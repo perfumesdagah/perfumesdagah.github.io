@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfumes DAGAH | El Asesor Inteligente</title>
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+           background-color: #0f0f0f;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 50% 30%, transparent 10%, #030a16 90%),
+                url('logo-dagah.png') no-repeat center center;
+            background-size: 55% auto;
+            opacity: 0.80; /* Calibración oficial */
+            z-index: -1;
+            pointer-events: none;
+        }
+        .logo-contenedor { text-align: center; padding: 25px 10px; width: 100%; }
+        .logo-contenedor img { width: 700px; max-width: 95%; height: auto; display: block; margin: 0 auto; }
+        .eslogan-comercial {
+            font-family: 'Georgia', serif; color: #ecd067; font-size: 1.15rem; letter-spacing: 5px;
+            text-transform: uppercase; text-align: center; margin-top: 5px; font-weight: bold; opacity: 0.9;
+        }
+        .catalogo-contenedor { display: flex; justify-content: center; padding: 20px; width: 100%; }
+        .tarjeta-producto {
+            background: rgba(9, 20, 40, 0.65); border: 1px solid rgba(236, 208, 103, 0.15);
+            border-radius: 16px; width: 1100px; max-width: 100%; display: flex; 
+            flex-direction: row; gap: 30px; padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5); backdrop-filter: blur(12px);
+        }
+        .imagen-producto-bloque { flex: 1; max-width: 480px; display: flex; flex-direction: column; gap: 20px; }
+        .info-producto-bloque { flex: 1.2; display: flex; flex-direction: column; justify-content: space-between; }
+        .panel-asesor { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 18px; border-radius: 12px; display: flex; flex-direction: column; gap: 10px; }
+        .asesor-titulo { font-size: 0.95rem; font-weight: bold; color: #ecd067; margin-bottom: 5px; }
+        .btn-asesor { background: #0b1528; border: 1px solid rgba(236,208,103,0.2); color: #dfdfdf; padding: 11px; border-radius: 8px; cursor: pointer; text-align: left; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; width: 100%; }
+        .btn-asesor:hover { background: #13223f; border-color: #ecd067; color: #ffffff; }
+        .btn-asesor.seleccionado { background: #ecd067; border-color: #ecd067; color: #091428; font-weight: bold; box-shadow: 0 0 15px rgba(236,208,103,0.3); }
+        .producto-nombre { font-family: 'Georgia', serif; font-size: 1.6rem; color: #ecd067; margin-bottom: 15px; border-bottom: 1px solid rgba(236,208,103,0.2); padding-bottom: 10px; }
+        .item-recomendado { background: rgba(236,208,103,0.02); border-left: 3px solid #ecd067; padding: 12px 15px; border-radius: 0 8px 8px 0; margin-bottom: 15px; }
+        .item-tag { font-size: 0.75rem; text-transform: uppercase; color: #aaa; display: block; margin-bottom: 4px; }
+        .caract-lista { list-style: none; padding-left: 0; }
+        .caract-lista li { font-size: 0.88rem; margin-bottom: 5px; color: #dfdfdf; }
+        .caract-lista strong { color: #ecd067; font-weight: 500; }
+        .selector-variaciones { margin-bottom: 15px; }
+        .selector-etiqueta { font-size: 0.9rem; color: #aaa; display: block; margin-bottom: 8px; }
+        .botones-grupo { display: flex; gap: 10px; }
+        .btn-variacion { background: #0b1528; border: 1px solid rgba(255,255,255,0.1); color: #dfdfdf; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; }
+        .btn-variacion:hover { border-color: #ecd067; }
+        .btn-variacion.activo { background: #ecd067; border-color: #ecd067; color: #091428; font-weight: bold; }
+        .compra-bloque { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); padding: 15px 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); }
+        .precio-pantalla { font-family: 'Georgia', serif; font-size: 1.5rem; color: #ecd067; font-weight: bold; }
+        .btn-whatsapp { background: #25D366; color: #ffffff; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(37,211,102,0.3); }
+        .btn-whatsapp:hover { background: #20ba5a; }
+        .web-footer { text-align: center; padding: 30px 10px; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); width: 100%; }
+        .footer-texto { font-size: 0.85rem; color: #666; letter-spacing: 1px; }
+        .combo-checkbox-zona { display: flex; align-items: center; gap: 10px; background: rgba(37, 211, 102, 0.05); border: 1px solid rgba(37, 211, 102, 0.2); padding: 12px 15px; border-radius: 8px; cursor: pointer; margin-top: 15px; color: #25D366; font-size: 0.88rem; transition: all 0.2s; width: 100%; }
+        .combo-checkbox-zona input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; accent-color: #25D366; }
+        @media (max-width: 768px) {
+            .catalogo-contenedor { padding: 10px; width: 100% !important; }
+            .tarjeta-producto { flex-direction: column !important; gap: 20px !important; padding: 15px !important; width: 100% !important; }
+            .imagen-producto-bloque, .info-producto-bloque { width: 100% !important; max-width: 100% !important; flex: none !important; }
+            .logo-contenedor img { max-width: 90% !important; }
+            .btn-asesor { padding: 12px 10px !important; font-size: 0.85rem !important; }
+            .menu-tips-tabs button { min-width: 45% !important; font-size: 0.7rem !important; }
+        }
+       /* CANDADO DE HIERRO: INFLADO Y ROTULADO COLOSAL */
+        .item-recomendado label, .item-recomendo label {
+            display: flex !important;
+            align-items: center !important;
+            gap: 15px !important;
+            width: 100% !important;
+            margin-bottom: 18px !important;
+        }
+        input[type="radio"][name="seleccion-perfume"] {
+            width: 35px !important; /* Diámetro colosal fijo */
+            height: 35px !important;
+            accent-color: #ecd067 !important;
+            cursor: pointer !important;
+            margin: 0 !important;
+            order: 1 !important; /* Forzado adelante siempre */
+        }
+        input[type="radio"][name="seleccion-perfume"]::after {
+            content: "👉 ELIJA AQUÍ" !important;
+            display: inline-block !important;
+            margin-left: 45px !important;
+            width: 320px !important;
+            font-family: 'Georgia', serif !important;
+            font-size: 1.35rem !important; /* Letra grande de mostrador */
+            color: #ecd067 !important;
+            font-weight: bold !important;
+            letter-spacing: 1px !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- ENCABEZADO CON IDENTIDAD DE MARCA -->
+    <header class="logo-contenedor">
+        <img src="logo-dagah.png" alt="DAGAH Perfumería Premium">
+        <p class="eslogan-comercial">EXPERIENCIA PARA SIEMPRE</p>
+    </header>
+
+    <main class="catalogo-contenedor">
+        <section class="tarjeta-producto">
+            <!-- COLUMNA IZQUIERDA: PANEL DE PREGUNTAS Y AUTOMATIZACIÓN -->
+            <div class="imagen-producto-bloque">
+                <!-- PASO 1 -->
+                <div class="panel-asesor">
+                    <p class="asesor-titulo">1. ¿Para quién busca la fragancia hoy?</p>
+                    <button id="gender-male" class="btn-asesor" onclick="cambiarGenero('male')">🙋‍♂️ Para mí (Hombre)</button>
+                    <button id="gender-female" class="btn-asesor" onclick="cambiarGenero('female')">🙋‍♀️ Para mí (Mujer)</button>
+                    <button id="gender-gift" class="btn-asesor" onclick="cambiarGenero('gift')">🎁 Para hacer un Regalo</button>
+                </div>
+
+                <!-- PASO 2 -->
+                <div class="panel-asesor">
+                    <p class="asesor-titulo" id="titulo-ocasion">2. ¿Para qué momento de su rutina la necesita?</p>
+                    <div id="contenedor-botones-ocasion">
+                        <p style="font-size:0.85rem; color:#aaa; text-align:center; padding:10px;">Elija primero la opción del paso 1...</p>
+                    </div>
+                </div>
+
+                <!-- PASO 3 -->
+                <div class="panel-asesor">
+                    <p class="asesor-titulo">3. ¿Qué tipo de aromas prefiere?</p>
+                    <button id="aroma-fresco" class="btn-asesor" onclick="cambiarAroma('fresco')">🍊 Frescos y Cítricos</button>
+                    <button id="aroma-dulce" class="btn-asesor" onclick="cambiarAroma('dulce')">🍯 Dulces y Especiados</button>
+                    <button id="aroma-amaderado" class="btn-asesor" onclick="cambiarAroma('amaderado')">🌲 Amaderados y rústicos</button>
+                    <button id="aroma-floral" class="btn-asesor" onclick="cambiarAroma('floral')">💐 Florales y Suaves</button>
+                    <button id="aroma-arabe" class="btn-asesor" onclick="cambiarAroma('arabe')">🕌 Aromas Árabes e Intensos</button>
+                </div>
+                                 <!-- PRESENTACIÓN ADENTRO DEL PANEL IZQUIERDO -->
+                <div class="selector-variaciones" id="caja-vendedora-tamaño" style="display:none; background: rgba(255,255,255,0.02); border: 1px solid rgba(181,148,16,0.3); padding: 15px; border-radius: 8px;">
+                    <span class="selector-etiqueta" style="font-size: 0.85rem; color: #ecd067; font-weight: bold; display:block; text-align:center; margin-bottom:8px;">Presentación para el envasado:</span>
+                    <div class="botones-grupo" style="display:flex; gap:8px;">
+                        <button id="sz-30" class="btn-variacion" onclick="seleccionarTamaño('30 ml')" style="flex:1;">30 ml</button>
+                        <button id="sz-50" class="btn-variacion activo" onclick="seleccionarTamaño('50 ml')" style="flex:1;">50 ml</button>
+                        <button id="sz-100" class="btn-variacion" onclick="seleccionarTamaño('100 ml')" style="flex:1;">100 ml</button>
+                    </div>
+                </div>
+
+                <!-- TOTALIZADOR CON RIELES EN PARALELO PARA VARIOS PERFUMES -->
+                <div class="compra-bloque" id="caja-vendedora-compra" style="display:none; flex-direction:column; gap:12px; background: rgba(236,208,103,0.05); padding: 15px; border-radius: 8px; border: 1px solid rgba(236,208,103,0.2); width:100%;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+                        <span style="font-size:0.85rem; color:#dfdfdf;" id="etiqueta-total">Valor de este Perfume:</span>
+                        <span class="precio-pantalla" id="precio-pantalla" style="font-size:1.4rem; color:#ecd067; font-weight:bold;"></span>
+                    </div>
+                    <div style="display:flex; gap:10px; width:100%;">
+                        <button class="btn-asesor" onclick="añadirAlCarrito()" style="flex:1; text-align:center; background:#0b1528; border-color:#ecd067; padding:12px; font-weight:bold; color:#ecd067;">
+                            ➕ Añadir otro perfume
+                        </button>
+                       <button class="btn-whatsapp" id="btn-despacho-wa" onclick="añadirAlCarrito(); enviarMensajeWhatsApp();" style="flex:1.2; justify-content:center; padding:12px;">
+                            💬 Solicitar Pedido (0)
+                        </button>
+                    </div>
+                    <div id="lista-carrito-visual" style="font-size:0.8rem; color:#aaa; width:100%; border-top:1px dashed rgba(235,208,103,0.2); padding-top:8px; display:none;"></div>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA: VITRINA DE EXHIBICIÓN EN PARALELO -->
+            <div class="info-producto-bloque">
+                <div>
+                    <!-- 1. CAJA DE CONSEJOS CON SU SILUETA A MANO ALZADA ARRIBA -->
+                    <div class="consejo-caja" id="caja-vendedora-consejo" style="display:none; border: 1px solid rgba(236, 208, 103, 0.4); background: rgba(236, 208, 103, 0.03); border-radius: 12px; padding: 20px;">
+                        <!-- Se llena dinámicamente -->
+                    </div>
+
+                    <!-- 2. CAJA DE SELECCIÓN TÉCNICA DE MEDALLAS DEBAJO -->
+                    <div style="margin-top: 25px;">
+                        <h2 class="producto-nombre" id="perfume-titulo">Asesoría de Taller</h2>
+                        <div id="perfume-descripcion" class="producto-descripcion">
+                            <p style="color:#ecd067; font-weight:bold; margin-bottom:10px; font-family:'Georgia', serif;">☕ ¡Hola! Qué gusto tenerle aquí.</p>
+                            <p>Por favor, complete las 3 preguntas de selección en el panel izquierdo. Nuestra vendedora virtual analizará sus respuestas y le desplegará aquí una lista exclusiva con las mejores opciones de nuestro stock envasado real que se adaptan a lo que usted necesita.</p>
+                        </div>
+                    </div>
+                     <!-- COMBOS Y OFERTAS DEBAJO DE LA SELECCIÓN -->
+                    <div class="combo-checkbox-zona" id="caja-vendedora-combo" style="display:none;" onclick="conmutarComboCheck()">
+                        <input type="checkbox" id="check-combo" onchange="actualizarPrecioYMensaje()">
+                        <label for="check-combo" style="cursor: pointer; font-weight: bold;">🟩 Sí, me gustaría armar el Combo DAGAH (+ Hair Mist 'Muñeca Nueva' por $30.000)</label>
+                    </div>
+                    
+                    <div id="banner-oferta-splash" style="display:none; background: rgba(236, 208, 103, 0.1); border: 2px dashed #ecd067; border-radius: 8px; padding: 12px; margin-top: 10px; text-align: center;">
+                        <p style="font-size: 0.85rem; color: #ecd067; font-weight: bold; text-transform: uppercase;">🎁 ¡OFERTA ACTIVADA POR 100ML! 🎁</p>
+                        <p style="font-size: 0.85rem; color: #ffffff; margin-top: 3px;">Añade un Body Splash Corporal por solo $15.000 COP adicionales.</p>
+                    </div>
+
+                    <!-- SECCIÓN DE PRODUCTOS INDIVIDUALES -->
+                    <!-- PUENTE ELÉCTRICO RECTIFICADO: FUERZA EL SALTO AL SCRIPT -->
+                <div class="caja-solos-bloque" style="display:flex; flex-direction:column; gap:10px; margin-top:15px; width:100%;">
+                    <button class="btn-asesor" onclick="enviarHairMistSolo();" style="width:100%; text-align:left; padding:12px; font-weight:bold; color:#ecd067; border-color:#ecd067;">
+                        💇‍♀️ Solo Hair Mist ($30k)
+                    </button>
+                    <button class="btn-asesor" onclick="enviarBodySplashSolo();" style="width:100%; text-align:left; padding:12px; font-weight:bold; color:#ecd067; border-color:#ecd067;">
+                        🚿 Solo Body Splash ($25k)
+                    </button>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="web-footer">
+        <p class="footer-texto">DAGAH Perfumería © - Conexión humana y directa.</p>
+    </footer>
+
+     <script>
+        const TELEFONO_DAGAH = "573106410582";
+        const PRECIO_30ML = 55000;
+        const PRECIO_50ML = 85000;
+        const PRECIO_100ML = 140000;
+        const PRECIO_CAPILAR = 30000;
+
+        const FICHAS_PERFUMES = {
+            oneMillion: { nombre: "Perfume DAGAH Inspiración One Million", tipo: " Mandarina y Canela dulce.", duracion: "7 a 9 horas.", estela: "Alta Magnética.", precios: { "30 ml": 55000, "50 ml": 85000, "100 ml": 140000 } },
+            toyBoy: { nombre: "Perfume DAGAH Inspiración Toy Boy", tipo: " Rosa y Pimienta de gala.", duracion: "Más de 8 horas.", estela: "Exclusiva.", precios: { "30 ml": 65000, "50 ml": 95000, "100 ml": 160000 } },
+            yaraDama: { nombre: "Perfume DAGAH Inspiración Yara Dama", tipo: " Cremosidad Árabe dulce.", duracion: "6 a 8 horas.", estela: "Discreta.", precios: { "30 ml": 60000, "50 ml": 90000, "100 ml": 150000 } },
+            yaraCandy: { nombre: "Perfume DAGAH Inspiración Yara Candy", tipo: " Dulce de Gominolas.", duracion: "7 a 8 horas.", estela: "Chispeante.", precios: { "30 ml": 55000, "50 ml": 85000, "100 ml": 140000 } },
+            thankUNext: { nombre: "Perfume DAGAH Inspiración Thank U Next", tipo: " Frambuesa y Coco suave.", duracion: "7 a 9 horas.", estela: "Coqueta.", precios: { "30 ml": 55000, "50 ml": 85000, "100 ml": 140000 } },
+            bubbleGum: { nombre: "Perfume DAGAH Inspiración Toy 2 Bubble", tipo: " Chicle adictivo y frutas.", duracion: "6 a 8 horas.", estela: "Divertida.", precios: { "30 ml": 55000, "50 ml": 85000, "100 ml": 140000 } },
+            asadBourbon: { nombre: "Perfume DAGAH Inspiración Asad Bourbon", tipo: " Bourbon licoroso y tabaco.", duracion: "Más de 12 horas.", estela: "Opulenta.", precios: { "30 ml": 65000, "50 ml": 95000, "100 ml": 160000 } },
+            versaceEros: { nombre: "Perfume DAGAH Inspiración Versace Eros", tipo: " Menta helada limpia.", duracion: "8 a 10 horas.", estela: "Seductora.", precios: { "30 ml": 55000, "50 ml": 85000, "100 ml": 140000 } },
+            yaraTous: { nombre: "Perfume DAGAH Inspiración Yara Tous", tipo: " Mango exótico y coco.", duracion: "7 a 8 horas.", estela: "Exótica.", precios: { "30 ml": 55000, "50 ml": 85000, "100 ml": 140000 } }
+        };
+
+        const baseOcasiones = {
+            male: { titulo: "2. ¿Para qué momento de su rutina la necesita?", opciones: [{ id: "opt1", txt: " Oficina y Trabajo Diario" }, { id: "opt2", txt: " Deporte y Gimnasio" }, { id: "opt3", txt: " Salidas al Campo y Descanso" }, { id: "opt4", txt: " Ocasiones Especiales y Noche" }] },
+            female: { titulo: "2. ¿Para qué momento de su rutina la necesita?", opciones: [{ id: "opt1", txt: " Oficina y Trabajo Diario" }, { id: "opt2", txt: " Deporte y Gimnasio" }, { id: "opt3", txt: " Salidas al Campo y Descanso" }, { id: "opt4", txt: " Ocasiones Especiales y Noche" }] },
+            gift: { titulo: "2. Para ayudarle a elegir bien, ¿qué estilo tiene?", opciones: [{ id: "opt1", txt: " Es alguien serio o de oficina" }, { id: "opt2", txt: " Es una persona activa o deportista" }, { id: "opt3", txt: " Le gusta el campo o la tranquilidad" }] }
+        };
+
+        let estadoActual = { gen: null, optId: null, aro: null, tam: "50 ml", precio: 85000, medallaElegida: "p1" };
+        let carritoPedidos = [];
+        let totalDineroAcumulado = 0;
+        function cambiarGenero(g) {
+            estadoActual.gen = g; estadoActual.optId = null;
+            ['gender-male', 'gender-female', 'gender-gift'].forEach(id => document.getElementById(id)?.classList.remove('seleccionado'));
+            document.getElementById(`gender-${g}`)?.classList.add('seleccionado');
+            renderizarOpcionesPaso2(); verificarYCalcularRecomendacion();
+        }
+
+        function renderizarOpcionesPaso2() {
+            const datosGen = baseOcasiones[estadoActual.gen]; 
+            document.getElementById('titulo-ocasion').innerText = datosGen.titulo;
+            let contenedor = document.getElementById('contenedor-botones-ocasion'); 
+            contenedor.innerHTML = "";
+            datosGen.opciones.forEach(opt => { 
+                contenedor.innerHTML += `<button id="btn-${opt.id}" class="btn-asesor" onclick="seleccionarOpcion('${opt.id}')">${opt.txt}</button>`; 
+            });
+            verificarYCalcularRecomendacion();
+        }
+
+        function seleccionarOpcion(idOpt) {
+            estadoActual.optId = idOpt; 
+            baseOcasiones[estadoActual.gen].opciones.forEach(opt => document.getElementById(`btn-${opt.id}`)?.classList.remove('seleccionado'));
+            document.getElementById(`btn-${idOpt}`)?.classList.add('seleccionado'); 
+            verificarYCalcularRecomendacion();
+        }
+
+        function cambiarAroma(a) {
+            estadoActual.aro = a; 
+            ['aroma-fresco', 'aroma-dulce', 'aroma-amaderado', 'aroma-floral', 'aroma-arabe'].forEach(id => document.getElementById(id)?.classList.remove('seleccionado'));
+            document.getElementById(`aroma-${a}`)?.classList.add('seleccionado'); 
+            verificarYCalcularRecomendacion();
+        }
+
+        function conmutarMedallaSeleccion(tipoMedalla) {
+            estadoActual.medallaElegida = tipoMedalla;
+            estadoActual.precio = tipoMedalla === "p1" ? estadoActual.precioP1 : estadoActual.precioP2;
+            actualizarPrecioYMensaje();
+        }
+        function verificarYCalcularRecomendacion() {
+            if (!estadoActual.gen || !estadoActual.optId || !estadoActual.aro) {
+                document.getElementById('perfume-titulo').innerHTML = "Asesoría de Taller";
+                document.getElementById('perfume-descripcion').innerHTML = `<p style="color:#ecd067; font-weight:bold; margin-bottom:10px; font-family:'Georgia', serif;">☕ Asesoría Inteligente en Espera</p><p>Por favor, complete las 3 preguntas de selección en el panel izquierdo.</p>`;
+                ['caja-vendedora-consejo', 'caja-vendedora-combo', 'caja-productos-solos', 'caja-vendedora-tamaño', 'caja-vendedora-compra'].forEach(id => { let el = document.getElementById(id); if (el) el.style.display = "none"; }); return;
+            }
+            ['caja-vendedora-consejo', 'caja-vendedora-combo', 'caja-productos-solos'].forEach(id => { let el = document.getElementById(id); if (el) el.style.display = id === 'caja-vendedora-combo' ? "flex" : "block"; });
+            let p1 = FICHAS_PERFUMES.oneMillion, p2 = FICHAS_PERFUMES.toyBoy;
+            if (estadoActual.gen === 'male') {
+                if (estadoActual.optId === 'opt1') {
+                    if (estadoActual.aro === 'fresco') { p1 = FICHAS_PERFUMES.versaceEros; p2 = FICHAS_PERFUMES.oneMillion; }
+                    else if (estadoActual.aro === 'dulce') { p1 = FICHAS_PERFUMES.oneMillion; p2 = FICHAS_PERFUMES.asadBourbon; }
+                    else if (estadoActual.aro === 'amaderado' || estadoActual.aro === 'arabe') { p1 = FICHAS_PERFUMES.asadBourbon; p2 = FICHAS_PERFUMES.toyBoy; }
+                    else { p1 = FICHAS_PERFUMES.toyBoy; p2 = FICHAS_PERFUMES.versaceEros; }
+                } else if (estadoActual.optId === 'opt2') {
+                    if (estadoActual.aro === 'dulce' || estadoActual.aro === 'arabe') { p1 = FICHAS_PERFUMES.oneMillion; p2 = FICHAS_PERFUMES.versaceEros; }
+                    else if (estadoActual.aro === 'floral') { p1 = FICHAS_PERFUMES.toyBoy; p2 = FICHAS_PERFUMES.versaceEros; }
+                    else { p1 = FICHAS_PERFUMES.versaceEros; p2 = FICHAS_PERFUMES.oneMillion; }
+                    } else if (estadoActual.optId === 'opt3') {
+                    if (estadoActual.aro === 'dulce') { p1 = FICHAS_PERFUMES.oneMillion; p2 = FICHAS_PERFUMES.toyBoy; }
+                    else if (estadoActual.aro === 'amaderado' || estadoActual.aro === 'arabe') { p1 = FICHAS_PERFUMES.asadBourbon; p2 = FICHAS_PERFUMES.oneMillion; }
+                    else { p1 = FICHAS_PERFUMES.versaceEros; p2 = FICHAS_PERFUMES.oneMillion; }
+                } else {
+                    if (estadoActual.aro === 'fresco') { p1 = FICHAS_PERFUMES.versaceEros; p2 = FICHAS_PERFUMES.oneMillion; }
+                    else if (estadoActual.aro === 'dulce') { p1 = FICHAS_PERFUMES.oneMillion; p2 = FICHAS_PERFUMES.asadBourbon; }
+                    else { p1 = FICHAS_PERFUMES.asadBourbon; p2 = FICHAS_PERFUMES.toyBoy; }
+                }
+            } else if (estadoActual.gen === 'female') {
+                if (estadoActual.optId === 'opt1') {
+                    if (estadoActual.aro === 'fresco') { p1 = FICHAS_PERFUMES.yaraTous; p2 = FICHAS_PERFUMES.thankUNext; }
+                    else if (estadoActual.aro === 'dulce' || estadoActual.aro === 'arabe') { p1 = FICHAS_PERFUMES.yaraDama; p2 = FICHAS_PERFUMES.yaraCandy; }
+                    else if (estadoActual.aro === 'floral') { p1 = FICHAS_PERFUMES.bubbleGum; p2 = FICHAS_PERFUMES.thankUNext; }
+                    else { p1 = FICHAS_PERFUMES.thankUNext; p2 = FICHAS_PERFUMES.yaraDama; }
+                } else if (estadoActual.optId === 'opt2') { p1 = FICHAS_PERFUMES.yaraTous; p2 = FICHAS_PERFUMES.yaraCandy;
+                     } else if (estadoActual.optId === 'opt3') {
+                    if (estadoActual.aro === 'fresco') { p1 = FICHAS_PERFUMES.yaraTous; p2 = FICHAS_PERFUMES.bubbleGum; }
+                    else if (estadoActual.aro === 'dulce' || estadoActual.aro === 'amaderado') { p1 = FICHAS_PERFUMES.thankUNext; p2 = FICHAS_PERFUMES.yaraCandy; }
+                    else if (estadoActual.aro === 'floral') { p1 = FICHAS_PERFUMES.bubbleGum; p2 = FICHAS_PERFUMES.thankUNext; }
+                    else { p1 = FICHAS_PERFUMES.yaraDama; p2 = FICHAS_PERFUMES.yaraTous; }
+                } else {
+                    if (estadoActual.aro === 'fresco') { p1 = FICHAS_PERFUMES.yaraTous; p2 = FICHAS_PERFUMES.yaraCandy; }
+                    else if (estadoActual.aro === 'dulce' || estadoActual.aro === 'arabe') { p1 = FICHAS_PERFUMES.yaraCandy; p2 = FICHAS_PERFUMES.thankUNext; }
+                    else if (estadoActual.aro === 'floral') { p1 = FICHAS_PERFUMES.bubbleGum; p2 = FICHAS_PERFUMES.thankUNext; }
+                    else { p1 = FICHAS_PERFUMES.thankUNext; p2 = FICHAS_PERFUMES.yaraCandy; }
+                }
+            } else if (estadoActual.gen === 'gift') {
+                if (estadoActual.optId === 'opt1') {
+                    if (estadoActual.aro === 'fresco' || estadoActual.aro === 'floral') { p1 = FICHAS_PERFUMES.toyBoy; p2 = FICHAS_PERFUMES.versaceEros; }
+                    else { p1 = FICHAS_PERFUMES.asadBourbon; p2 = FICHAS_PERFUMES.oneMillion; }
+                } else if (estadoActual.optId === 'opt2') {
+                    if (estadoActual.aro === 'dulce' || estadoActual.aro === 'arabe') { p1 = FICHAS_PERFUMES.oneMillion; p2 = FICHAS_PERFUMES.versaceEros; }
+                    else { p1 = FICHAS_PERFUMES.versaceEros; p2 = FICHAS_PERFUMES.toyBoy; }
+                } else {
+                    if (estadoActual.aro === 'dulce' || estadoActual.aro === 'arabe') { p1 = FICHAS_PERFUMES.yaraCandy; p2 = FICHAS_PERFUMES.thankUNext; }
+                    else { p1 = FICHAS_PERFUMES.toyBoy; p2 = FICHAS_PERFUMES.versaceEros; }
+                }
+            }
+            let ctxTexto = "Uso general.", vstTexto = "Ropa casual.";
+            if (estadoActual.optId === 'opt2') { ctxTexto = "Deporte o gimnasio."; vstTexto = "Prendas deportivas."; }
+            else if (estadoActual.optId === 'opt1') { ctxTexto = "Oficina o trabajo diario."; vstTexto = "Vestimenta casual."; }
+            else if (estadoActual.optId === 'opt3') { ctxTexto = "Campo o descanso."; vstTexto = "Ropa ligera o jeans."; }
+            else if (estadoActual.optId === 'opt4') { ctxTexto = "Eventos o uso nocturno."; vstTexto = "Traje elegante o ropa de salir."; }
+            let precioP1 = p1.precios[estadoActual.tam];
+            let precioP2 = p2.precios[estadoActual.tam];
+            let contenedorConsejo = document.getElementById('caja-vendedora-consejo');
+            contenedorConsejo.innerHTML = `
+                <p class="consejo-titulo" style="font-size:1.1rem; margin-bottom:15px;">📌 Secretos del Taller (Educación de Autor):</p>
+                <div class="menu-tips-tabs" style="display:flex; gap:8px; margin-bottom:15px; flex-wrap:wrap;">
+                    <button id="tab-tip1" class="btn-variacion activo" onclick="conmutarTip('tip1')" style="padding:6px 12px; font-size:0.75rem; flex:1; min-width:100px;">📊 1. Aplicación</button>
+                    <button id="tab-tip2" class="btn-variacion" onclick="conmutarTip('tip2')" style="padding:6px 12px; font-size:0.75rem; flex:1; min-width:100px;">⏳ 2. Duración</button>
+                    <button id="tab-tip3" class="btn-variacion" onclick="conmutarTip('tip3')" style="padding:6px 12px; font-size:0.75rem; flex:1; min-width:100px;">📦 3. Guardado</button>
+                    <button id="tab-tip4" class="btn-variacion" onclick="conmutarTip('tip4')" style="padding:6px 12px; font-size:0.75rem; flex:1; min-width:100px;">👔 4. Estela</button>
+                </div>
+               <div id="zona-tip1" class="bloque-tip-contenido">
+                    <div style="width:100%; background:#020612; border-radius:10px; border:1px solid #ecd067; padding:15px; margin-bottom:12px; display:flex; flex-direction:column; align-items:center;">
+                        <div style="width:100%; height:260px; display:flex; align-items:center; justify-content:center; position:relative;">
+                            <svg width="260" height="250" viewBox="0 0 260 250" style="opacity:0.95;">
+                                <!-- SILUETA MAESTRA DEL MUÑECO -->
+                                <circle cx="130" cy="55" r="20" fill="none" stroke="#ecd067" stroke-width="1.5"/>
+                                <path d="M108,55 C104,53 104,47 108,45" fill="none" stroke="#ecd067" stroke-width="1.2"/>
+                                <path d="M152,55 C156,53 156,47 152,45" fill="none" stroke="#ecd067" stroke-width="1.2"/>
+                                <line x1="123" y1="50" x2="127" y2="50" stroke="#ecd067" stroke-width="1.5" stroke-linecap="round"/>
+                                <line x1="133" y1="50" x2="137" y2="50" stroke="#ecd067" stroke-width="1.5" stroke-linecap="round"/>
+                                <line x1="120" y1="55" x2="120" y2="62" stroke="#ecd067" stroke-width="1.2"/>
+                                <path d="M126,68 Q130,71 134,68" fill="none" stroke="#ecd067" stroke-width="1.2"/>
+                                <line x1="130" y1="75" x2="130" y2="155" stroke="#ecd067" stroke-width="1.8"/>
+                                <!-- BRAZOS EXTENDIDOS HACIA LAS MUÑECAS -->
+                                <path d="M130,85 L85,115 L35,100" fill="none" stroke="#ecd067" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M130,85 L175,115 L225,100" fill="none" stroke="#ecd067" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <line x1="130" y1="155" x2="105" y2="205" stroke="#ecd067" stroke-width="1.5"/>
+                                <line x1="130" y1="155" x2="155" y2="205" stroke="#ecd067" stroke-width="1.5"/>
+                                <!-- CABLEADO DE FLECHAS Y TEXTOS DE SU FOTO -->
+                                <path d="M25,25 L130,25" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
+                                <circle cx="130" cy="25" r="2" fill="#ecd067"/>
+                                <text x="5" y="17" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">💇‍♀️ LLUVIA CAPILAR: 3 SPRAYS</text>
+                                <path d="M25,45 L108,45" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
+                                <circle cx="108" cy="45" r="2" fill="#ecd067"/>
+                                <text x="5" y="37" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">👂 OREJAS / OÍDOS: 1 SPRAY</text>
+                                <path d="M225,75 L145,75" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
+                                <circle cx="145" cy="75" r="2" fill="#ecd067"/>
+                                <text x="175" y="67" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">🧣 CUELLO: 2 SPRAYS</text>
+                                <path d="M225,100 L130,100" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
+                                <circle cx="130" cy="100" r="2" fill="#ecd067"/>
+                                <text x="175" y="92" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">👗 ESCOTE: 2 SPRAYS</text>
+                                <path d="M25,115 L85,115" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
+                                <circle cx="85" cy="115" r="2" fill="#ecd067"/>
+                                <text x="5" y="108" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">💪 ANTEBRAZO: 1 SPRAY</text>
+                                <!-- PUNTO DE ALTO CONSUMO: ROPA -->
+                                <path d="M225,118 L130,120" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
+                                <circle cx="130" cy="120" r="2" fill="#ecd067"/>
+                                <text x="175" y="112" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">👔 ROPA / PRENDAS: 3 SPRAYS</text>
+                                <path d="M25,140 L35,100" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
+                                <circle cx="35" cy="100" r="2" fill="#ecd067"/>
+                                <text x="5" y="133" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">🤲 MUÑECAS: 1 SPRAY</text>
+                                <path d="M225,145 L130,82" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
+                                <circle cx="130" cy="82" r="2" fill="#ecd067"/>
+                                <text x="175" y="138" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">👤 NUCA / ESPALDA: 2 SPRAYS</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div id="zona-tip2" class="bloque-tip-contenido" style="display:none; padding:10px 0;">
+                    <p style="font-size:1rem; color:#ffffff; text-align:center; font-family:'Georgia',serif; line-height:1.5;">
+                        La <strong style="color:#ecd067;">duración</strong> es el tiempo que las esencias se aferran a las fibras de la piel. Depende de la concentración de aceites y de la fijación de cada persona.
+                        <br><br>
+                        <span style="color:#ecd067; font-weight:bold; font-size:0.95rem;">📌 NOTA DE TALLER:</span> 
+                        Las fragancias dulces y árabes (por sus notas pesadas de fondo) siempre van a durar y proyectar más que las cítricas o frescas.
+                    </p>
+                </div>
+                <div id="zona-tip3" class="bloque-tip-contenido" style="display:none; padding:10px 0;"><p style="font-size:0.95rem; color:#ecd067; font-weight:bold; text-align:center;">Evite guardar en el baño por la humedad.</p></div>
+                <div id="zona-tip4" class="bloque-tip-contenido" style="display:none; padding:10px 0;">
+                    <p style="font-size:1rem; color:#ffffff; text-align:center; font-family:'Georgia',serif; line-height:1.5;">
+                        La <strong style="color:#ecd067;">estela</strong> es el rastro aromático que dejamos en el aire al caminar.
+                        <br><br>
+                        <span style="color:#ecd067; font-weight:bold; font-size:0.95rem;">📌 NOTA DE TALLER:</span> 
+                        Las esencias árabes y amaderadas, al tener mayor densidad molecular, proyectan una estela mucho más potente y expansiva que las frescas.
+                    </p>
+                </div>
+            `;
+            document.getElementById('perfume-titulo').innerHTML = "⭐ SELECCIÓN DE FRAGANCIA:";
+            document.getElementById('perfume-descripcion').innerHTML = `
+                <div class="item-recomendado" style="margin-top:20px; background:rgba(236,208,103,0.03); padding:15px; border-radius:8px; border:1px solid rgba(236,208,103,0.3);">
+                    <label style="display:flex; align-items:center; gap:10px; cursor:pointer; font-family:'Georgia',serif; font-size:1.15rem; color:#ecd067; font-weight:bold; margin-bottom:10px;">
+                        <input type="radio" name="seleccion-perfume" id="radio-p1" checked onclick="conmutarMedallaSeleccion('p1')" style="width:18px; height:18px; accent-color:#ecd067;">
+                        🥇 Opción Principal
+                    </label>
+                    <p style="font-family:'Georgia',serif; font-size:1.1rem; color:#ffffff; margin-bottom:5px;">${p1.nombre}</p>
+                    <p style="font-size:1.25rem; color:#ecd067; font-weight:bold; margin-bottom:12px; font-family:'Georgia',serif;">$${precioP1.toLocaleString('es-CO')} COP</p>
+                    <ul class="caract-lista">
+                        <li><strong>👃 Aroma:</strong> ${p1.tipo}</li>
+                        <li><strong>⏱️ Duración:</strong> ${p1.duracion}</li>
+                        <li><strong>💨 Estela:</strong> ${p1.estela}</li>
+                        <li><strong>🌡️ Contexto:</strong> ${ctxTexto}</li>
+                        <li><strong>👔 Vestir:</strong> ${vstTexto}</li>
+                    </ul>
+                </div>
+                <div class="item-recomendado" style="margin-top:20px; background:rgba(255,255,255,0.02); padding:15px; border-radius:8px; border:1px solid rgba(255,255,255,0.1);">
+                    <label style="display:flex; align-items:center; gap:10px; cursor:pointer; font-family:'Georgia',serif; font-size:1.15rem; color:#dfdfdf; font-weight:bold; margin-bottom:10px;">
+                        <input type="radio" name="seleccion-perfume" id="radio-p2" onclick="conmutarMedallaSeleccion('p2')" style="width:18px; height:18px; accent-color:#ecd067;">
+                        🥈 Opción Alternativa
+                    </label>
+                    <p style="font-family:'Georgia',serif; font-size:1.1rem; color:#ffffff; margin-bottom:5px;">${p2.nombre}</p>
+                    <p style="font-size:1.25rem; color:#ecd067; font-weight:bold; margin-bottom:12px; font-family:'Georgia',serif;">$${precioP2.toLocaleString('es-CO')} COP</p>
+                    <ul class="caract-lista">
+                        <li><strong>👃 Aroma:</strong> ${p2.tipo}</li>
+                        <li><strong>⏱️ Duración:</strong> ${p2.duracion}</li>
+                        <li><strong>💨 Estela:</strong> ${p2.estela}</li>
+                    </ul>
+                </div>
+            `;
+            estadoActual.objetoP1 = p1; estadoActual.objetoP2 = p2;
+            estadoActual.precioP1 = precioP1; estadoActual.precioP2 = precioP2;
+            estadoActual.medallaElegida = "p1"; estadoActual.precio = precioP1;
+            actualizarPrecioYMensaje();
+            if (window.innerWidth <= 768) document.getElementById('perfume-titulo').scrollIntoView({ behavior: 'smooth' });
+        }
+        function conmutarMedallaSeleccion(tipoMedalla) {
+            estadoActual.medallaElegida = tipoMedalla;
+            estadoActual.precio = tipoMedalla === "p1" ? estadoActual.precioP1 : estadoActual.precioP2;
+            actualizarPrecioYMensaje();
+        }
+        function conmutarMedallaSeleccion(tipoMedalla) {
+            // REGISTRA CUÁL CÍRCULO SE ACTIVÓ EN EL MONITOR
+            estadoActual.medallaElegida = tipoMedalla;
+            
+            // CRUZA EL PRECIO AUTOMÁTICAMENTE
+            let precioBase = tipoMedalla === "p1" ? 
+                estadoActual.precioP1 : estadoActual.precioP2;
+            
+            estadoActual.precio = precioBase;
+            actualizarPrecioYMensaje();
+        }
+        function seleccionarTamaño(tam) {
+            estadoActual.tam = tam;
+            ['sz-30', 'sz-50', 'sz-100'].forEach(id => document.getElementById(id).classList.remove('activo'));
+            document.getElementById(tam === '30 ml' ? 'sz-30' : tam === '50 ml' ? 'sz-50' : 'sz-100').classList.add('activo'); 
+            verificarYCalcularRecomendacion();
+        }
+        function conmutarComboCheck() { const cb = document.getElementById('check-combo'); cb.checked = !cb.checked; actualizarPrecioYMensaje(); }
+        function actualizarPrecioYMensaje() {
+            if (!estadoActual.gen || !estadoActual.optId || !estadoActual.aro) return;
+            document.getElementById('caja-vendedora-tamaño').style.display = "block"; 
+            document.getElementById('caja-vendedora-compra').style.display = "flex";
+            document.getElementById('banner-oferta-splash').style.display = estadoActual.tam === '100 ml' ? "block" : "none";
+            document.getElementById('precio-pantalla').innerText = `$${(document.getElementById('check-combo').checked ? (estadoActual.precio + PRECIO_CAPILAR) : estadoActual.precio).toLocaleString('es-CO')} COP`;
+        }
+       function añadirAlCarrito() {
+            if (!estadoActual.gen || !estadoActual.optId || !estadoActual.aro) { 
+                alert("Por favor, elija las preguntas primero."); return; 
+            }
+            let cb = document.getElementById('check-combo').checked;
+            let pMarcado = estadoActual.medallaElegida === "p1" ? 
+                estadoActual.objetoP1 : estadoActual.objetoP2;
+            
+            if (!pMarcado) return;
+            let nombrePerfume = pMarcado.nombre;
+            let precioTexto = document.getElementById('precio-pantalla').innerText;
+            let precioNumero = parseInt(precioTexto.replace(/[^0-9]/g, ''));
+            
+            carritoPedidos.push({ nombre: nombrePerfume, tam: estadoActual.tam, aroma: estadoActual.aro.toUpperCase(), combo: cb ? " (+ Combo Hair Mist)" : "", precioText: precioTexto });
+            totalDineroAcumulado += precioNumero;
+            document.getElementById('btn-despacho-wa').innerText = `💬 Solicitar Pedido (${carritoPedidos.length})`;
+            let divVisual = document.getElementById('lista-carrito-visual'); 
+            if (divVisual) {
+                divVisual.style.display = "block";
+                divVisual.innerHTML = `<strong>📦 En lista:</strong> ${carritoPedidos.length} esencias. Total: <strong>$${totalDineroAcumulado.toLocaleString('es-CO')} COP</strong>`;
+            }
+        }
+      
+        function enviarMensajeWhatsApp() {
+           
+
+            // BLOQUE DE RECOMENDACIÓN ORIGINAL (CONSERVADO INTACTO)
+            let pMarcado = estadoActual.medallaElegida === "p1" ? estadoActual.objetoP1 : estadoActual.objetoP2;
+            if (carritoPedidos.length === 0) {
+                if (!pMarcado) { alert("Por favor, elija las preguntas primero."); return; }
+                let cb = document.getElementById('check-combo').checked;
+                let nombrePerfume = pMarcado.nombre;
+                let precioTotal = document.getElementById('precio-pantalla').innerText;
+                let txtMsg = `¡Hola Perfumes DAGAH! Acabo de armar mi rutina en el Asesor Inteligente.\n\n📌 *MI FRAGANCIA ELEGIDA:*\n• Perfume: *${nombrePerfume}*\n• Presentación: *${estadoActual.tam}*${cb ? ' (+ Combo Hair Mist)' : ''}\n• Base Olfativa: *${estadoActual.aro.toUpperCase()}*\n\n💰 *VALOR NETO A PAGAR:* *${precioTotal}*\n\n¿Tienen disponibilidad de esta esencia de galón en el taller para despacho diario?`;
+                let baseRuta = "https://whatsapp.com";
+                window.open(`${baseRuta}?phone=${TELEFONO_DAGAH}&text=${encodeURIComponent(txtMsg)}`, "_blank");
+                return;
+            }
+            
+            // REMATE DE COMPRA MÚLTIPLE DEL CARRITO
+            let txtMsg = `¡Hola Perfumes DAGAH! Acabo de armar un pedido múltiple en el Asesor Inteligente.\n📦 *LISTA DE FRAGANCIAS SOLICITADAS:*\n`;
+            carritoPedidos.forEach((p, index) => { txtMsg += `\n*Perfume #${index + 1}:* ${p.nombre}\n• Tamaño: ${p.tam}${p.combo}\n• Base: ${p.aroma}\n• Precio: ${p.precioText}\n`; });
+            txtMsg += `\n💰 *VALOR TOTAL DE LA COMPRA:* *$${totalDineroAcumulado.toLocaleString('es-CO')} COP*\n\n¿Tienen disponibilidad de estas esencias en el taller?`;
+            // ENLACE OFICIAL DE META RECTIFICADO CON SALTO FORZADO
+            let baseRuta = "https://whatsapp.com";
+                window.open(`${baseRuta}?phone=${TELEFONO_DAGAH}&text=${encodeURIComponent(txtMsg)}`, "_blank");
+                return;
+        }
+            
+        
+        function conmutarTip(tipId) { ['tip1', 'tip2', 'tip3', 'tip4'].forEach(id => { document.getElementById(`zona-${id}`).style.display = id === tipId ? 'block' : 'none'; document.getElementById(`tab-${id}`).classList.toggle('activo', id === tipId); }); }
+     // PARCHE DE RESCATE: COMPUERTAS PARA LA LÍNEA DIRECTA INDIVIDUAL
+         function enviarHairMistSolo() {
+            // DETECTA COMPUERTA OFICIAL PARA MÓVIL O COMPUTADOR
+            let baseRuta = window.innerWidth <= 768 ? 
+                "https://whatsapp.com" : "https://whatsapp.com";
+            
+            let txtMsg = `¡Hola Perfumes DAGAH! Me interesa solicitar el producto individual:\n\n💇‍♀️ *Solo Hair Mist*\n💰 *Valor:* *$30.000 COP*`;
+            window.open(`${baseRuta}?phone=${TELEFONO_DAGAH}&text=${encodeURIComponent(txtMsg)}`, '_blank');
+        }
+        // AUTOPISTA DE REEMPLAZO LIMPIA DE FÁBRICA
+        function enviarHairMistSolo() {
+            let baseRuta = window.innerWidth <= 768 ? 
+                "https://whatsapp.com" : "https://whatsapp.com";
+            
+            let txtMsg = `¡Hola Perfumes DAGAH! Me interesa solicitar únicamente el producto individual:\n\n💇‍♀️ *PRODUCTO:* *Solo Hair Mist*\n💰 *VALOR:* *$30.000 COP*`;
+            window.open(`${baseRuta}?phone=${TELEFONO_DAGAH}&text=${encodeURIComponent(txtMsg)}`, '_blank');
+        }
+
+        function enviarBodySplashSolo() {
+            let baseRuta = window.innerWidth <= 768 ? 
+                "https://whatsapp.com" : "https://whatsapp.com";
+            
+            let txtMsg = `¡Hola Perfumes DAGAH! Me interesa solicitar únicamente el producto individual:\n\n🚿 *PRODUCTO:* *Solo Body Splash*\n💰 *VALOR:* *$25.000 COP*`;
+            window.open(`${baseRuta}?phone=${TELEFONO_DAGAH}&text=${encodeURIComponent(txtMsg)}`, '_blank');
+        }
+
+    </script>
+</body>
+</html>
