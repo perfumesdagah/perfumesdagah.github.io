@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#151009">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect"" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -34,14 +34,12 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 
-/* ── cinta superior ─────────────────── */
 .topline{background:var(--gold);color:var(--gold-ink);font-size:.68rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase;overflow:hidden;padding:.45rem 0}
 .mq{overflow:hidden;display:flex}
 .mq-track{display:flex;width:max-content;animation:mq var(--sp,28s) linear infinite}
 .mq-group{display:flex;align-items:center;gap:2.6rem;padding-right:2.6rem;white-space:nowrap}
 @keyframes mq{to{transform:translateX(-50%)}}
 
-/* ── header ─────────────────── */
 header{position:sticky;top:0;z-index:50;background:rgba(21,16,9,.75);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:.35s}
 header.scrolled{background:rgba(21,16,9,.96);border-color:var(--line)}
 .hd{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0;gap:1rem}
@@ -65,7 +63,6 @@ header.scrolled{background:rgba(21,16,9,.96);border-color:var(--line)}
 .btn:hover .ar{transform:translateX(4px)}
 .hd .btn{padding:.6rem 1.15rem;font-size:.8rem}
 
-/* ── apertura ─────────────────── */
 .hero{position:relative;overflow:hidden;padding:3.2rem 0 4.5rem;
   background:radial-gradient(60% 55% at 82% 8%,rgba(201,162,75,.16),transparent 65%),
              radial-gradient(45% 40% at 8% 92%,rgba(201,162,75,.08),transparent 60%),var(--ink)}
@@ -106,12 +103,10 @@ header.scrolled{background:rgba(21,16,9,.96);border-color:var(--line)}
 .chips-row .chip:nth-child(3){--fd:7.2s}
 .chips-row .chip:nth-child(4){--fd:5.9s}
 
-/* ── cinta garantía ─────────────────── */
 .belt{background:var(--paper2);color:#3a2f1c;border-block:1px solid #d8cbac;padding:.9rem 0;font-family:var(--serif);font-style:italic;font-size:1rem;letter-spacing:.04em}
 .belt .mq-group span{display:flex;align-items:center;gap:2.6rem}
 .belt em{font-style:normal;color:#a07d2e;font-size:.8em}
 
-/* ── catálogo ──────────────── */
 .catalog{background:var(--paper);color:#221a0e;padding:4.2rem 0 5rem}
 .cat-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.4rem;margin-bottom:2rem}
 .eyebrow.dark{color:#a07d2e}.eyebrow.dark::before{background:#a07d2e}
@@ -191,7 +186,6 @@ header.scrolled{background:rgba(21,16,9,.96);border-color:var(--line)}
 .btn-wa--ghost:hover{background:#efe7d3;box-shadow:none;color:#5c4d2e}
 .empty{grid-column:1/-1;text-align:center;padding:3.5rem 1rem;font-family:var(--serif);font-style:italic;font-size:1.2rem;color:#8a7a56}
 
-/* ── asesoría ─────────────────── */
 .quiz{padding:5rem 0;background:var(--ink2)}
 .quiz-head h2{font-family:var(--serif);font-size:clamp(2rem,5vw,3.1rem);font-weight:600;line-height:1.08;margin:.7rem 0 .6rem}
 .quiz-head h2 em{color:var(--gold-hi)}
@@ -215,7 +209,6 @@ header.scrolled{background:rgba(21,16,9,.96);border-color:var(--line)}
 .q-reset{margin-top:1.2rem;font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-dim)}
 .q-reset:hover{color:var(--gold-hi)}
 
-/* ── aula del perfume ─────────────────── */
 .school{padding:5rem 0;background:var(--ink)}
 .school h2{font-family:var(--serif);font-size:clamp(2rem,5vw,3.1rem);font-weight:600;line-height:1.08;margin:.7rem 0 .6rem}
 .school h2 em{color:var(--gold-hi)}
@@ -241,7 +234,6 @@ header.scrolled{background:rgba(21,16,9,.96);border-color:var(--line)}
 .tip b{display:block;font-family:var(--serif);font-size:1.05rem;color:var(--gold-hi);margin-bottom:.35rem}
 .tip p{font-size:.85rem;color:var(--cream-dim)}
 
-/* ── FAQ ────────────────── */
 .faq{padding:5rem 0;background:var(--paper);color:#221a0e}
 .faq h2{font-family:var(--serif);font-size:clamp(2rem,5vw,3.1rem);font-weight:600;margin:.7rem 0 2.2rem}
 .faq h2 em{font-style:italic;color:#a07d2e}
@@ -255,7 +247,6 @@ header.scrolled{background:rgba(21,16,9,.96);border-color:var(--line)}
 .faq-a div{overflow:hidden}
 .faq-a p{padding:0 .2rem 1.4rem;color:#6d5c3a;max-width:60ch;font-size:.95rem}
 
-/* ── cierre ───────────────── */
 .final{position:relative;padding:6rem 0;text-align:center;overflow:hidden;
   background:radial-gradient(55% 60% at 50% 110%,rgba(201,162,75,.22),transparent 65%),var(--ink)}
 .final .ghost{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--serif);font-size:clamp(7rem,26vw,20rem);color:transparent;-webkit-text-stroke:1px rgba(230,214,180,.06);pointer-events:none;white-space:nowrap}
@@ -265,7 +256,6 @@ header.scrolled{background:rgba(21,16,9,.96);border-color:var(--line)}
 .final .btn{position:relative;font-size:1.05rem;padding:1.1rem 2.2rem}
 .final .status{position:relative;display:inline-flex;margin-top:1.8rem}
 
-/* ── footer ────────────────── */
 footer{border-top:1px solid var(--line);padding:3rem 0 2.4rem;background:var(--ink)}
 .ft{display:grid;gap:2.2rem}
 @media(min-width:820px){.ft{grid-template-columns:1.3fr 1fr 1fr}}
@@ -276,7 +266,6 @@ footer{border-top:1px solid var(--line);padding:3rem 0 2.4rem;background:var(--i
 .ft ul{list-style:none;display:grid;gap:.5rem}
 .ft-bot{margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:.8rem;justify-content:space-between;font-size:.75rem;color:#7d715a}
 
-/* ── barra pedido + FAB ─────────────────── */
 #orderbar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:#221a0e;border-top:1px solid var(--gold);transform:translateY(110%);transition:transform .45s cubic-bezier(.2,.75,.25,1);box-shadow:0 -14px 40px rgba(0,0,0,.5)}
 #orderbar.show{transform:none}
 #orderbar.show #obSend{animation:bnc .5s ease}
@@ -297,7 +286,6 @@ footer{border-top:1px solid var(--line);padding:3rem 0 2.4rem;background:var(--i
 @keyframes fabp{to{transform:scale(1.75);opacity:0}}
 body.has-bar .fab{bottom:92px}
 
-/* ── reveals ───────────────── */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease var(--d,0s),transform .8s cubic-bezier(.2,.75,.25,1) var(--d,0s)}
 .rv.in{opacity:1;transform:none}
 
@@ -323,7 +311,6 @@ body.has-bar .fab{bottom:92px}
     <nav>
       <a href="#inventario">Inventario</a><a href="#asesoria">Asesoría</a><a href="#escuela">Tips</a><a href="#preguntas">Preguntas</a>
     </nav>
-    
   </div>
 </header>
 
@@ -511,8 +498,7 @@ body.has-bar .fab{bottom:92px}
     <h2 class="rv" style="--d:.05s">Lo que todos <em>preguntan</em></h2>
     <div class="faq-list">
       <div class="faq-item rv"><button class="faq-q" aria-expanded="false">¿Cómo puedo pagar?<span class="pl">+</span></button><div class="faq-a"><div><p>Nequi o Bancolombia — lo eliges en la página al hacer el pedido y lo confirmamos por el mismo chat. Cualquier otra forma se conversa personalmente.</p></div></div></div>
-     
-            <div class="faq-item rv" style="--d:.2s"><button class="faq-q" aria-expanded="false">No sé cuál elegir, ¿me ayudan?<span class="pl">+</span></button><div class="faq-a"><div><p>¡Sí! Use la asesoría de aroma de la página (tres toques) o escríbanos «asesoría» por WhatsApp y cuéntenos qué aromas le gustan. Le recomendamos entre lo disponible.</p></div></div></div>
+      <div class="faq-item rv" style="--d:.2s"><button class="faq-q" aria-expanded="false">No sé cuál elegir, ¿me ayudan?<span class="pl">+</span></button><div class="faq-a"><div><p>¡Sí! Use la asesoría de aroma de la página (tres toques) o escríbanos «asesoría» por WhatsApp y cuéntenos qué aromas le gustan. Le recomendamos entre lo disponible.</p></div></div></div>
       <div class="faq-item rv" style="--d:.25s"><button class="faq-q" aria-expanded="false">Quiero pedir varios, ¿cómo hago la lista?<span class="pl">+</span></button><div class="faq-a"><div><p>Muy fácil: toque <b>＋ Agregar</b> en cada perfume (como echándolos a una canasta). Su lista queda pegada arriba, a la vista, con cantidades y total. Toque <b>Enviar pedido</b> y se abre WhatsApp con todo escrito.</p></div></div></div>
       <div class="faq-item rv" style="--d:.3s"><button class="faq-q" aria-expanded="false">¿Tengo que registrarme o pagar suscripción?<span class="pl">+</span></button><div class="faq-a"><div><p>No. Cero cuentas, cero contraseñas, cero cobros ocultos: eliges el perfume, tocas el botón y la compra se completa en tu propio WhatsApp.</p></div></div></div>
     </div>
@@ -563,39 +549,36 @@ body.has-bar .fab{bottom:92px}
     <div class="ob-btns"><button id="obClear">Vaciar</button><a id="obSend" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Enviar pedido</a></div>
   </div>
 </div>
-
+<a class="fab" id="fab" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg><use href="#i-wa"/></svg></a>
 
 <script>
-/* ═══════════ CONFIGURACIÓN DAGAH ═══════════
-   ✏️ DON LEÓN: aquí mismo edita PRECIO y STOCK de cada
-   perfume cuando lo necesite. Solo cambie los numeritos. */
 const WA_NUM = "573106410582";
 const SALUDO = "¡Hola DAGAH! ✦";
 
 const PROD = [
- {id:1,  nombre:"Mandarina",        familia:"Fresco",    nota:"Mandarina chispeante · Azahar",        ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media: alegre"},
- {id:2,  nombre:"Bubble Gum",         familia:"Dulce",     nota:"Chicle dulce · Frutas rosadas",        ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media: divertida"},
- {id:3,  nombre:"Yara Rosa",        familia:"Dulce",     nota:"Orquídea · Vainilla · Almizcle",       ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta: firma"},
- {id:4,  nombre:"Yara Candy",       familia:"Dulce",     nota:"Caramelo de fresa · Grosella · Vainilla", ml:100, precio:100000, stock:3, tag:"Inspiración", img:"Yara Candy", dur:"8+ horas", estela:"Exclusiva"},
- {id:5,  nombre:"Yara Tous",        familia:"Floral",    nota:"Frutos rojos · Flores · Almizcle",     ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"Yara Tous",  dur:"6–8 horas", estela:"Media-alta"},
- {id:6,  nombre:"Asad",             familia:"Oriental",  nota:"Especias · Ámbar · Vainilla de bourbon", ml:100, precio:100000, stock:3, tag:"Inspiración", img:"Asad Bourbon", dur:"8+ horas", estela:"Alta: presencia de caballero"},
- {id:7,  nombre:"Asad Elixir",      familia:"Oriental",  nota:"Especias oscuras · Cuero · Ámbar",     ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"8+ horas", estela:"Alta"},
- {id:8,  nombre:"Asad Café",        familia:"Dulce",     nota:"Café · Especias · Ámbar",              ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"8+ horas", estela:"Alta"},
- {id:9,  nombre:"Club de Nuit",     familia:"Amaderado", nota:"Piña · Abedul · Almizcle",             ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Alta"},
- {id:10, nombre:"Vida Bella",       familia:"Dulce",     nota:"Grosella · Iris · Praliné",            ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta"},
- {id:11, nombre:"Toy Boy",          familia:"Amaderado", nota:"Pimienta · Madera · Ámbar",            ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"Toy Boy",    dur:"6–8 horas", estela:"Media-alta"},
- {id:12, nombre:"Eau Fraiche",      familia:"Fresco",    nota:"Limón · Cardamomo · Madera clara",     ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
- {id:13, nombre:"Eros",             familia:"Fresco",    nota:"Menta · Manzana · Vainilla",           ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"Versace Eros", dur:"6–8 horas", estela:"Alta: conquista"},
- {id:14, nombre:"One Million",      familia:"Dulce",     nota:"Ámbar · Canela · Cuero dulce",         ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"One Million", dur:"6–8 horas", estela:"Alta: de fiesta"},
- {id:15, nombre:"Mandarina Mango",  familia:"Fresco",    nota:"Mango · Mandarina · Coco",             ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
- {id:16, nombre:"Good Girl Blush",  familia:"Floral",    nota:"Peonía · Cereza · Vainilla",           ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta"},
- {id:17, nombre:"Nitro Red",        familia:"Fresco",    nota:"Cítricos · Lavanda · Ámbar",           ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
- {id:18, nombre:"Tommy Men",        familia:"Fresco",    nota:"Manzana · Menta · Algodón",            ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
- {id:19, nombre:"París Fem",        familia:"Floral",    nota:"Rosa · Violeta · Madera suave",        ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"5–7 horas", estela:"Media"},
- {id:20, nombre:"Boss Unlimited",   familia:"Amaderado", nota:"Manzana · Pino · Sándalo",             ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"5–7 horas", estela:"Media"},
- {id:21, nombre:"Thanks Next",      familia:"Floral",    nota:"Frutas · Flores · Almizcle",           ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"Thank U Next", dur:"5–7 horas", estela:"Media: juvenil"},
- {id:22, nombre:"Thanks Next 2",  familia:"Dulce",     nota:"Frutas dulces · Flores · Almizcle",    ml:100, precio:100000,  stock:3, tag:"Inspiración",  img:"Thanks Next 2",dur:"5–7 horas", estela:"Media"},
- {id:23, nombre:"Valentino",        familia:"Floral",    nota:"Rosa · Café · Vainilla",               ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Alta"},
+ {id:1,  nombre:"Mandarina",        familia:"Fresco",    nota:"Mandarina chispeante · Azahar",        ml:100, precio:85000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media: alegre"},
+ {id:2,  nombre:"Bubble Gum",       familia:"Dulce",     nota:"Chicle dulce · Frutas rosadas",        ml:100, precio:85000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media: divertida"},
+ {id:3,  nombre:"Yara Rosa",        familia:"Dulce",     nota:"Orquídea · Vainilla · Almizcle",       ml:100, precio:85000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta: firma"},
+ {id:4,  nombre:"Yara Candy",       familia:"Dulce",     nota:"Caramelo de fresa · Grosella · Vainilla", ml:100, precio:85000, stock:3, tag:"Inspiración", img:"Yara Candy", dur:"8+ horas", estela:"Exclusiva"},
+ {id:5,  nombre:"Yara Tous",        familia:"Floral",    nota:"Frutos rojos · Flores · Almizcle",     ml:100, precio:85000,  stock:3, tag:"Inspiración", img:"Yara Tous",  dur:"6–8 horas", estela:"Media-alta"},
+ {id:6,  nombre:"Asad",             familia:"Oriental",  nota:"Especias · Ámbar · Vainilla de bourbon", ml:100, precio:85000, stock:3, tag:"Inspiración", img:"Asad Bourbon", dur:"8+ horas", estela:"Alta: presencia de caballero"},
+ {id:7,  nombre:"Asad Elixir",      familia:"Oriental",  nota:"Especias oscuras · Cuero · Ámbar",     ml:100, precio:85000,  stock:3, tag:"Inspiración",  dur:"8+ horas", estela:"Alta"},
+ {id:8,  nombre:"Asad Café",        familia:"Dulce",     nota:"Café · Especias · Ámbar",              ml:100, precio:85000,  stock:3, tag:"Inspiración",  dur:"8+ horas", estela:"Alta"},
+ {id:9,  nombre:"Club de Nuit",     familia:"Amaderado", nota:"Piña · Abedul · Almizcle",             ml:100, precio:85000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Alta"},
+ {id:10, nombre:"Vida Bella",       familia:"Dulce",     nota:"Grosella · Iris · Praliné",            ml:100, precio:85000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta"},
+ {id:11, nombre:"Toy Boy",          familia:"Amaderado", nota:"Pimienta · Madera · Ámbar",            ml:100, precio:85000,  stock:3, tag:"Inspiración", img:"Toy Boy",    dur:"6–8 horas", estela:"Media-alta"},
+ {id:12, nombre:"Eau Fraîche",      familia:"Fresco",    nota:"Limón · Cardamomo · Madera clara",     ml:100, precio:85000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
+ {id:13, nombre:"Eros",             familia:"Fresco",    nota:"Menta · Manzana · Vainilla",           ml:100, precio:85000,  stock:3, tag:"Inspiración", img:"Versace Eros", dur:"6–8 horas", estela:"Alta: conquista"},
+ {id:14, nombre:"One Million",      familia:"Dulce",     nota:"Ámbar · Canela · Cuero dulce",         ml:100, precio:85000,  stock:3, tag:"Inspiración", img:"One Million", dur:"6–8 horas", estela:"Alta: de fiesta"},
+ {id:15, nombre:"Mandarina Mango",  familia:"Fresco",    nota:"Mango · Mandarina · Coco",             ml:100, precio:85000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
+ {id:16, nombre:"Good Girl Blush",  familia:"Floral",    nota:"Peonía · Cereza · Vainilla",           ml:100, precio:85000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta"},
+ {id:17, nombre:"Nitro Red",        familia:"Fresco",    nota:"Cítricos · Lavanda · Ámbar",           ml:100, precio:85000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
+ {id:18, nombre:"Tommy Men",        familia:"Fresco",    nota:"Manzana · Menta · Algodón",            ml:100, precio:85000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
+ {id:19, nombre:"París Fem",        familia:"Floral",    nota:"Rosa · Violeta · Madera suave",        ml:100, precio:85000,  stock:3, tag:"Inspiración",  dur:"5–7 horas", estela:"Media"},
+ {id:20, nombre:"Boss Unlimited",   familia:"Amaderado", nota:"Manzana · Pino · Sándalo",             ml:100, precio:85000,  stock:3, tag:"Inspiración",  dur:"5–7 horas", estela:"Media"},
+ {id:21, nombre:"Thanks Next",      familia:"Floral",    nota:"Frutas · Flores · Almizcle",           ml:100, precio:85000,  stock:3, tag:"Inspiración", img:"Thank U Next", dur:"5–7 horas", estela:"Media: juvenil"},
+ {id:22, nombre:"Thanks Next 2.0",  familia:"Dulce",     nota:"Frutas dulces · Flores · Almizcle",    ml:100, precio:85000,  stock:3, tag:"Inspiración", img:"Thanks Next 2", dur:"5–7 horas", estela:"Media"},
+ {id:23, nombre:"Valentino",        familia:"Floral",    nota:"Rosa · Café · Vainilla",               ml:100, precio:85000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Alta"},
  {id:24, nombre:"Le Male Elixir",   familia:"Oriental",  nota:"Menta · Lavanda · Vainilla intensa",   ml:100, precio:110000, stock:3, tag:"Elixir",       dur:"8+ horas", estela:"Alta"},
  {id:25, nombre:"9 PM Elixir",      familia:"Dulce",     nota:"Canela · Ámbar · Vainilla",            ml:100, precio:110000, stock:3, tag:"Elixir",       dur:"8+ horas", estela:"Alta"},
  {id:26, nombre:"Lattafa Roja",     familia:"Oriental",  nota:"Frutas rojas · Rosa · Ámbar",          ml:100, precio:110000, stock:3, tag:"Baúl de lujo", dur:"8+ horas", estela:"Alta"},
@@ -606,17 +589,37 @@ const PROD = [
 ];
 
 const TAGS = {
- 1:{para:["el"],oca:["noche","especial","diario"]},
- 2:{para:["el"],oca:["noche","especial"]},
+ 1:{para:["ella","el"],oca:["diario","gimnasio"]},
+ 2:{para:["ella"],oca:["diario","gimnasio"]},
  3:{para:["ella"],oca:["diario","especial"]},
- 4:{para:["ella"],oca:["diario","gimnasio"]},
- 5:{para:["el"],oca:["diario","especial"]},
- 6:{para:["el"],oca:["noche","especial"]},
- 7:{para:["ella"],oca:["diario","especial"]},
- 8:{para:["ella"],oca:["especial","noche"]},
- 9:{para:["ella"],oca:["diario","especial"]}
+ 4:{para:["ella"],oca:["diario","especial"]},
+ 5:{para:["ella"],oca:["diario","especial"]},
+ 6:{para:["el"],oca:["noche","especial","diario"]},
+ 7:{para:["el"],oca:["noche","especial"]},
+ 8:{para:["el"],oca:["noche","especial"]},
+ 9:{para:["el"],oca:["noche","especial"]},
+ 10:{para:["ella"],oca:["diario","especial"]},
+ 11:{para:["el"],oca:["diario","especial"]},
+ 12:{para:["el"],oca:["diario","gimnasio"]},
+ 13:{para:["el"],oca:["noche","especial"]},
+ 14:{para:["el"],oca:["noche","especial"]},
+ 15:{para:["ella","el"],oca:["diario","gimnasio"]},
+ 16:{para:["ella"],oca:["especial","noche"]},
+ 17:{para:["el"],oca:["diario","gimnasio"]},
+ 18:{para:["el"],oca:["diario","gimnasio"]},
+ 19:{para:["ella"],oca:["especial","noche"]},
+ 20:{para:["el"],oca:["diario","especial"]},
+ 21:{para:["ella"],oca:["diario","especial"]},
+ 22:{para:["ella"],oca:["diario","especial"]},
+ 23:{para:["el","ella"],oca:["especial","noche"]},
+ 24:{para:["el"],oca:["noche","especial"]},
+ 25:{para:["el"],oca:["noche","especial"]},
+ 26:{para:["el","ella"],oca:["especial","noche"]},
+ 27:{para:["el","ella"],oca:["especial","noche"]},
+ 28:{para:["el","ella"],oca:["especial","noche"]},
+ 29:{para:["ella"],oca:["diario","especial"]},
+ 30:{para:["ella"],oca:["diario","especial"]}
 };
-/* ═══════════════════════════════════════════ */
 
 const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const $ = s => document.querySelector(s);
@@ -656,15 +659,15 @@ $("#chips").addEventListener("click",e=>{
 });
 $("#sort").addEventListener("change",e=>{curSort=e.target.value;render();});
 
-function footCtrl(p,q){
-  return q>0
-    ? `<span class="step-qty"><button data-sub="${p.id}" aria-label="Quitar uno de ${p.nombre}">−</button><b>${q}</b><button data-add="${p.id}" aria-label="Agregar uno más de ${p.nombre}">+</button></span>`
-    : `<button class="add add-txt" data-add="${p.id}">＋ Agregar</button>`;
-}
 function ph(name){
   const ini = name.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
   const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='300' height='340'><rect width='100%' height='100%' fill='#1d1610'/><circle cx='150' cy='140' r='70' fill='none' stroke='#c9a24b' stroke-width='3'/><text x='150' y='162' font-family='Georgia,serif' font-size='54' fill='#e8ca7d' text-anchor='middle'>${ini}</text><text x='150' y='290' font-family='Verdana,sans-serif' font-size='15' letter-spacing='4' fill='#b9ad93' text-anchor='middle'>DAGAH</text></svg>`;
   return "data:image/svg+xml," + encodeURIComponent(svg);
+}
+function footCtrl(p,q){
+  return q>0
+    ? `<span class="step-qty"><button data-sub="${p.id}" aria-label="Quitar uno de ${p.nombre}">−</button><b>${q}</b><button data-add="${p.id}" aria-label="Agregar uno más de ${p.nombre}">+</button></span>`
+    : `<button class="add add-txt" data-add="${p.id}">＋ Agregar</button>`;
 }
 function card(p,i){
   const out = p.stock===0;
@@ -676,7 +679,7 @@ function card(p,i){
   const act = out
     ? `<a class="btn-wa btn-wa--ghost" target="_blank" rel="noopener" href="${wa(`${SALUDO} Vi que *${p.nombre}* está agotado. ¿Me avisas cuando vuelva a llegar? 👀`)}"><svg><use href="#i-wa"/></svg>Avísame cuando vuelva</a>`
     : `<a class="btn-wa" target="_blank" rel="noopener" href="${wa(`${SALUDO} Quiero pedir *${p.nombre}* (${p.ml} ml — ${fmt(p.precio)}).\n\n✦ Mi ciudad y dirección:\n${payLine()}\n¿Es posible? ✦`)}"><svg><use href="#i-wa"/></svg>Pedir por WhatsApp</a>`;
-      const base = p.img || p.nombre;
+  const base = p.img || p.nombre;
   const seal = ph(p.nombre);
   const imgSrc = `imagenes/${base}.jpeg`;
   const imgErr = ` onerror="this.onerror=null;this.src='imagenes/${base}.jpg';this.onerror=function(){this.onerror=null;this.src='${seal}';};"`;
@@ -746,7 +749,6 @@ function bar(){
 }
 $("#obClear").onclick = ()=>{sel.clear();bar();basket();render();};
 
-/* ── asesoría de aroma ── */
 const quiz = {para:null,oca:null,fam:null};
 const LBL = {para:{ella:"ella",el:"él",regalo:"un regalo",sorpresa:"sorprender"},
              oca:{diario:"el diario y el trabajo",gimnasio:"el deporte y el gimnasio",especial:"una ocasión especial",noche:"la noche y la fiesta"}};
