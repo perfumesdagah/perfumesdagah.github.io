@@ -1,568 +1,821 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfumes DAGAH | El Asesor Inteligente</title>
-    
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-           background-color: #0f0f0f;
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 50% 30%, transparent 10%, #030a16 90%),
-                url('logo-dagah.png') no-repeat center center;
-            background-size: 55% auto;
-            opacity: 0.80; /* Calibración oficial */
-            z-index: -1;
-            pointer-events: none;
-        }
-        .logo-contenedor { text-align: center; padding: 25px 10px; width: 100%; }
-        .logo-contenedor img { width: 700px; max-width: 95%; height: auto; display: block; margin: 0 auto; }
-        .eslogan-comercial {
-            font-family: 'Georgia', serif; color: #ecd067; font-size: 1.15rem; letter-spacing: 5px;
-            text-transform: uppercase; text-align: center; margin-top: 5px; font-weight: bold; opacity: 0.9;
-        }
-        .catalogo-contenedor { display: flex; justify-content: center; padding: 20px; width: 100%; }
-        .tarjeta-producto {
-            background: rgba(9, 20, 40, 0.65); border: 1px solid rgba(236, 208, 103, 0.15);
-            border-radius: 16px; width: 1100px; max-width: 100%; display: flex; 
-            flex-direction: row; gap: 30px; padding: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5); backdrop-filter: blur(12px);
-        }
-        .imagen-producto-bloque { flex: 1; max-width: 480px; display: flex; flex-direction: column; gap: 20px; }
-        .info-producto-bloque { flex: 1.2; display: flex; flex-direction: column; justify-content: space-between; }
-        .panel-asesor { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 18px; border-radius: 12px; display: flex; flex-direction: column; gap: 10px; }
-        .asesor-titulo { font-size: 0.95rem; font-weight: bold; color: #ecd067; margin-bottom: 5px; }
-        .btn-asesor { background: #0b1528; border: 1px solid rgba(236,208,103,0.2); color: #dfdfdf; padding: 11px; border-radius: 8px; cursor: pointer; text-align: left; font-size: 0.9rem; font-weight: 500; transition: all 0.2s; width: 100%; }
-        .btn-asesor:hover { background: #13223f; border-color: #ecd067; color: #ffffff; }
-        .btn-asesor.seleccionado { background: #ecd067; border-color: #ecd067; color: #091428; font-weight: bold; box-shadow: 0 0 15px rgba(236,208,103,0.3); }
-        .producto-nombre { font-family: 'Georgia', serif; font-size: 1.6rem; color: #ecd067; margin-bottom: 15px; border-bottom: 1px solid rgba(236,208,103,0.2); padding-bottom: 10px; }
-        .item-recomendado { background: rgba(236,208,103,0.02); border-left: 3px solid #ecd067; padding: 12px 15px; border-radius: 0 8px 8px 0; margin-bottom: 15px; }
-        .item-tag { font-size: 0.75rem; text-transform: uppercase; color: #aaa; display: block; margin-bottom: 4px; }
-        .caract-lista { list-style: none; padding-left: 0; }
-        .caract-lista li { font-size: 0.88rem; margin-bottom: 5px; color: #dfdfdf; }
-        .caract-lista strong { color: #ecd067; font-weight: 500; }
-        .selector-variaciones { margin-bottom: 15px; }
-        .selector-etiqueta { font-size: 0.9rem; color: #aaa; display: block; margin-bottom: 8px; }
-        .botones-grupo { display: flex; gap: 10px; }
-        .btn-variacion { background: #0b1528; border: 1px solid rgba(255,255,255,0.1); color: #dfdfdf; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s; }
-        .btn-variacion:hover { border-color: #ecd067; }
-        .btn-variacion.activo { background: #ecd067; border-color: #ecd067; color: #091428; font-weight: bold; }
-        .compra-bloque { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); padding: 15px 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); }
-        .precio-pantalla { font-family: 'Georgia', serif; font-size: 1.5rem; color: #ecd067; font-weight: bold; }
-        .btn-whatsapp { background: #25D366; color: #ffffff; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; font-size: 0.95rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(37,211,102,0.3); }
-        .btn-whatsapp:hover { background: #20ba5a; }
-        .web-footer { text-align: center; padding: 30px 10px; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); width: 100%; }
-        .footer-texto { font-size: 0.85rem; color: #666; letter-spacing: 1px; }
-        .combo-checkbox-zona { display: flex; align-items: center; gap: 10px; background: rgba(37, 211, 102, 0.05); border: 1px solid rgba(37, 211, 102, 0.2); padding: 12px 15px; border-radius: 8px; cursor: pointer; margin-top: 15px; color: #25D366; font-size: 0.88rem; transition: all 0.2s; width: 100%; }
-        .combo-checkbox-zona input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; accent-color: #25D366; }
-        @media (max-width: 768px) {
-            .catalogo-contenedor { padding: 10px; width: 100% !important; }
-            .tarjeta-producto { flex-direction: column !important; gap: 20px !important; padding: 15px !important; width: 100% !important; }
-            .imagen-producto-bloque, .info-producto-bloque { width: 100% !important; max-width: 100% !important; flex: none !important; }
-            .logo-contenedor img { max-width: 90% !important; }
-            .btn-asesor { padding: 12px 10px !important; font-size: 0.85rem !important; }
-            .menu-tips-tabs button { min-width: 45% !important; font-size: 0.7rem !important; }
-        }
-       /* CANDADO DE HIERRO: INFLADO Y ROTULADO COLOSAL */
-        .item-recomendado label, .item-recomendo label {
-            display: flex !important;
-            align-items: center !important;
-            gap: 15px !important;
-            width: 100% !important;
-            margin-bottom: 18px !important;
-        }
-        input[type="radio"][name="seleccion-perfume"] {
-            width: 35px !important; /* Diámetro colosal fijo */
-            height: 35px !important;
-            accent-color: #ecd067 !important;
-            cursor: pointer !important;
-            margin: 0 !important;
-            order: 1 !important; /* Forzado adelante siempre */
-        }
-        input[type="radio"][name="seleccion-perfume"]::after {
-            content: "👉 ELIJA AQUÍ" !important;
-            display: inline-block !important;
-            margin-left: 45px !important;
-            width: 320px !important;
-            font-family: 'Georgia', serif !important;
-            font-size: 1.35rem !important; /* Letra grande de mostrador */
-            color: #ecd067 !important;
-            font-weight: bold !important;
-            letter-spacing: 1px !important;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PERFUMES DAGAH — Inventario en vivo · Pedidos por WhatsApp</title>
+<meta name="description" content="Perfumes de excelente calidad en stock real. Pide directo por WhatsApp, asesoría de aroma automática y atención 24/7 desde San Luis, Antioquia.">
+<meta name="theme-color" content="#151009">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#151009; --ink2:#1d1610; --ink3:#241c12;
+  --line:rgba(230,214,180,.14); --line-strong:rgba(230,214,180,.28);
+  --cream:#f0e6d2; --cream-dim:#b9ad93;
+  --paper:#f6f0e2; --paper2:#efe6d1; --card:#fffdf6; --card-line:#e5d9c0;
+  --gold:#c9a24b; --gold-hi:#e8ca7d; --gold-ink:#1a130a;
+  --wa:#22c15e; --wa-dark:#128c44;
+  --serif:"Fraunces",Georgia,serif; --sans:"Manrope",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--cream);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.has-bar{padding-bottom:84px}
+::selection{background:var(--gold);color:var(--gold-ink)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+section{scroll-margin-top:72px}
+.wrap{width:min(1120px,92%);margin:0 auto}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+/* ── cinta superior ─────────────────── */
+.topline{background:var(--gold);color:var(--gold-ink);font-size:.68rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase;overflow:hidden;padding:.45rem 0}
+.mq{overflow:hidden;display:flex}
+.mq-track{display:flex;width:max-content;animation:mq var(--sp,28s) linear infinite}
+.mq-group{display:flex;align-items:center;gap:2.6rem;padding-right:2.6rem;white-space:nowrap}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ── header ─────────────────── */
+header{position:sticky;top:0;z-index:50;background:rgba(21,16,9,.75);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:.35s}
+header.scrolled{background:rgba(21,16,9,.96);border-color:var(--line)}
+.hd{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0;gap:1rem}
+.logo{font-family:var(--serif);font-weight:700;font-size:1.45rem;letter-spacing:.14em;display:flex;align-items:center;gap:.5rem}
+.logo-img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:1px solid rgba(201,162,75,.6)}
+.logo i{font-style:normal;color:var(--gold);font-size:.9em;animation:twinkle 3.2s ease-in-out infinite}
+@keyframes twinkle{50%{opacity:.35;transform:scale(.8)}}
+.hd nav{display:none;gap:1.6rem;font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-dim)}
+.hd nav a:hover{color:var(--gold-hi)}
+@media(min-width:880px){.hd nav{display:flex}}
+.btn{display:inline-flex;align-items:center;gap:.55rem;border-radius:999px;font-weight:800;padding:.85rem 1.5rem;font-size:.92rem;transition:transform .25s,box-shadow .25s,background .25s}
+.btn svg{width:18px;height:18px;flex:none}
+.btn:hover{transform:translateY(-2px)}
+.btn-gold{background:var(--gold);color:var(--gold-ink)}
+.btn-gold:hover{background:var(--gold-hi);box-shadow:0 10px 26px rgba(201,162,75,.3)}
+.btn-wabg{background:var(--wa);color:#fff}
+.btn-wabg:hover{background:#28d468;box-shadow:0 10px 26px rgba(34,193,94,.3)}
+.btn-ghost{border:1px solid var(--line-strong);color:var(--cream)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-hi)}
+.btn .ar{transition:transform .25s}
+.btn:hover .ar{transform:translateX(4px)}
+.hd .btn{padding:.6rem 1.15rem;font-size:.8rem}
+
+/* ── apertura ─────────────────── */
+.hero{position:relative;overflow:hidden;padding:3.2rem 0 4.5rem;
+  background:radial-gradient(60% 55% at 82% 8%,rgba(201,162,75,.16),transparent 65%),
+             radial-gradient(45% 40% at 8% 92%,rgba(201,162,75,.08),transparent 60%),var(--ink)}
+.hero-ghost{position:absolute;bottom:-4rem;left:-2rem;font-family:var(--serif);font-style:italic;font-size:clamp(6rem,22vw,17rem);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(230,214,180,.07);pointer-events:none;user-select:none;white-space:nowrap}
+.hero-grid{position:relative;display:grid;gap:3rem}
+@media(min-width:920px){.hero-grid{grid-template-columns:1.05fr .95fr;align-items:center;gap:2rem}.hero-copy{padding-right:2rem}}
+.eyebrow{display:flex;align-items:center;gap:.7rem;font-size:.7rem;font-weight:800;letter-spacing:.34em;text-transform:uppercase;color:var(--gold)}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--gold)}
+.hero h1{font-family:var(--serif);font-size:clamp(4.2rem,15vw,9.5rem);font-weight:600;line-height:.92;letter-spacing:.04em;margin:.9rem 0 .4rem}
+.lm{display:block;overflow:hidden}
+.lm span{display:inline-block;transform:translateY(112%);animation:rise 1s cubic-bezier(.2,.75,.2,1) forwards;animation-delay:var(--d,0s)}
+@keyframes rise{to{transform:none}}
+.hero-sub{font-family:var(--serif);font-style:italic;color:var(--gold-hi);font-size:clamp(1.05rem,2.6vw,1.35rem)}
+.hero p.lead{margin:1.3rem 0 1.8rem;color:var(--cream-dim);max-width:44ch}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:.9rem}
+.hero-ases{display:inline-block;margin-top:1.1rem;font-size:.84rem;font-weight:700;color:var(--gold-hi);border-bottom:1px dashed rgba(201,162,75,.6);padding-bottom:2px}
+.hero-ases:hover{color:var(--gold)}
+.hero-stats{display:flex;flex-wrap:wrap;margin-top:2.2rem;border-top:1px solid var(--line)}
+.hero-stats div{padding:1rem 1.6rem 0 0;margin-right:1.6rem;border-right:1px solid var(--line)}
+.hero-stats div:last-child{border:none;margin:0}
+.hero-stats b{display:block;font-family:var(--serif);font-size:1.5rem;color:var(--gold-hi);font-weight:600}
+.hero-stats span{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-dim)}
+.hero-scene{position:relative;justify-self:center;width:min(420px,100%);display:flex;flex-direction:column;align-items:center;padding:1.2rem 0 2.6rem}
+.medal{position:relative;width:min(300px,76%);aspect-ratio:1}
+.medal img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid var(--gold);box-shadow:0 0 0 10px rgba(201,162,75,.12),0 24px 60px rgba(0,0,0,.55);animation:breathe 7s ease-in-out infinite}
+@keyframes breathe{50%{box-shadow:0 0 0 18px rgba(201,162,75,.07),0 24px 60px rgba(0,0,0,.55)}}
+.ring{position:absolute;inset:-16%;animation:spin 40s linear infinite}
+.ring text{font-family:var(--sans);font-size:11.5px;letter-spacing:2.5px;fill:var(--gold)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.slogan{margin-top:3.4rem;font-family:var(--serif);font-style:italic;font-size:clamp(1.2rem,3.2vw,1.6rem);color:var(--gold-hi);text-align:center}
+.slogan small{display:block;margin-top:.4rem;font-family:var(--sans);font-style:normal;font-size:.68rem;font-weight:800;letter-spacing:.34em;text-transform:uppercase;color:var(--cream-dim)}
+.chips-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin-top:1.8rem;position:relative;z-index:3}
+.chip{position:relative;background:rgba(21,16,9,.88);border:1px solid rgba(201,162,75,.5);color:var(--cream);font-size:.72rem;font-weight:700;letter-spacing:.12em;padding:.42rem .85rem;border-radius:999px;animation:floaty var(--fd,6s) ease-in-out infinite}
+.chip small{display:block;font-size:.58rem;letter-spacing:.24em;color:var(--gold);text-transform:uppercase}
+@keyframes floaty{50%{transform:translateY(-6px)}}
+.chips-row .chip:nth-child(1){--fd:5.4s}
+.chips-row .chip:nth-child(2){--fd:6.6s}
+.chips-row .chip:nth-child(3){--fd:7.2s}
+.chips-row .chip:nth-child(4){--fd:5.9s}
+
+/* ── cinta garantía ─────────────────── */
+.belt{background:var(--paper2);color:#3a2f1c;border-block:1px solid #d8cbac;padding:.9rem 0;font-family:var(--serif);font-style:italic;font-size:1rem;letter-spacing:.04em}
+.belt .mq-group span{display:flex;align-items:center;gap:2.6rem}
+.belt em{font-style:normal;color:#a07d2e;font-size:.8em}
+
+/* ── catálogo ──────────────── */
+.catalog{background:var(--paper);color:#221a0e;padding:4.2rem 0 5rem}
+.cat-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.4rem;margin-bottom:2rem}
+.eyebrow.dark{color:#a07d2e}.eyebrow.dark::before{background:#a07d2e}
+.cat-head h2{font-family:var(--serif);font-size:clamp(2rem,5.4vw,3.3rem);font-weight:600;line-height:1.05;margin-top:.5rem}
+.cat-head h2 em{font-style:italic;color:#a07d2e}
+.cat-live{font-size:.78rem;font-weight:700;color:#6d5c3a;display:flex;align-items:center;gap:.55rem}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--wa);box-shadow:0 0 0 0 rgba(34,193,94,.5);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 11px rgba(34,193,94,0)}100%{box-shadow:0 0 0 0 rgba(34,193,94,0)}}
+.tools{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem;margin-bottom:1.4rem}
+.chips{display:flex;gap:.55rem;overflow-x:auto;padding-bottom:.3rem;scrollbar-width:none;flex:1;min-width:0}
+.chips::-webkit-scrollbar{display:none}
+.fchip{flex:none;border:1px solid #c9b98f;border-radius:999px;padding:.5rem 1.05rem;font-size:.78rem;font-weight:800;letter-spacing:.08em;color:#5c4d2e;transition:.25s;background:transparent}
+.fchip:hover{border-color:#a07d2e;color:#a07d2e}
+.fchip.on{background:#221a0e;color:var(--gold-hi);border-color:#221a0e}
+.fchip b{opacity:.55;font-weight:700;margin-left:.25rem}
+.sortsel{appearance:none;border:1px solid #c9b98f;background:transparent;color:#5c4d2e;font-weight:700;font-size:.78rem;padding:.55rem 2rem .55rem 1rem;border-radius:999px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235c4d2e' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .9rem center;cursor:pointer}
+.howto{margin:0 0 1.2rem;border:1.5px dashed #c9a24b;background:#fff8ea;border-radius:14px;padding:1.2rem 1.3rem}
+.howto-t{font-family:var(--serif);font-size:1.25rem;font-weight:600;margin-bottom:.9rem}
+.howto-t em{color:#a07d2e}
+.howto-grid{display:grid;gap:1rem}
+@media(min-width:760px){.howto-grid{grid-template-columns:1fr 1fr}}
+.howto-a,.howto-b{background:#fffdf6;border:1px solid var(--card-line);border-radius:10px;padding:.9rem 1rem}
+.howto-a b,.howto-b b{display:block;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:#a07d2e;margin-bottom:.4rem}
+.howto-a p,.howto-b p{font-size:.92rem;color:#5c4d2e}
+.hl{background:rgba(201,162,75,.28);padding:.1rem .4rem;border-radius:6px;font-weight:800;white-space:nowrap}
+.paybar{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin:0 0 1.4rem;padding:.7rem 1.1rem;border:1px solid var(--card-line);border-radius:999px;background:#fffdf6}
+.paybar-t{font-weight:800;font-size:.8rem;color:#5c4d2e}
+.paychip{border:1.5px solid #c9b98f;border-radius:999px;padding:.45rem 1.05rem;font-size:.78rem;font-weight:800;color:#5c4d2e;transition:.25s}
+.paychip:hover{border-color:#a07d2e;color:#a07d2e}
+.paychip.on{background:#221a0e;color:var(--gold-hi);border-color:#221a0e}
+.paybar-note{font-size:.72rem;color:#8a7a56}
+.basket{position:sticky;top:64px;z-index:35;margin:0 0 1.2rem;border:1.5px dashed #c9a24b;background:#fff8ea;border-radius:14px;box-shadow:0 10px 26px rgba(56,42,15,.14)}
+.b-head{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;width:100%;text-align:left;font-family:var(--serif);font-size:1.02rem;font-weight:600;color:#221a0e;padding:.75rem 1.1rem;cursor:pointer}
+.b-head b{color:#a07d2e}
+.b-toggle{margin-left:auto;font-family:var(--sans);font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#a07d2e}
+.b-body{padding:0 1.1rem .9rem}
+.b-row{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.45rem 0;border-bottom:1px solid #eadfc6;font-size:.92rem}
+.b-row:last-of-type{border-bottom:none}
+.b-name{flex:1;font-weight:700;color:#221a0e}
+.b-sub{font-weight:800;color:#a07d2e;min-width:9ch;text-align:right}
+.b-note{margin-top:.7rem;font-size:.85rem;color:#5c4d2e}
+.grid-count{font-size:.78rem;color:#8a7a56;margin-bottom:1.1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.1rem}
+.card{background:var(--card);border:1px solid var(--card-line);border-radius:14px;display:flex;gap:.95rem;padding:.95rem;position:relative;transition:transform .3s,box-shadow .3s;animation:pop .5s cubic-bezier(.2,.75,.25,1) both}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.98)}}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(56,42,15,.14)}
+.card-img{position:relative;width:112px;flex:none;aspect-ratio:1/1.12;border-radius:10px;overflow:hidden;background:#fff}
+.card-img img{width:100%;height:100%;object-fit:contain;background:#fff;padding:4px}
+.tag{position:absolute;top:6px;left:6px;background:#221a0e;color:var(--gold-hi);font-size:.55rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:.3rem .55rem;border-radius:999px}
+.pill{position:absolute;bottom:6px;right:6px;font-size:.6rem;font-weight:800;letter-spacing:.04em;padding:.3rem .55rem;border-radius:999px}
+.pill-ok{background:rgba(246,240,226,.94);color:#4c6b3c;border:1px solid #b9c9a4}
+.pill-low{background:#221a0e;color:var(--gold-hi);border:1px solid var(--gold);animation:pulse2 2.4s infinite}
+@keyframes pulse2{50%{box-shadow:0 0 0 6px rgba(201,162,75,.18)}}
+.pill-out{background:#efe9db;color:#9a8c70;border:1px solid #d5c9ad}
+.card-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:.28rem}
+.card-top{display:flex;justify-content:space-between;font-size:.62rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#a07d2e}
+.card-top .ml{color:#9a8c70;letter-spacing:.12em}
+.card-name{font-family:var(--serif);font-size:1.18rem;font-weight:600;line-height:1.15}
+.price{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:#221a0e}
+.spec{font-size:.8rem;color:#6d5c3a}
+.spec b{color:#a07d2e}
+.card-foot{display:flex;align-items:center;justify-content:flex-end;margin-top:.35rem}
+.add{width:40px;height:40px;border-radius:50%;border:1.5px solid #221a0e;font-size:1.3rem;line-height:1;display:grid;place-items:center;transition:.25s;color:#221a0e}
+.add:hover{background:#221a0e;color:var(--gold-hi)}
+.add-txt{width:auto;border-radius:999px;padding:.5rem 1rem;font-size:.78rem;font-weight:800;display:inline-flex;align-items:center;gap:.35rem}
+.step-qty{display:inline-flex;align-items:center;gap:.45rem;border:1.5px solid #221a0e;border-radius:999px;padding:.12rem .4rem}
+.step-qty button{width:26px;height:26px;font-size:1.1rem;font-weight:800;color:#221a0e;border-radius:50%;transition:.2s}
+.step-qty button:hover{background:#221a0e;color:var(--gold-hi)}
+.step-qty b{min-width:1.4ch;text-align:center;font-family:var(--serif);font-size:1rem}
+.btn-wa{display:flex;align-items:center;justify-content:center;gap:.5rem;background:var(--wa);color:#fff;font-weight:800;font-size:.8rem;border-radius:999px;padding:.65rem .9rem;margin-top:.5rem;transition:.25s}
+.btn-wa svg{width:16px;height:16px}
+.btn-wa:hover{background:#28d468;box-shadow:0 8px 20px rgba(34,193,94,.35);transform:translateY(-2px)}
+.card.is-out .card-img img{filter:grayscale(1) brightness(.92)}
+.card.is-out .card-name,.card.is-out .price{color:#9a8c70}
+.btn-wa--ghost{background:transparent;border:1.5px dashed #b6a884;color:#7c6d4e}
+.btn-wa--ghost:hover{background:#efe7d3;box-shadow:none;color:#5c4d2e}
+.empty{grid-column:1/-1;text-align:center;padding:3.5rem 1rem;font-family:var(--serif);font-style:italic;font-size:1.2rem;color:#8a7a56}
+
+/* ── asesoría ─────────────────── */
+.quiz{padding:5rem 0;background:var(--ink2)}
+.quiz-head h2{font-family:var(--serif);font-size:clamp(2rem,5vw,3.1rem);font-weight:600;line-height:1.08;margin:.7rem 0 .6rem}
+.quiz-head h2 em{color:var(--gold-hi)}
+.quiz-sub{color:var(--cream-dim);max-width:52ch}
+.quiz-box{margin-top:2.4rem;border:1px solid var(--line-strong);border-radius:18px;padding:2rem 1.6rem;background:linear-gradient(180deg,rgba(201,162,75,.06),transparent)}
+.q{margin-bottom:1.8rem}
+.q-t{font-family:var(--serif);font-size:1.15rem;font-weight:600;margin-bottom:.8rem;color:var(--gold-hi)}
+.q-opts{display:flex;flex-wrap:wrap;gap:.6rem}
+.q-opts button{border:1px solid var(--line-strong);border-radius:999px;padding:.6rem 1.1rem;font-size:.82rem;font-weight:700;color:var(--cream);transition:.25s}
+.q-opts button:hover{border-color:var(--gold);color:var(--gold-hi)}
+.q-opts button.on{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.q-res{border-top:1px dashed var(--line-strong);padding-top:1.6rem;animation:pop .5s both}
+.q-res-t{font-size:.7rem;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.q-card{display:flex;flex-wrap:wrap;gap:1.4rem;align-items:center;justify-content:space-between;background:var(--card);color:#221a0e;border-radius:14px;padding:1.4rem 1.5rem}
+.q-card h3{font-family:var(--serif);font-size:1.6rem;font-weight:600}
+.q-why{font-size:.85rem;color:#8a7a56;margin-top:.4rem;max-width:46ch}
+.q-side{display:grid;gap:.4rem;justify-items:stretch;min-width:220px}
+.q-side .btn-wa{margin-top:.3rem}
+.q-alt{margin-top:1rem;color:var(--cream-dim);font-size:.9rem}
+.q-alt b{color:var(--gold-hi)}
+.q-reset{margin-top:1.2rem;font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-dim)}
+.q-reset:hover{color:var(--gold-hi)}
+
+/* ── aula del perfume ─────────────────── */
+.school{padding:5rem 0;background:var(--ink)}
+.school h2{font-family:var(--serif);font-size:clamp(2rem,5vw,3.1rem);font-weight:600;line-height:1.08;margin:.7rem 0 .6rem}
+.school h2 em{color:var(--gold-hi)}
+.school .sub{color:var(--cream-dim);margin-bottom:2.6rem;max-width:60ch}
+.school-grid{display:grid;gap:1.6rem}
+@media(min-width:920px){.school-grid{grid-template-columns:.9fr 1.1fr}}
+.fig-card{border:1px solid var(--line-strong);border-radius:18px;padding:1.6rem;display:grid;grid-template-columns:auto 1fr;gap:1.4rem;align-items:center;background:linear-gradient(180deg,rgba(201,162,75,.06),transparent)}
+.figura{width:150px;flex:none}
+.figura text{fill:var(--gold-hi);font-size:13px;font-weight:800;font-family:var(--sans)}
+.pt{fill:var(--gold);animation:pulse2 2.4s infinite}
+.fig-legend{list-style:none;display:grid;gap:.55rem;font-size:.9rem;color:var(--cream-dim)}
+.fig-legend b{color:var(--gold-hi);font-family:var(--serif);font-size:1rem;margin-right:.4rem}
+.fig-note{margin-top:.9rem;font-size:.8rem;color:var(--cream-dim);border-top:1px dashed var(--line-strong);padding-top:.8rem}
+.concepts{display:grid;gap:1rem}
+.concept{background:var(--card);color:#221a0e;border-radius:14px;padding:1.2rem 1.4rem}
+.concept h3{font-family:var(--serif);font-size:1.3rem;font-weight:600;margin-bottom:.3rem}
+.concept h3 em{font-style:italic;color:#a07d2e}
+.concept p{font-size:.9rem;color:#6d5c3a}
+.tips-hook{margin-top:2.2rem;text-align:center;font-size:.8rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-hi)}
+.tips-hook b{color:var(--gold)}
+.tips{margin-top:1.2rem;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.tip{border:1px solid var(--line-strong);border-radius:14px;padding:1.1rem 1.2rem;background:rgba(21,16,9,.5)}
+.tip b{display:block;font-family:var(--serif);font-size:1.05rem;color:var(--gold-hi);margin-bottom:.35rem}
+.tip p{font-size:.85rem;color:var(--cream-dim)}
+
+/* ── FAQ ────────────────── */
+.faq{padding:5rem 0;background:var(--paper);color:#221a0e}
+.faq h2{font-family:var(--serif);font-size:clamp(2rem,5vw,3.1rem);font-weight:600;margin:.7rem 0 2.2rem}
+.faq h2 em{font-style:italic;color:#a07d2e}
+.faq-list{max-width:760px}
+.faq-item{border-bottom:1px solid #d8cbac}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:1rem;text-align:left;padding:1.3rem .2rem;font-family:var(--serif);font-size:1.15rem;font-weight:600;color:#221a0e}
+.faq-q .pl{flex:none;width:30px;height:30px;border:1.5px solid #221a0e;border-radius:50%;display:grid;place-items:center;font-size:1.1rem;transition:transform .35s,background .3s}
+.faq-item.open .pl{transform:rotate(45deg);background:var(--gold);border-color:var(--gold)}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease}
+.faq-item.open .faq-a{grid-template-rows:1fr}
+.faq-a div{overflow:hidden}
+.faq-a p{padding:0 .2rem 1.4rem;color:#6d5c3a;max-width:60ch;font-size:.95rem}
+
+/* ── cierre ───────────────── */
+.final{position:relative;padding:6rem 0;text-align:center;overflow:hidden;
+  background:radial-gradient(55% 60% at 50% 110%,rgba(201,162,75,.22),transparent 65%),var(--ink)}
+.final .ghost{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--serif);font-size:clamp(7rem,26vw,20rem);color:transparent;-webkit-text-stroke:1px rgba(230,214,180,.06);pointer-events:none;white-space:nowrap}
+.final h2{position:relative;font-family:var(--serif);font-weight:500;font-size:clamp(2.3rem,6.5vw,4.2rem);line-height:1.05}
+.final h2 em{font-style:italic;color:var(--gold-hi)}
+.final p{position:relative;color:var(--cream-dim);margin:1.1rem auto 2rem;max-width:42ch}
+.final .btn{position:relative;font-size:1.05rem;padding:1.1rem 2.2rem}
+.final .status{position:relative;display:inline-flex;margin-top:1.8rem}
+
+/* ── footer ────────────────── */
+footer{border-top:1px solid var(--line);padding:3rem 0 2.4rem;background:var(--ink)}
+.ft{display:grid;gap:2.2rem}
+@media(min-width:820px){.ft{grid-template-columns:1.3fr 1fr 1fr}}
+.ft h4{font-size:.7rem;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+.ft p,.ft a{color:var(--cream-dim);font-size:.92rem}
+.ft a:hover{color:var(--gold-hi)}
+.ft .logo{font-size:1.7rem;margin-bottom:.7rem}
+.ft ul{list-style:none;display:grid;gap:.5rem}
+.ft-bot{margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:.8rem;justify-content:space-between;font-size:.75rem;color:#7d715a}
+
+/* ── barra pedido + FAB ─────────────────── */
+#orderbar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:#221a0e;border-top:1px solid var(--gold);transform:translateY(110%);transition:transform .45s cubic-bezier(.2,.75,.25,1);box-shadow:0 -14px 40px rgba(0,0,0,.5)}
+#orderbar.show{transform:none}
+#orderbar.show #obSend{animation:bnc .5s ease}
+@keyframes bnc{40%{transform:scale(1.07)}}
+.ob-in{width:min(1120px,94%);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.85rem 0}
+.ob-txt b{font-family:var(--serif);color:var(--gold-hi);font-size:1.05rem}
+.ob-txt span{display:block;font-size:.78rem;color:var(--cream-dim)}
+.ob-btns{display:flex;gap:.6rem;align-items:center}
+#obClear{font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-dim);padding:.6rem}
+#obClear:hover{color:#ff9d7a}
+#obSend{display:inline-flex;align-items:center;gap:.5rem;background:var(--wa);color:#fff;font-weight:800;font-size:.88rem;border-radius:999px;padding:.75rem 1.3rem}
+#obSend svg{width:17px;height:17px}
+#obSend:hover{background:#28d468}
+.fab{position:fixed;right:18px;bottom:18px;z-index:69;width:60px;height:60px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 12px 30px rgba(34,193,94,.4);transition:bottom .45s,transform .25s}
+.fab svg{width:30px;height:30px;fill:#fff}
+.fab:hover{transform:scale(1.08)}
+.fab::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--wa);animation:fabp 2.2s ease-out infinite}
+@keyframes fabp{to{transform:scale(1.75);opacity:0}}
+body.has-bar .fab{bottom:92px}
+
+/* ── reveals ───────────────── */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease var(--d,0s),transform .8s cubic-bezier(.2,.75,.25,1) var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv,.lm span{opacity:1;transform:none}
+}
+</style>
 </head>
 <body>
-    <!-- ENCABEZADO CON IDENTIDAD DE MARCA -->
-    <header class="logo-contenedor">
-        <img src="logo-dagah.png" alt="DAGAH Perfumería Premium">
-        <p class="eslogan-comercial">EXPERIENCIA PARA SIEMPRE</p>
-    </header>
 
-    <main class="catalogo-contenedor">
-        <section class="tarjeta-producto">
-            <!-- COLUMNA IZQUIERDA: PANEL DE PREGUNTAS Y AUTOMATIZACIÓN -->
-            <div class="imagen-producto-bloque">
-                <!-- PASO 1 -->
-                <div class="panel-asesor">
-                    <p class="asesor-titulo">1. ¿Para quién busca la fragancia hoy?</p>
-                    <button id="gender-male" class="btn-asesor" onclick="cambiarGenero('male')">🙋‍♂️ Para mí (Hombre)</button>
-                    <button id="gender-female" class="btn-asesor" onclick="cambiarGenero('female')">🙋‍♀️ Para mí (Mujer)</button>
-                    <button id="gender-gift" class="btn-asesor" onclick="cambiarGenero('gift')">🎁 Para hacer un Regalo</button>
-                </div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol></svg>
 
-                <!-- PASO 2 -->
-                <div class="panel-asesor">
-                    <p class="asesor-titulo" id="titulo-ocasion">2. ¿Para qué momento de su rutina la necesita?</p>
-                    <div id="contenedor-botones-ocasion">
-                        <p style="font-size:0.85rem; color:#aaa; text-align:center; padding:10px;">Elija primero la opción del paso 1...</p>
-                    </div>
-                </div>
+<div class="topline"><div class="mq"><div class="mq-track" style="--sp:26s">
+  <div class="mq-group"><span>Envíos a todo el país</span><span>✦</span><span>Excelente calidad</span><span>✦</span><span>Pago Nequi y Bancolombia</span><span>✦</span><span>Pedidos por WhatsApp</span><span>✦</span><span>Sin registro · Sin contraseñas</span><span>✦</span></div>
+  <div class="mq-group" aria-hidden="true"><span>Envíos a todo el país</span><span>✦</span><span>Excelente calidad</span><span>✦</span><span>Pago Nequi y Bancolombia</span><span>✦</span><span>Pedidos por WhatsApp</span><span>✦</span><span>Sin registro · Sin contraseñas</span><span>✦</span></div>
+</div></div></div>
 
-                <!-- PASO 3 -->
-                <div class="panel-asesor">
-                    <p class="asesor-titulo">3. ¿Qué tipo de aromas prefiere?</p>
-                    <button id="aroma-fresco" class="btn-asesor" onclick="cambiarAroma('fresco')">🍊 Frescos y Cítricos</button>
-                    <button id="aroma-dulce" class="btn-asesor" onclick="cambiarAroma('dulce')">🍯 Dulces y Especiados</button>
-                    <button id="aroma-amaderado" class="btn-asesor" onclick="cambiarAroma('amaderado')">🌲 Amaderados y rústicos</button>
-                    <button id="aroma-floral" class="btn-asesor" onclick="cambiarAroma('floral')">💐 Florales y Suaves</button>
-                    <button id="aroma-arabe" class="btn-asesor" onclick="cambiarAroma('arabe')">🕌 Aromas Árabes e Intensos</button>
-                </div>
-                                 <!-- PRESENTACIÓN ADENTRO DEL PANEL IZQUIERDO -->
-                <div class="selector-variaciones" id="caja-vendedora-tamaño" style="display:none; background: rgba(255,255,255,0.02); border: 1px solid rgba(181,148,16,0.3); padding: 15px; border-radius: 8px;">
-                    <span class="selector-etiqueta" style="font-size: 0.85rem; color: #ecd067; font-weight: bold; display:block; text-align:center; margin-bottom:8px;">Presentación para el envasado:</span>
-                    <div class="botones-grupo" style="display:flex; gap:8px;">
-                        <button id="sz-30" class="btn-variacion" onclick="seleccionarTamaño('30 ml')" style="flex:1;">30 ml</button>
-                        <button id="sz-50" class="btn-variacion activo" onclick="seleccionarTamaño('50 ml')" style="flex:1;">50 ml</button>
-                        <button id="sz-100" class="btn-variacion" onclick="seleccionarTamaño('100 ml')" style="flex:1;">100 ml</button>
-                    </div>
-                </div>
+<header id="hd">
+  <div class="wrap hd">
+    <a class="logo" href="#top"><img src="logo-dagah.png" alt="DAGAH" class="logo-img">DAGAH<i>✦</i></a>
+    <nav>
+      <a href="#inventario">Inventario</a><a href="#asesoria">Asesoría</a><a href="#escuela">Tips</a><a href="#preguntas">Preguntas</a>
+    </nav>
+    
+  </div>
+</header>
 
-                <!-- TOTALIZADOR CON RIELES EN PARALELO PARA VARIOS PERFUMES -->
-                <div class="compra-bloque" id="caja-vendedora-compra" style="display:none; flex-direction:column; gap:12px; background: rgba(236,208,103,0.05); padding: 15px; border-radius: 8px; border: 1px solid rgba(236,208,103,0.2); width:100%;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
-                        <span style="font-size:0.85rem; color:#dfdfdf;" id="etiqueta-total">Valor de este Perfume:</span>
-                        <span class="precio-pantalla" id="precio-pantalla" style="font-size:1.4rem; color:#ecd067; font-weight:bold;"></span>
-                    </div>
-                    <div style="display:flex; gap:10px; width:100%;">
-                        <button class="btn-asesor" onclick="añadirAlCarrito()" style="flex:1; text-align:center; background:#0b1528; border-color:#ecd067; padding:12px; font-weight:bold; color:#ecd067;">
-                            ➕ Añadir otro perfume
-                        </button>
-                       <button class="btn-whatsapp" id="btn-despacho-wa" onclick="añadirAlCarrito(); enviarMensajeWhatsApp();" style="flex:1.2; justify-content:center; padding:12px;">
-                            💬 Solicitar Pedido (0)
-                        </button>
-                    </div>
-                    <div id="lista-carrito-visual" style="font-size:0.8rem; color:#aaa; width:100%; border-top:1px dashed rgba(235,208,103,0.2); padding-top:8px; display:none;"></div>
-                </div>
-            </div>
+<main id="top">
+<section class="hero">
+  <div class="hero-ghost" aria-hidden="true">aroma</div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow"><span data-scramble="INVENTARIO REAL · HOY">INVENTARIO REAL · HOY</span></p>
+      <h1><span class="lm"><span style="--d:.1s">DAGAH</span></span></h1>
+      <p class="hero-sub lm"><span style="--d:.3s">Perfumes que llegan antes que tu fama.</span></p>
+      <p class="lead rv">Casa de perfumes con stock verdadero: lo que ves aquí está en la vitrina, listo para enviarse hoy. Sin catálogos eternos, sin crear cuentas y sin iniciar sesión en nada — ves, tocas y pides por WhatsApp.</p>
+      <div class="hero-ctas rv" style="--d:.1s">
+        <a class="btn btn-gold" href="#inventario">Ver inventario <span class="ar">↓</span></a>
+        <a class="btn btn-ghost" id="hero-wa" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Escríbenos</a>
+      </div>
+      <a class="hero-ases rv" style="--d:.15s" href="#asesoria">¿No sabe cuál elegir? Haga la asesoría de 3 toques ↓</a>
+      <div class="hero-stats rv" style="--d:.2s">
+        <div><b id="stat-stock">—</b><span>En stock hoy</span></div>
+        <div><b>24/7</b><span>Atención</span></div>
+        <div><b>Alta</b><span>Calidad</span></div>
+      </div>
+    </div>
+    <div class="hero-scene rv" style="--d:.15s">
+      <div class="medal">
+        <img src="logo-dagah.png" alt="Logo Perfumes DAGAH">
+        <svg class="ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="cir" d="M100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"/></defs><text><textPath href="#cir">PERFUMES DAGAH ✦ EXCELENTE CALIDAD ✦ PEDIDOS AL WHATSAPP ✦ </textPath></text></svg>
+      </div>
+      <p class="slogan">“Tu aroma habla por ti.”<small>Perfumería DAGAH</small></p>
+      <div class="chips-row">
+        <span class="chip"><small>Salida</small>Bergamota</span>
+        <span class="chip"><small>Corazón</small>Oud</span>
+        <span class="chip"><small>Fondo</small>Ámbar</span>
+        <span class="chip"><small>Estela</small>Vainilla</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <!-- COLUMNA DERECHA: VITRINA DE EXHIBICIÓN EN PARALELO -->
-            <div class="info-producto-bloque">
-                <div>
-                    <!-- 1. CAJA DE CONSEJOS CON SU SILUETA A MANO ALZADA ARRIBA -->
-                    <div class="consejo-caja" id="caja-vendedora-consejo" style="display:none; border: 1px solid rgba(236, 208, 103, 0.4); background: rgba(236, 208, 103, 0.03); border-radius: 12px; padding: 20px;">
-                        <!-- Se llena dinámicamente -->
-                    </div>
+<div class="belt"><div class="mq"><div class="mq-track" style="--sp:32s">
+  <div class="mq-group"><span>Asesoría de aroma automática <em>✦</em></span><span>Almacenes: pidan varios en un solo mensaje <em>✦</em></span><span>Nequi · Bancolombia <em>✦</em></span></div>
+  <div class="mq-group" aria-hidden="true"><span>Asesoría de aroma automática <em>✦</em></span><span>Almacenes: pidan varios en un solo mensaje <em>✦</em></span><span>Nequi · Bancolombia <em>✦</em></span></div>
+</div></div></div>
 
-                    <!-- 2. CAJA DE SELECCIÓN TÉCNICA DE MEDALLAS DEBAJO -->
-                    <div style="margin-top: 25px;">
-                        <h2 class="producto-nombre" id="perfume-titulo">Asesoría de Taller</h2>
-                        <div id="perfume-descripcion" class="producto-descripcion">
-                            <p style="color:#ecd067; font-weight:bold; margin-bottom:10px; font-family:'Georgia', serif;">☕ ¡Hola! Qué gusto tenerle aquí.</p>
-                            <p>Por favor, complete las 3 preguntas de selección en el panel izquierdo. Nuestra vendedora virtual analizará sus respuestas y le desplegará aquí una lista exclusiva con las mejores opciones de nuestro stock envasado real que se adaptan a lo que usted necesita.</p>
-                        </div>
-                    </div>
-                     <!-- COMBOS Y OFERTAS DEBAJO DE LA SELECCIÓN -->
-                    <div class="combo-checkbox-zona" id="caja-vendedora-combo" style="display:none;" onclick="conmutarComboCheck()">
-                        <input type="checkbox" id="check-combo" onchange="actualizarPrecioYMensaje()">
-                        <label for="check-combo" style="cursor: pointer; font-weight: bold;">🟩 Sí, me gustaría armar el Combo DAGAH (+ Hair Mist 'Muñeca Nueva' por $30.000)</label>
-                    </div>
-                    
-                    <div id="banner-oferta-splash" style="display:none; background: rgba(236, 208, 103, 0.1); border: 2px dashed #ecd067; border-radius: 8px; padding: 12px; margin-top: 10px; text-align: center;">
-                        <p style="font-size: 0.85rem; color: #ecd067; font-weight: bold; text-transform: uppercase;">🎁 ¡OFERTA ACTIVADA POR 100ML! 🎁</p>
-                        <p style="font-size: 0.85rem; color: #ffffff; margin-top: 3px;">Añade un Body Splash Corporal por solo $15.000 COP adicionales.</p>
-                    </div>
+<section class="catalog" id="inventario">
+  <div class="wrap">
+    <div class="cat-head rv">
+      <div>
+        <p class="eyebrow dark">Vitrina en vivo</p>
+        <h2>Lo que hay <em>ahora mismo</em></h2>
+      </div>
+      <p class="cat-live"><span class="dot"></span>Actualizado hoy, <span data-today>—</span></p>
+    </div>
+    <div class="howto rv">
+      <p class="howto-t">¿Cómo pido? <em>Elija su camino, los dos son fáciles:</em></p>
+      <div class="howto-grid">
+        <div class="howto-a"><b>Camino 1 · Quiero uno solo</b><p>Toque el botón verde <span class="hl">Pedir por WhatsApp</span> debajo del perfume que le guste. Se abre el chat con todo ya escrito.</p></div>
+        <div class="howto-b"><b>Camino 2 · Quiero varios (una lista)</b><p>Toque <span class="hl">＋ Agregar</span> en cada perfume. Su lista lo acompaña pegada arriba mientras mira. Toque <span class="hl">Enviar pedido</span> y listo.</p></div>
+      </div>
+    </div>
+    <div class="paybar rv">
+      <span class="paybar-t">💳 ¿Cómo pagaría?</span>
+      <button class="paychip" data-pay="Nequi">Nequi</button>
+      <button class="paychip" data-pay="Bancolombia">Bancolombia</button>
+      <span class="paybar-note" id="paynote">Tóquelo y quedará escrito en su pedido.</span>
+    </div>
+    <div class="tools rv" style="--d:.1s">
+      <div class="chips" id="chips" role="tablist" aria-label="Filtrar por familia"></div>
+      <select class="sortsel" id="sort" aria-label="Ordenar inventario">
+        <option value="rel">Destacados</option>
+        <option value="asc">Precio: menor a mayor</option>
+        <option value="desc">Precio: mayor a menor</option>
+        <option value="few">Quedan pocas unidades</option>
+      </select>
+    </div>
+    <div class="basket" id="basket" hidden></div>
+    <p class="grid-count" id="count"></p>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
 
-                    <!-- SECCIÓN DE PRODUCTOS INDIVIDUALES -->
-                    <!-- PUENTE ELÉCTRICO RECTIFICADO: FUERZA EL SALTO AL SCRIPT -->
-                <div class="caja-solos-bloque" style="display:flex; flex-direction:column; gap:10px; margin-top:15px; width:100%;">
-                    <button class="btn-asesor" onclick="enviarHairMistSolo();" style="width:100%; text-align:left; padding:12px; font-weight:bold; color:#ecd067; border-color:#ecd067;">
-                        💇‍♀️ Solo Hair Mist ($30k)
-                    </button>
-                    <button class="btn-asesor" onclick="enviarBodySplashSolo();" style="width:100%; text-align:left; padding:12px; font-weight:bold; color:#ecd067; border-color:#ecd067;">
-                        🚿 Solo Body Splash ($25k)
-                    </button>
-                </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+<section class="quiz" id="asesoria">
+  <div class="wrap">
+    <div class="quiz-head rv">
+      <p class="eyebrow">Asesoría de aroma</p>
+      <h2>¿No sabe cuál elegir? <em>La página lo asesora</em></h2>
+      <p class="quiz-sub">Tres toques y la vitrina le recomienda el perfume perfecto — y solo le recomienda lo que hay en stock ahora mismo.</p>
+    </div>
+    <div class="quiz-box rv" style="--d:.1s">
+      <div class="q">
+        <p class="q-t">1 · ¿Para quién es?</p>
+        <div class="q-opts" data-q="para">
+          <button data-v="ella">Para ella</button>
+          <button data-v="el">Para él</button>
+          <button data-v="regalo">Un regalo</button>
+          <button data-v="sorpresa">Sorpréndeme</button>
+        </div>
+      </div>
+      <div class="q">
+        <p class="q-t">2 · ¿Para qué momento?</p>
+        <div class="q-opts" data-q="oca">
+          <button data-v="diario">Diario y trabajo</button>
+          <button data-v="gimnasio">Gimnasio y deporte</button>
+          <button data-v="especial">Ocasión especial</button>
+          <button data-v="noche">Noche y fiesta</button>
+        </div>
+      </div>
+      <div class="q">
+        <p class="q-t">3 · ¿Qué aroma le gusta?</p>
+        <div class="q-opts" data-q="fam">
+          <button data-v="Dulce">Dulce</button>
+          <button data-v="Amaderado">Amaderado</button>
+          <button data-v="Floral">Floral</button>
+          <button data-v="Fresco">Fresco</button>
+          <button data-v="Oriental">Intenso</button>
+        </div>
+      </div>
+      <div class="q-res" id="qres" hidden></div>
+    </div>
+  </div>
+</section>
 
-    <footer class="web-footer">
-        <p class="footer-texto">DAGAH Perfumería © - Conexión humana y directa.</p>
-    </footer>
+<section class="school" id="escuela">
+  <div class="wrap">
+    <p class="eyebrow rv">El aula del perfume</p>
+    <h2 class="rv" style="--d:.05s">La pequeña ciencia <em>de la gran elegancia</em></h2>
+    <p class="sub rv" style="--d:.1s">Tres minutos de saber para llevar el perfume como un conocedor — y elegir el próximo con criterio.</p>
+    <div class="school-grid">
+      <div class="fig-card rv">
+        <svg class="figura" viewBox="0 0 220 430" aria-label="Zonas de aplicación del perfume">
+          <g fill="none" stroke="#e8ca7d" stroke-width="3" stroke-linecap="round" opacity=".9">
+            <circle cx="110" cy="42" r="24"/>
+            <path d="M110 66 v14"/>
+            <path d="M78 92 q32 -16 64 0 l6 66 q1 12 -11 12 h-54 q-12 0 -11 -12 z"/>
+            <path d="M76 96 q-18 44 -14 92"/>
+            <path d="M144 96 q18 44 14 92"/>
+            <path d="M96 170 q-4 60 -2 118 t-2 96"/>
+            <path d="M124 170 q4 60 2 118 t2 96"/>
+          </g>
+          <g>
+            <circle class="pt" cx="132" cy="50" r="6"/><text x="146" y="55">1</text>
+            <circle class="pt" cx="110" cy="76" r="6"/><text x="124" y="81">2</text>
+            <circle class="pt" cx="62" cy="188" r="6"/><text x="40" y="193">3</text>
+            <circle class="pt" cx="158" cy="188" r="6"/><text x="170" y="193">3</text>
+            <circle class="pt" cx="80" cy="132" r="6"/><text x="56" y="137">4</text>
+            <circle class="pt" cx="100" cy="252" r="6"/><text x="112" y="257">5</text>
+          </g>
+        </svg>
+        <div>
+          <p class="q-t">Dónde aplicarlo</p>
+          <ul class="fig-legend">
+            <li><b>1</b> Detrás de la oreja</li>
+            <li><b>2</b> Cuello y pecho</li>
+            <li><b>3</b> Muñecas</li>
+            <li><b>4</b> Interior de los codos</li>
+            <li><b>5</b> Detrás de las rodillas</li>
+          </ul>
+          <p class="fig-note">Aplique donde se siente el pulso: el calor del cuerpo activa el aroma y lo libera despacio.</p>
+        </div>
+      </div>
+      <div class="concepts rv" style="--d:.1s">
+        <div class="concept"><h3>Duración <em>· cuánto se queda</em></h3><p>Las horas que el aroma vive en su piel. La piel hidratada lo retiene más: aplíquelo después del baño, con la crema puesta.</p></div>
+        <div class="concept"><h3>Estela <em>· el rastro que deja</em></h3><p>La huella invisible que queda al pasar. Una buena estela hace que lo noten al llegar… y que lo recuerden al irse.</p></div>
+        <div class="concept"><h3>Las tres notas <em>· la vida del perfume</em></h3><p><b>Salida:</b> la primera impresión (minutos). <b>Corazón:</b> el carácter (horas). <b>Fondo:</b> el recuerdo que queda en la piel y en la ropa.</p></div>
+      </div>
+    </div>
+    <div class="tips">
+      <div class="tip rv"><b>🚫 No lo frote</b><p>Frotar rompe las moléculas y cambia el aroma. Rocíe y deje secar al natural.</p></div>
+      <div class="tip rv" style="--d:.06s"><b>🚿 Después del baño</b><p>La piel tibia e hidratada retiene el perfume mucho más que la piel seca.</p></div>
+      <div class="tip rv" style="--d:.12s"><b>📏 A 10–15 cm</b><p>Rocíe a esa distancia para que se reparta parejo sin empapar la piel.</p></div>
+      <div class="tip rv" style="--d:.18s"><b>🧴 Nunca en el baño</b><p>El calor, el vapor y la luz dañan el perfume. Un cajón cerrado y fresco es su lugar ideal.</p></div>
+      <div class="tip rv" style="--d:.24s"><b>🤫 Invite, no anuncie</b><p>Dos o tres toques bastan. El perfume debe descubrirse, no anunciarse.</p></div>
+      <div class="tip rv" style="--d:.3s"><b>🧊 Igual perfume, distinta piel</b><p>Un mismo perfume huele distinto en dos personas. La química de su piel es el último ingrediente secreto.</p></div>
+      <div class="tip rv" style="--d:.36s"><b>🌡️ Mire el clima</b><p>En el calor el aroma despierta más pronto y más fuerte; en el frío dura más pero se esconde. En tierra caliente, menos toques.</p></div>
+      <div class="tip rv"><b>🧠 Perfume y memoria</b><p>El olfato es el sentido más pegado a la memoria: un aroma trae de vuelta a una persona en un segundo. Por eso un perfume es el regalo que nunca se olvida.</p></div>
+      <div class="tip rv"><b>🕰️ Los perfumes también envejecen</b><p>Un frasco cerrado dura años; abierto, entre 1 y 3 si lo guarda lejos del calor y la luz. Si el color o el olor cambian mucho, ya cumplió su ciclo.</p></div>
+    </div>
+    <p class="tips-hook rv">✦ ¿Quiere saber más? Vuelva. <b>Aquí los esperamos</b> con más Tips ✦</p>
+  </div>
+</section>
 
-     <script>
-        const TELEFONO_DAGAH = "573106410582";
-        const PRECIO_30ML = 55000;
-        const PRECIO_50ML = 85000;
-        const PRECIO_100ML = 140000;
-        const PRECIO_CAPILAR = 30000;
+<section class="faq" id="preguntas">
+  <div class="wrap">
+    <p class="eyebrow dark rv">Antes de escribir</p>
+    <h2 class="rv" style="--d:.05s">Lo que todos <em>preguntan</em></h2>
+    <div class="faq-list">
+      <div class="faq-item rv"><button class="faq-q" aria-expanded="false">¿Cómo puedo pagar?<span class="pl">+</span></button><div class="faq-a"><div><p>Nequi o Bancolombia — lo eliges en la página al hacer el pedido y lo confirmamos por el mismo chat. Cualquier otra forma se conversa personalmente.</p></div></div></div>
+     
+            <div class="faq-item rv" style="--d:.2s"><button class="faq-q" aria-expanded="false">No sé cuál elegir, ¿me ayudan?<span class="pl">+</span></button><div class="faq-a"><div><p>¡Sí! Use la asesoría de aroma de la página (tres toques) o escríbanos «asesoría» por WhatsApp y cuéntenos qué aromas le gustan. Le recomendamos entre lo disponible.</p></div></div></div>
+      <div class="faq-item rv" style="--d:.25s"><button class="faq-q" aria-expanded="false">Quiero pedir varios, ¿cómo hago la lista?<span class="pl">+</span></button><div class="faq-a"><div><p>Muy fácil: toque <b>＋ Agregar</b> en cada perfume (como echándolos a una canasta). Su lista queda pegada arriba, a la vista, con cantidades y total. Toque <b>Enviar pedido</b> y se abre WhatsApp con todo escrito.</p></div></div></div>
+      <div class="faq-item rv" style="--d:.3s"><button class="faq-q" aria-expanded="false">¿Tengo que registrarme o pagar suscripción?<span class="pl">+</span></button><div class="faq-a"><div><p>No. Cero cuentas, cero contraseñas, cero cobros ocultos: eliges el perfume, tocas el botón y la compra se completa en tu propio WhatsApp.</p></div></div></div>
+    </div>
+  </div>
+</section>
 
-        const FICHAS_PERFUMES = {
-            oneMillion: { nombre: "Perfume DAGAH Inspiración One Million", tipo: " Mandarina y Canela dulce.", duracion: "7 a 9 horas.", estela: "Alta Magnética.", precios: { "30 ml": 55000, "50 ml": 85000, "100 ml": 140000 } },
-            toyBoy: { nombre: "Perfume DAGAH Inspiración Toy Boy", tipo: " Rosa y Pimienta de gala.", duracion: "Más de 8 horas.", estela: "Exclusiva.", precios: { "30 ml": 65000, "50 ml": 95000, "100 ml": 160000 } },
-            yaraDama: { nombre: "Perfume DAGAH Inspiración Yara Dama", tipo: " Cremosidad Árabe dulce.", duracion: "6 a 8 horas.", estela: "Discreta.", precios: { "30 ml": 60000, "50 ml": 90000, "100 ml": 150000 } },
-            yaraCandy: { nombre: "Perfume DAGAH Inspiración Yara Candy", tipo: " Dulce de Gominolas.", duracion: "7 a 8 horas.", estela: "Chispeante.", precios: { "30 ml": 55000, "50 ml": 85000, "100 ml": 140000 } },
-            thankUNext: { nombre: "Perfume DAGAH Inspiración Thank U Next", tipo: " Frambuesa y Coco suave.", duracion: "7 a 9 horas.", estela: "Coqueta.", precios: { "30 ml": 55000, "50 ml": 85000, "100 ml": 140000 } },
-            bubbleGum: { nombre: "Perfume DAGAH Inspiración Toy 2 Bubble", tipo: " Chicle adictivo y frutas.", duracion: "6 a 8 horas.", estela: "Divertida.", precios: { "30 ml": 55000, "50 ml": 85000, "100 ml": 140000 } },
-            asadBourbon: { nombre: "Perfume DAGAH Inspiración Asad Bourbon", tipo: " Bourbon licoroso y tabaco.", duracion: "Más de 12 horas.", estela: "Opulenta.", precios: { "30 ml": 65000, "50 ml": 95000, "100 ml": 160000 } },
-            versaceEros: { nombre: "Perfume DAGAH Inspiración Versace Eros", tipo: " Menta helada limpia.", duracion: "8 a 10 horas.", estela: "Seductora.", precios: { "30 ml": 55000, "50 ml": 85000, "100 ml": 140000 } },
-            yaraTous: { nombre: "Perfume DAGAH Inspiración Yara Tous", tipo: " Mango exótico y coco.", duracion: "7 a 8 horas.", estela: "Exótica.", precios: { "30 ml": 55000, "50 ml": 85000, "100 ml": 140000 } }
-        };
+<section class="final" id="contacto">
+  <div class="ghost" aria-hidden="true">DAGAH</div>
+  <div class="wrap">
+    <h2 class="rv">¿A qué quieres <em>oler hoy?</em></h2>
+    <p class="rv" style="--d:.08s">Haga la asesoría de aroma o escríbanos: le ayudamos a encontrar su firma olfativa entre lo que hay en vitrina.</p>
+    <a class="btn btn-wabg rv" style="--d:.16s" id="final-wa" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Hablar con DAGAH</a>
+    <a class="btn btn-ghost rv" style="--d:.2s" id="share-wa" target="_blank" rel="noopener">📲 Recomendar la página</a>
+    <div class="status rv" style="--d:.24s"><span class="dot"></span><span data-status>—</span></div>
+  </div>
+</section>
+</main>
 
-        const baseOcasiones = {
-            male: { titulo: "2. ¿Para qué momento de su rutina la necesita?", opciones: [{ id: "opt1", txt: " Oficina y Trabajo Diario" }, { id: "opt2", txt: " Deporte y Gimnasio" }, { id: "opt3", txt: " Salidas al Campo y Descanso" }, { id: "opt4", txt: " Ocasiones Especiales y Noche" }] },
-            female: { titulo: "2. ¿Para qué momento de su rutina la necesita?", opciones: [{ id: "opt1", txt: " Oficina y Trabajo Diario" }, { id: "opt2", txt: " Deporte y Gimnasio" }, { id: "opt3", txt: " Salidas al Campo y Descanso" }, { id: "opt4", txt: " Ocasiones Especiales y Noche" }] },
-            gift: { titulo: "2. Para ayudarle a elegir bien, ¿qué estilo tiene?", opciones: [{ id: "opt1", txt: " Es alguien serio o de oficina" }, { id: "opt2", txt: " Es una persona activa o deportista" }, { id: "opt3", txt: " Le gusta el campo o la tranquilidad" }] }
-        };
+<footer>
+  <div class="wrap ft">
+    <div>
+      <p class="logo"><img src="logo-dagah.png" alt="DAGAH" class="logo-img">DAGAH<i>✦</i></p>
+      <p>Casa de perfumes con inventario real. Curamos pocas referencias, las fotografiamos una por una y las enviamos protegidas.</p>
+    </div>
+    <div>
+      <h4>La casa</h4>
+      <ul>
+        <li><p>WhatsApp: 310 641 0582</p></li>
+        <li><p>Pagos: Nequi · Bancolombia</p></li>
+        <li><p>San Luis, Antioquia · Colombia</p></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Atención</h4>
+      <ul>
+        <li><p>Todos los días · 24 horas</p></li>
+        <li><p>Escríbanos cuando quiera</p></li>
+        <li><a href="#preguntas">Preguntas frecuentes ↗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap ft-bot"><span>© <span id="yr"></span> Perfumes DAGAH. Todos los derechos reservados.</span><span>Hecho con paciencia y buen olfato ✦</span></div>
+</footer>
 
-        let estadoActual = { gen: null, optId: null, aro: null, tam: "50 ml", precio: 85000, medallaElegida: "p1" };
-        let carritoPedidos = [];
-        let totalDineroAcumulado = 0;
-        function cambiarGenero(g) {
-            estadoActual.gen = g; estadoActual.optId = null;
-            ['gender-male', 'gender-female', 'gender-gift'].forEach(id => document.getElementById(id)?.classList.remove('seleccionado'));
-            document.getElementById(`gender-${g}`)?.classList.add('seleccionado');
-            renderizarOpcionesPaso2(); verificarYCalcularRecomendacion();
-        }
+<div id="orderbar" role="region" aria-label="Tu selección">
+  <div class="ob-in">
+    <div class="ob-txt"><b id="obCount">0 perfumes</b><span id="obTotal">Total aprox.: $0</span></div>
+    <div class="ob-btns"><button id="obClear">Vaciar</button><a id="obSend" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Enviar pedido</a></div>
+  </div>
+</div>
 
-        function renderizarOpcionesPaso2() {
-            const datosGen = baseOcasiones[estadoActual.gen]; 
-            document.getElementById('titulo-ocasion').innerText = datosGen.titulo;
-            let contenedor = document.getElementById('contenedor-botones-ocasion'); 
-            contenedor.innerHTML = "";
-            datosGen.opciones.forEach(opt => { 
-                contenedor.innerHTML += `<button id="btn-${opt.id}" class="btn-asesor" onclick="seleccionarOpcion('${opt.id}')">${opt.txt}</button>`; 
-            });
-            verificarYCalcularRecomendacion();
-        }
 
-        function seleccionarOpcion(idOpt) {
-            estadoActual.optId = idOpt; 
-            baseOcasiones[estadoActual.gen].opciones.forEach(opt => document.getElementById(`btn-${opt.id}`)?.classList.remove('seleccionado'));
-            document.getElementById(`btn-${idOpt}`)?.classList.add('seleccionado'); 
-            verificarYCalcularRecomendacion();
-        }
+<script>
+/* ═══════════ CONFIGURACIÓN DAGAH ═══════════
+   ✏️ DON LEÓN: aquí mismo edita PRECIO y STOCK de cada
+   perfume cuando lo necesite. Solo cambie los numeritos. */
+const WA_NUM = "573106410582";
+const SALUDO = "¡Hola DAGAH! ✦";
 
-        function cambiarAroma(a) {
-            estadoActual.aro = a; 
-            ['aroma-fresco', 'aroma-dulce', 'aroma-amaderado', 'aroma-floral', 'aroma-arabe'].forEach(id => document.getElementById(id)?.classList.remove('seleccionado'));
-            document.getElementById(`aroma-${a}`)?.classList.add('seleccionado'); 
-            verificarYCalcularRecomendacion();
-        }
+const PROD = [
+ {id:1,  nombre:"Mandarina",        familia:"Fresco",    nota:"Mandarina chispeante · Azahar",        ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media: alegre"},
+ {id:2,  nombre:"Bubble Gum",         familia:"Dulce",     nota:"Chicle dulce · Frutas rosadas",        ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media: divertida"},
+ {id:3,  nombre:"Yara Rosa",        familia:"Dulce",     nota:"Orquídea · Vainilla · Almizcle",       ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta: firma"},
+ {id:4,  nombre:"Yara Candy",       familia:"Dulce",     nota:"Caramelo de fresa · Grosella · Vainilla", ml:100, precio:100000, stock:3, tag:"Inspiración", img:"Yara Candy", dur:"8+ horas", estela:"Exclusiva"},
+ {id:5,  nombre:"Yara Tous",        familia:"Floral",    nota:"Frutos rojos · Flores · Almizcle",     ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"Yara Tous",  dur:"6–8 horas", estela:"Media-alta"},
+ {id:6,  nombre:"Asad",             familia:"Oriental",  nota:"Especias · Ámbar · Vainilla de bourbon", ml:100, precio:100000, stock:3, tag:"Inspiración", img:"Asad Bourbon", dur:"8+ horas", estela:"Alta: presencia de caballero"},
+ {id:7,  nombre:"Asad Elixir",      familia:"Oriental",  nota:"Especias oscuras · Cuero · Ámbar",     ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"8+ horas", estela:"Alta"},
+ {id:8,  nombre:"Asad Café",        familia:"Dulce",     nota:"Café · Especias · Ámbar",              ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"8+ horas", estela:"Alta"},
+ {id:9,  nombre:"Club de Nuit",     familia:"Amaderado", nota:"Piña · Abedul · Almizcle",             ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Alta"},
+ {id:10, nombre:"Vida Bella",       familia:"Dulce",     nota:"Grosella · Iris · Praliné",            ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta"},
+ {id:11, nombre:"Toy Boy",          familia:"Amaderado", nota:"Pimienta · Madera · Ámbar",            ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"Toy Boy",    dur:"6–8 horas", estela:"Media-alta"},
+ {id:12, nombre:"Eau Fraiche",      familia:"Fresco",    nota:"Limón · Cardamomo · Madera clara",     ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
+ {id:13, nombre:"Eros",             familia:"Fresco",    nota:"Menta · Manzana · Vainilla",           ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"Versace Eros", dur:"6–8 horas", estela:"Alta: conquista"},
+ {id:14, nombre:"One Million",      familia:"Dulce",     nota:"Ámbar · Canela · Cuero dulce",         ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"One Million", dur:"6–8 horas", estela:"Alta: de fiesta"},
+ {id:15, nombre:"Mandarina Mango",  familia:"Fresco",    nota:"Mango · Mandarina · Coco",             ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
+ {id:16, nombre:"Good Girl Blush",  familia:"Floral",    nota:"Peonía · Cereza · Vainilla",           ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta"},
+ {id:17, nombre:"Nitro Red",        familia:"Fresco",    nota:"Cítricos · Lavanda · Ámbar",           ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
+ {id:18, nombre:"Tommy Men",        familia:"Fresco",    nota:"Manzana · Menta · Algodón",            ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
+ {id:19, nombre:"París Fem",        familia:"Floral",    nota:"Rosa · Violeta · Madera suave",        ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"5–7 horas", estela:"Media"},
+ {id:20, nombre:"Boss Unlimited",   familia:"Amaderado", nota:"Manzana · Pino · Sándalo",             ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"5–7 horas", estela:"Media"},
+ {id:21, nombre:"Thanks Next",      familia:"Floral",    nota:"Frutas · Flores · Almizcle",           ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"Thank U Next", dur:"5–7 horas", estela:"Media: juvenil"},
+ {id:22, nombre:"Thanks Next 2",  familia:"Dulce",     nota:"Frutas dulces · Flores · Almizcle",    ml:100, precio:100000,  stock:3, tag:"Inspiración",  img:"Thanks Next 2",dur:"5–7 horas", estela:"Media"},
+ {id:23, nombre:"Valentino",        familia:"Floral",    nota:"Rosa · Café · Vainilla",               ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Alta"},
+ {id:24, nombre:"Le Male Elixir",   familia:"Oriental",  nota:"Menta · Lavanda · Vainilla intensa",   ml:100, precio:110000, stock:3, tag:"Elixir",       dur:"8+ horas", estela:"Alta"},
+ {id:25, nombre:"9 PM Elixir",      familia:"Dulce",     nota:"Canela · Ámbar · Vainilla",            ml:100, precio:110000, stock:3, tag:"Elixir",       dur:"8+ horas", estela:"Alta"},
+ {id:26, nombre:"Lattafa Roja",     familia:"Oriental",  nota:"Frutas rojas · Rosa · Ámbar",          ml:100, precio:110000, stock:3, tag:"Baúl de lujo", dur:"8+ horas", estela:"Alta"},
+ {id:27, nombre:"Kamrah",           familia:"Dulce",     nota:"Gourmand · Flores · Almizcle",         ml:100, precio:110000, stock:3, tag:"Baúl de lujo", dur:"8+ horas", estela:"Alta"},
+ {id:28, nombre:"Lattafa Morada",   familia:"Floral",    nota:"Frutas moradas · Flores · Vainilla",   ml:100, precio:110000, stock:3, tag:"Baúl de lujo", dur:"8+ horas", estela:"Alta"},
+ {id:29, nombre:"Now Women",        familia:"Floral",    nota:"Pera · Jazmín · Almizcle",             ml:100, precio:110000, stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta"},
+ {id:30, nombre:"Postre Mallows",   familia:"Dulce",     nota:"Malvavisco · Caramelo · Vainilla",     ml:100, precio:120000, stock:3, tag:"Gourmand",     dur:"6–8 horas", estela:"Media-alta"}
+];
 
-        function conmutarMedallaSeleccion(tipoMedalla) {
-            estadoActual.medallaElegida = tipoMedalla;
-            estadoActual.precio = tipoMedalla === "p1" ? estadoActual.precioP1 : estadoActual.precioP2;
-            actualizarPrecioYMensaje();
-        }
-        function verificarYCalcularRecomendacion() {
-            if (!estadoActual.gen || !estadoActual.optId || !estadoActual.aro) {
-                document.getElementById('perfume-titulo').innerHTML = "Asesoría de Taller";
-                document.getElementById('perfume-descripcion').innerHTML = `<p style="color:#ecd067; font-weight:bold; margin-bottom:10px; font-family:'Georgia', serif;">☕ Asesoría Inteligente en Espera</p><p>Por favor, complete las 3 preguntas de selección en el panel izquierdo.</p>`;
-                ['caja-vendedora-consejo', 'caja-vendedora-combo', 'caja-productos-solos', 'caja-vendedora-tamaño', 'caja-vendedora-compra'].forEach(id => { let el = document.getElementById(id); if (el) el.style.display = "none"; }); return;
-            }
-            ['caja-vendedora-consejo', 'caja-vendedora-combo', 'caja-productos-solos'].forEach(id => { let el = document.getElementById(id); if (el) el.style.display = id === 'caja-vendedora-combo' ? "flex" : "block"; });
-            let p1 = FICHAS_PERFUMES.oneMillion, p2 = FICHAS_PERFUMES.toyBoy;
-            if (estadoActual.gen === 'male') {
-                if (estadoActual.optId === 'opt1') {
-                    if (estadoActual.aro === 'fresco') { p1 = FICHAS_PERFUMES.versaceEros; p2 = FICHAS_PERFUMES.oneMillion; }
-                    else if (estadoActual.aro === 'dulce') { p1 = FICHAS_PERFUMES.oneMillion; p2 = FICHAS_PERFUMES.asadBourbon; }
-                    else if (estadoActual.aro === 'amaderado' || estadoActual.aro === 'arabe') { p1 = FICHAS_PERFUMES.asadBourbon; p2 = FICHAS_PERFUMES.toyBoy; }
-                    else { p1 = FICHAS_PERFUMES.toyBoy; p2 = FICHAS_PERFUMES.versaceEros; }
-                } else if (estadoActual.optId === 'opt2') {
-                    if (estadoActual.aro === 'dulce' || estadoActual.aro === 'arabe') { p1 = FICHAS_PERFUMES.oneMillion; p2 = FICHAS_PERFUMES.versaceEros; }
-                    else if (estadoActual.aro === 'floral') { p1 = FICHAS_PERFUMES.toyBoy; p2 = FICHAS_PERFUMES.versaceEros; }
-                    else { p1 = FICHAS_PERFUMES.versaceEros; p2 = FICHAS_PERFUMES.oneMillion; }
-                    } else if (estadoActual.optId === 'opt3') {
-                    if (estadoActual.aro === 'dulce') { p1 = FICHAS_PERFUMES.oneMillion; p2 = FICHAS_PERFUMES.toyBoy; }
-                    else if (estadoActual.aro === 'amaderado' || estadoActual.aro === 'arabe') { p1 = FICHAS_PERFUMES.asadBourbon; p2 = FICHAS_PERFUMES.oneMillion; }
-                    else { p1 = FICHAS_PERFUMES.versaceEros; p2 = FICHAS_PERFUMES.oneMillion; }
-                } else {
-                    if (estadoActual.aro === 'fresco') { p1 = FICHAS_PERFUMES.versaceEros; p2 = FICHAS_PERFUMES.oneMillion; }
-                    else if (estadoActual.aro === 'dulce') { p1 = FICHAS_PERFUMES.oneMillion; p2 = FICHAS_PERFUMES.asadBourbon; }
-                    else { p1 = FICHAS_PERFUMES.asadBourbon; p2 = FICHAS_PERFUMES.toyBoy; }
-                }
-            } else if (estadoActual.gen === 'female') {
-                if (estadoActual.optId === 'opt1') {
-                    if (estadoActual.aro === 'fresco') { p1 = FICHAS_PERFUMES.yaraTous; p2 = FICHAS_PERFUMES.thankUNext; }
-                    else if (estadoActual.aro === 'dulce' || estadoActual.aro === 'arabe') { p1 = FICHAS_PERFUMES.yaraDama; p2 = FICHAS_PERFUMES.yaraCandy; }
-                    else if (estadoActual.aro === 'floral') { p1 = FICHAS_PERFUMES.bubbleGum; p2 = FICHAS_PERFUMES.thankUNext; }
-                    else { p1 = FICHAS_PERFUMES.thankUNext; p2 = FICHAS_PERFUMES.yaraDama; }
-                } else if (estadoActual.optId === 'opt2') { p1 = FICHAS_PERFUMES.yaraTous; p2 = FICHAS_PERFUMES.yaraCandy;
-                     } else if (estadoActual.optId === 'opt3') {
-                    if (estadoActual.aro === 'fresco') { p1 = FICHAS_PERFUMES.yaraTous; p2 = FICHAS_PERFUMES.bubbleGum; }
-                    else if (estadoActual.aro === 'dulce' || estadoActual.aro === 'amaderado') { p1 = FICHAS_PERFUMES.thankUNext; p2 = FICHAS_PERFUMES.yaraCandy; }
-                    else if (estadoActual.aro === 'floral') { p1 = FICHAS_PERFUMES.bubbleGum; p2 = FICHAS_PERFUMES.thankUNext; }
-                    else { p1 = FICHAS_PERFUMES.yaraDama; p2 = FICHAS_PERFUMES.yaraTous; }
-                } else {
-                    if (estadoActual.aro === 'fresco') { p1 = FICHAS_PERFUMES.yaraTous; p2 = FICHAS_PERFUMES.yaraCandy; }
-                    else if (estadoActual.aro === 'dulce' || estadoActual.aro === 'arabe') { p1 = FICHAS_PERFUMES.yaraCandy; p2 = FICHAS_PERFUMES.thankUNext; }
-                    else if (estadoActual.aro === 'floral') { p1 = FICHAS_PERFUMES.bubbleGum; p2 = FICHAS_PERFUMES.thankUNext; }
-                    else { p1 = FICHAS_PERFUMES.thankUNext; p2 = FICHAS_PERFUMES.yaraCandy; }
-                }
-            } else if (estadoActual.gen === 'gift') {
-                if (estadoActual.optId === 'opt1') {
-                    if (estadoActual.aro === 'fresco' || estadoActual.aro === 'floral') { p1 = FICHAS_PERFUMES.toyBoy; p2 = FICHAS_PERFUMES.versaceEros; }
-                    else { p1 = FICHAS_PERFUMES.asadBourbon; p2 = FICHAS_PERFUMES.oneMillion; }
-                } else if (estadoActual.optId === 'opt2') {
-                    if (estadoActual.aro === 'dulce' || estadoActual.aro === 'arabe') { p1 = FICHAS_PERFUMES.oneMillion; p2 = FICHAS_PERFUMES.versaceEros; }
-                    else { p1 = FICHAS_PERFUMES.versaceEros; p2 = FICHAS_PERFUMES.toyBoy; }
-                } else {
-                    if (estadoActual.aro === 'dulce' || estadoActual.aro === 'arabe') { p1 = FICHAS_PERFUMES.yaraCandy; p2 = FICHAS_PERFUMES.thankUNext; }
-                    else { p1 = FICHAS_PERFUMES.toyBoy; p2 = FICHAS_PERFUMES.versaceEros; }
-                }
-            }
-            let ctxTexto = "Uso general.", vstTexto = "Ropa casual.";
-            if (estadoActual.optId === 'opt2') { ctxTexto = "Deporte o gimnasio."; vstTexto = "Prendas deportivas."; }
-            else if (estadoActual.optId === 'opt1') { ctxTexto = "Oficina o trabajo diario."; vstTexto = "Vestimenta casual."; }
-            else if (estadoActual.optId === 'opt3') { ctxTexto = "Campo o descanso."; vstTexto = "Ropa ligera o jeans."; }
-            else if (estadoActual.optId === 'opt4') { ctxTexto = "Eventos o uso nocturno."; vstTexto = "Traje elegante o ropa de salir."; }
-            let precioP1 = p1.precios[estadoActual.tam];
-            let precioP2 = p2.precios[estadoActual.tam];
-            let contenedorConsejo = document.getElementById('caja-vendedora-consejo');
-            contenedorConsejo.innerHTML = `
-                <p class="consejo-titulo" style="font-size:1.1rem; margin-bottom:15px;">📌 Secretos del Taller (Educación de Autor):</p>
-                <div class="menu-tips-tabs" style="display:flex; gap:8px; margin-bottom:15px; flex-wrap:wrap;">
-                    <button id="tab-tip1" class="btn-variacion activo" onclick="conmutarTip('tip1')" style="padding:6px 12px; font-size:0.75rem; flex:1; min-width:100px;">📊 1. Aplicación</button>
-                    <button id="tab-tip2" class="btn-variacion" onclick="conmutarTip('tip2')" style="padding:6px 12px; font-size:0.75rem; flex:1; min-width:100px;">⏳ 2. Duración</button>
-                    <button id="tab-tip3" class="btn-variacion" onclick="conmutarTip('tip3')" style="padding:6px 12px; font-size:0.75rem; flex:1; min-width:100px;">📦 3. Guardado</button>
-                    <button id="tab-tip4" class="btn-variacion" onclick="conmutarTip('tip4')" style="padding:6px 12px; font-size:0.75rem; flex:1; min-width:100px;">👔 4. Estela</button>
-                </div>
-               <div id="zona-tip1" class="bloque-tip-contenido">
-                    <div style="width:100%; background:#020612; border-radius:10px; border:1px solid #ecd067; padding:15px; margin-bottom:12px; display:flex; flex-direction:column; align-items:center;">
-                        <div style="width:100%; height:260px; display:flex; align-items:center; justify-content:center; position:relative;">
-                            <svg width="260" height="250" viewBox="0 0 260 250" style="opacity:0.95;">
-                                <!-- SILUETA MAESTRA DEL MUÑECO -->
-                                <circle cx="130" cy="55" r="20" fill="none" stroke="#ecd067" stroke-width="1.5"/>
-                                <path d="M108,55 C104,53 104,47 108,45" fill="none" stroke="#ecd067" stroke-width="1.2"/>
-                                <path d="M152,55 C156,53 156,47 152,45" fill="none" stroke="#ecd067" stroke-width="1.2"/>
-                                <line x1="123" y1="50" x2="127" y2="50" stroke="#ecd067" stroke-width="1.5" stroke-linecap="round"/>
-                                <line x1="133" y1="50" x2="137" y2="50" stroke="#ecd067" stroke-width="1.5" stroke-linecap="round"/>
-                                <line x1="120" y1="55" x2="120" y2="62" stroke="#ecd067" stroke-width="1.2"/>
-                                <path d="M126,68 Q130,71 134,68" fill="none" stroke="#ecd067" stroke-width="1.2"/>
-                                <line x1="130" y1="75" x2="130" y2="155" stroke="#ecd067" stroke-width="1.8"/>
-                                <!-- BRAZOS EXTENDIDOS HACIA LAS MUÑECAS -->
-                                <path d="M130,85 L85,115 L35,100" fill="none" stroke="#ecd067" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M130,85 L175,115 L225,100" fill="none" stroke="#ecd067" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <line x1="130" y1="155" x2="105" y2="205" stroke="#ecd067" stroke-width="1.5"/>
-                                <line x1="130" y1="155" x2="155" y2="205" stroke="#ecd067" stroke-width="1.5"/>
-                                <!-- CABLEADO DE FLECHAS Y TEXTOS DE SU FOTO -->
-                                <path d="M25,25 L130,25" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
-                                <circle cx="130" cy="25" r="2" fill="#ecd067"/>
-                                <text x="5" y="17" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">💇‍♀️ LLUVIA CAPILAR: 3 SPRAYS</text>
-                                <path d="M25,45 L108,45" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
-                                <circle cx="108" cy="45" r="2" fill="#ecd067"/>
-                                <text x="5" y="37" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">👂 OREJAS / OÍDOS: 1 SPRAY</text>
-                                <path d="M225,75 L145,75" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
-                                <circle cx="145" cy="75" r="2" fill="#ecd067"/>
-                                <text x="175" y="67" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">🧣 CUELLO: 2 SPRAYS</text>
-                                <path d="M225,100 L130,100" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
-                                <circle cx="130" cy="100" r="2" fill="#ecd067"/>
-                                <text x="175" y="92" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">👗 ESCOTE: 2 SPRAYS</text>
-                                <path d="M25,115 L85,115" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
-                                <circle cx="85" cy="115" r="2" fill="#ecd067"/>
-                                <text x="5" y="108" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">💪 ANTEBRAZO: 1 SPRAY</text>
-                                <!-- PUNTO DE ALTO CONSUMO: ROPA -->
-                                <path d="M225,118 L130,120" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
-                                <circle cx="130" cy="120" r="2" fill="#ecd067"/>
-                                <text x="175" y="112" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">👔 ROPA / PRENDAS: 3 SPRAYS</text>
-                                <path d="M25,140 L35,100" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
-                                <circle cx="35" cy="100" r="2" fill="#ecd067"/>
-                                <text x="5" y="133" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">🤲 MUÑECAS: 1 SPRAY</text>
-                                <path d="M225,145 L130,82" fill="none" stroke="#ecd067" stroke-width="0.8" stroke-dasharray="3,3"/>
-                                <circle cx="130" cy="82" r="2" fill="#ecd067"/>
-                                <text x="175" y="138" fill="#ecd067" font-size="8" font-family="Arial" font-weight="bold">👤 NUCA / ESPALDA: 2 SPRAYS</text>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div id="zona-tip2" class="bloque-tip-contenido" style="display:none; padding:10px 0;">
-                    <p style="font-size:1rem; color:#ffffff; text-align:center; font-family:'Georgia',serif; line-height:1.5;">
-                        La <strong style="color:#ecd067;">duración</strong> es el tiempo que las esencias se aferran a las fibras de la piel. Depende de la concentración de aceites y de la fijación de cada persona.
-                        <br><br>
-                        <span style="color:#ecd067; font-weight:bold; font-size:0.95rem;">📌 NOTA DE TALLER:</span> 
-                        Las fragancias dulces y árabes (por sus notas pesadas de fondo) siempre van a durar y proyectar más que las cítricas o frescas.
-                    </p>
-                </div>
-                <div id="zona-tip3" class="bloque-tip-contenido" style="display:none; padding:10px 0;"><p style="font-size:0.95rem; color:#ecd067; font-weight:bold; text-align:center;">Evite guardar en el baño por la humedad.</p></div>
-                <div id="zona-tip4" class="bloque-tip-contenido" style="display:none; padding:10px 0;">
-                    <p style="font-size:1rem; color:#ffffff; text-align:center; font-family:'Georgia',serif; line-height:1.5;">
-                        La <strong style="color:#ecd067;">estela</strong> es el rastro aromático que dejamos en el aire al caminar.
-                        <br><br>
-                        <span style="color:#ecd067; font-weight:bold; font-size:0.95rem;">📌 NOTA DE TALLER:</span> 
-                        Las esencias árabes y amaderadas, al tener mayor densidad molecular, proyectan una estela mucho más potente y expansiva que las frescas.
-                    </p>
-                </div>
-            `;
-            document.getElementById('perfume-titulo').innerHTML = "⭐ SELECCIÓN DE FRAGANCIA:";
-            document.getElementById('perfume-descripcion').innerHTML = `
-                <div class="item-recomendado" style="margin-top:20px; background:rgba(236,208,103,0.03); padding:15px; border-radius:8px; border:1px solid rgba(236,208,103,0.3);">
-                    <label style="display:flex; align-items:center; gap:10px; cursor:pointer; font-family:'Georgia',serif; font-size:1.15rem; color:#ecd067; font-weight:bold; margin-bottom:10px;">
-                        <input type="radio" name="seleccion-perfume" id="radio-p1" checked onclick="conmutarMedallaSeleccion('p1')" style="width:18px; height:18px; accent-color:#ecd067;">
-                        🥇 Opción Principal
-                    </label>
-                    <p style="font-family:'Georgia',serif; font-size:1.1rem; color:#ffffff; margin-bottom:5px;">${p1.nombre}</p>
-                    <p style="font-size:1.25rem; color:#ecd067; font-weight:bold; margin-bottom:12px; font-family:'Georgia',serif;">$${precioP1.toLocaleString('es-CO')} COP</p>
-                    <ul class="caract-lista">
-                        <li><strong>👃 Aroma:</strong> ${p1.tipo}</li>
-                        <li><strong>⏱️ Duración:</strong> ${p1.duracion}</li>
-                        <li><strong>💨 Estela:</strong> ${p1.estela}</li>
-                        <li><strong>🌡️ Contexto:</strong> ${ctxTexto}</li>
-                        <li><strong>👔 Vestir:</strong> ${vstTexto}</li>
-                    </ul>
-                </div>
-                <div class="item-recomendado" style="margin-top:20px; background:rgba(255,255,255,0.02); padding:15px; border-radius:8px; border:1px solid rgba(255,255,255,0.1);">
-                    <label style="display:flex; align-items:center; gap:10px; cursor:pointer; font-family:'Georgia',serif; font-size:1.15rem; color:#dfdfdf; font-weight:bold; margin-bottom:10px;">
-                        <input type="radio" name="seleccion-perfume" id="radio-p2" onclick="conmutarMedallaSeleccion('p2')" style="width:18px; height:18px; accent-color:#ecd067;">
-                        🥈 Opción Alternativa
-                    </label>
-                    <p style="font-family:'Georgia',serif; font-size:1.1rem; color:#ffffff; margin-bottom:5px;">${p2.nombre}</p>
-                    <p style="font-size:1.25rem; color:#ecd067; font-weight:bold; margin-bottom:12px; font-family:'Georgia',serif;">$${precioP2.toLocaleString('es-CO')} COP</p>
-                    <ul class="caract-lista">
-                        <li><strong>👃 Aroma:</strong> ${p2.tipo}</li>
-                        <li><strong>⏱️ Duración:</strong> ${p2.duracion}</li>
-                        <li><strong>💨 Estela:</strong> ${p2.estela}</li>
-                    </ul>
-                </div>
-            `;
-            estadoActual.objetoP1 = p1; estadoActual.objetoP2 = p2;
-            estadoActual.precioP1 = precioP1; estadoActual.precioP2 = precioP2;
-            estadoActual.medallaElegida = "p1"; estadoActual.precio = precioP1;
-            actualizarPrecioYMensaje();
-            if (window.innerWidth <= 768) document.getElementById('perfume-titulo').scrollIntoView({ behavior: 'smooth' });
-        }
-        function conmutarMedallaSeleccion(tipoMedalla) {
-            estadoActual.medallaElegida = tipoMedalla;
-            estadoActual.precio = tipoMedalla === "p1" ? estadoActual.precioP1 : estadoActual.precioP2;
-            actualizarPrecioYMensaje();
-        }
-        function conmutarMedallaSeleccion(tipoMedalla) {
-            // REGISTRA CUÁL CÍRCULO SE ACTIVÓ EN EL MONITOR
-            estadoActual.medallaElegida = tipoMedalla;
-            
-            // CRUZA EL PRECIO AUTOMÁTICAMENTE
-            let precioBase = tipoMedalla === "p1" ? 
-                estadoActual.precioP1 : estadoActual.precioP2;
-            
-            estadoActual.precio = precioBase;
-            actualizarPrecioYMensaje();
-        }
-        function seleccionarTamaño(tam) {
-            estadoActual.tam = tam;
-            ['sz-30', 'sz-50', 'sz-100'].forEach(id => document.getElementById(id).classList.remove('activo'));
-            document.getElementById(tam === '30 ml' ? 'sz-30' : tam === '50 ml' ? 'sz-50' : 'sz-100').classList.add('activo'); 
-            verificarYCalcularRecomendacion();
-        }
-        function conmutarComboCheck() { const cb = document.getElementById('check-combo'); cb.checked = !cb.checked; actualizarPrecioYMensaje(); }
-        function actualizarPrecioYMensaje() {
-            if (!estadoActual.gen || !estadoActual.optId || !estadoActual.aro) return;
-            document.getElementById('caja-vendedora-tamaño').style.display = "block"; 
-            document.getElementById('caja-vendedora-compra').style.display = "flex";
-            document.getElementById('banner-oferta-splash').style.display = estadoActual.tam === '100 ml' ? "block" : "none";
-            document.getElementById('precio-pantalla').innerText = `$${(document.getElementById('check-combo').checked ? (estadoActual.precio + PRECIO_CAPILAR) : estadoActual.precio).toLocaleString('es-CO')} COP`;
-        }
-       function añadirAlCarrito() {
-            if (!estadoActual.gen || !estadoActual.optId || !estadoActual.aro) { 
-                alert("Por favor, elija las preguntas primero."); return; 
-            }
-            let cb = document.getElementById('check-combo').checked;
-            let pMarcado = estadoActual.medallaElegida === "p1" ? 
-                estadoActual.objetoP1 : estadoActual.objetoP2;
-            
-            if (!pMarcado) return;
-            let nombrePerfume = pMarcado.nombre;
-            let precioTexto = document.getElementById('precio-pantalla').innerText;
-            let precioNumero = parseInt(precioTexto.replace(/[^0-9]/g, ''));
-            
-            carritoPedidos.push({ nombre: nombrePerfume, tam: estadoActual.tam, aroma: estadoActual.aro.toUpperCase(), combo: cb ? " (+ Combo Hair Mist)" : "", precioText: precioTexto });
-            totalDineroAcumulado += precioNumero;
-            document.getElementById('btn-despacho-wa').innerText = `💬 Solicitar Pedido (${carritoPedidos.length})`;
-            let divVisual = document.getElementById('lista-carrito-visual'); 
-            if (divVisual) {
-                divVisual.style.display = "block";
-                divVisual.innerHTML = `<strong>📦 En lista:</strong> ${carritoPedidos.length} esencias. Total: <strong>$${totalDineroAcumulado.toLocaleString('es-CO')} COP</strong>`;
-            }
-        }
-      
-        function enviarMensajeWhatsApp() {
-           
+const TAGS = {
+ 1:{para:["el"],oca:["noche","especial","diario"]},
+ 2:{para:["el"],oca:["noche","especial"]},
+ 3:{para:["ella"],oca:["diario","especial"]},
+ 4:{para:["ella"],oca:["diario","gimnasio"]},
+ 5:{para:["el"],oca:["diario","especial"]},
+ 6:{para:["el"],oca:["noche","especial"]},
+ 7:{para:["ella"],oca:["diario","especial"]},
+ 8:{para:["ella"],oca:["especial","noche"]},
+ 9:{para:["ella"],oca:["diario","especial"]}
+};
+/* ═══════════════════════════════════════════ */
 
-            // BLOQUE DE RECOMENDACIÓN ORIGINAL (CONSERVADO INTACTO)
-            let pMarcado = estadoActual.medallaElegida === "p1" ? estadoActual.objetoP1 : estadoActual.objetoP2;
-            if (carritoPedidos.length === 0) {
-                if (!pMarcado) { alert("Por favor, elija las preguntas primero."); return; }
-                let cb = document.getElementById('check-combo').checked;
-                let nombrePerfume = pMarcado.nombre;
-                let precioTotal = document.getElementById('precio-pantalla').innerText;
-                let txtMsg = `¡Hola Perfumes DAGAH! Acabo de armar mi rutina en el Asesor Inteligente.\n\n📌 *MI FRAGANCIA ELEGIDA:*\n• Perfume: *${nombrePerfume}*\n• Presentación: *${estadoActual.tam}*${cb ? ' (+ Combo Hair Mist)' : ''}\n• Base Olfativa: *${estadoActual.aro.toUpperCase()}*\n\n💰 *VALOR NETO A PAGAR:* *${precioTotal}*\n\n¿Tienen disponibilidad de esta esencia de galón en el taller para despacho diario?`;
-                let baseRuta = "https://whatsapp.com";
-                window.open(`${baseRuta}?phone=${TELEFONO_DAGAH}&text=${encodeURIComponent(txtMsg)}`, "_blank");
-                return;
-            }
-            
-            // REMATE DE COMPRA MÚLTIPLE DEL CARRITO
-            let txtMsg = `¡Hola Perfumes DAGAH! Acabo de armar un pedido múltiple en el Asesor Inteligente.\n📦 *LISTA DE FRAGANCIAS SOLICITADAS:*\n`;
-            carritoPedidos.forEach((p, index) => { txtMsg += `\n*Perfume #${index + 1}:* ${p.nombre}\n• Tamaño: ${p.tam}${p.combo}\n• Base: ${p.aroma}\n• Precio: ${p.precioText}\n`; });
-            txtMsg += `\n💰 *VALOR TOTAL DE LA COMPRA:* *$${totalDineroAcumulado.toLocaleString('es-CO')} COP*\n\n¿Tienen disponibilidad de estas esencias en el taller?`;
-            // ENLACE OFICIAL DE META RECTIFICADO CON SALTO FORZADO
-            let baseRuta = "https://whatsapp.com";
-                window.open(`${baseRuta}?phone=${TELEFONO_DAGAH}&text=${encodeURIComponent(txtMsg)}`, "_blank");
-                return;
-        }
-            
-        
-        function conmutarTip(tipId) { ['tip1', 'tip2', 'tip3', 'tip4'].forEach(id => { document.getElementById(`zona-${id}`).style.display = id === tipId ? 'block' : 'none'; document.getElementById(`tab-${id}`).classList.toggle('activo', id === tipId); }); }
-     // PARCHE DE RESCATE: COMPUERTAS PARA LA LÍNEA DIRECTA INDIVIDUAL
-         function enviarHairMistSolo() {
-            // DETECTA COMPUERTA OFICIAL PARA MÓVIL O COMPUTADOR
-            let baseRuta = window.innerWidth <= 768 ? 
-                "https://whatsapp.com" : "https://whatsapp.com";
-            
-            let txtMsg = `¡Hola Perfumes DAGAH! Me interesa solicitar el producto individual:\n\n💇‍♀️ *Solo Hair Mist*\n💰 *Valor:* *$30.000 COP*`;
-            window.open(`${baseRuta}?phone=${TELEFONO_DAGAH}&text=${encodeURIComponent(txtMsg)}`, '_blank');
-        }
-        // AUTOPISTA DE REEMPLAZO LIMPIA DE FÁBRICA
-        function enviarHairMistSolo() {
-            let baseRuta = window.innerWidth <= 768 ? 
-                "https://whatsapp.com" : "https://whatsapp.com";
-            
-            let txtMsg = `¡Hola Perfumes DAGAH! Me interesa solicitar únicamente el producto individual:\n\n💇‍♀️ *PRODUCTO:* *Solo Hair Mist*\n💰 *VALOR:* *$30.000 COP*`;
-            window.open(`${baseRuta}?phone=${TELEFONO_DAGAH}&text=${encodeURIComponent(txtMsg)}`, '_blank');
-        }
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = s => document.querySelector(s);
+const fmt = n => "$" + n.toLocaleString("es-CO");
+const wa  = m => `https://wa.me/${WA_NUM}?text=${encodeURIComponent(m)}`;
+const sel = new Map();
+let curFam = "Todos", curSort = "rel", bOpen = true, curPay = "";
 
-        function enviarBodySplashSolo() {
-            let baseRuta = window.innerWidth <= 768 ? 
-                "https://whatsapp.com" : "https://whatsapp.com";
-            
-            let txtMsg = `¡Hola Perfumes DAGAH! Me interesa solicitar únicamente el producto individual:\n\n🚿 *PRODUCTO:* *Solo Body Splash*\n💰 *VALOR:* *$25.000 COP*`;
-            window.open(`${baseRuta}?phone=${TELEFONO_DAGAH}&text=${encodeURIComponent(txtMsg)}`, '_blank');
-        }
+function payLine(){ return curPay ? `✦ Pagaré con: ${curPay}` : "✦ Pagaré con: Nequi o Bancolombia"; }
+document.querySelectorAll("[data-pay]").forEach(b=>b.addEventListener("click",()=>{
+  curPay = (curPay === b.dataset.pay) ? "" : b.dataset.pay;
+  document.querySelectorAll("[data-pay]").forEach(x=>x.classList.toggle("on", x.dataset.pay === curPay));
+  $("#paynote").textContent = curPay ? `Listo: su pedido dirá «Pagaré con ${curPay}».` : "Tóquelo y quedará escrito en su pedido.";
+}));
 
-    </script>
+const msgGen = `${SALUDO} Vengo de la página web y quiero información sobre sus perfumes disponibles 🙌`;
+["hd-wa","hero-wa","final-wa","fab","ft-wa"].forEach(id=>{const e=document.getElementById(id); if(e) e.href = wa(msgGen);});
+const sh = document.getElementById("share-wa");
+if(sh) sh.href = `https://wa.me/?text=${encodeURIComponent("✦ PERFUMES DAGAH ✦ Perfumes de excelente calidad, pedidos por WhatsApp sin registro. Mira la vitrina: " + location.href)}`;
+
+const hoy = new Date().toLocaleDateString("es-CO",{weekday:"long",day:"numeric",month:"long"});
+document.querySelectorAll("[data-today]").forEach(e=>e.textContent = hoy);
+document.querySelectorAll("[data-status]").forEach(e=>e.innerHTML = "🟢 Atendemos 24/7 — escríbanos a cualquier hora");
+$("#yr").textContent = new Date().getFullYear();
+$("#stat-stock").textContent = PROD.reduce((a,p)=>a+Math.max(p.stock,0),0);
+
+const fams = ["Todos",...new Set(PROD.map(p=>p.familia))];
+$("#chips").innerHTML = fams.map(f=>{
+  const c = f==="Todos" ? PROD.length : PROD.filter(p=>p.familia===f).length;
+  return `<button class="fchip ${f===curFam?"on":""}" data-f="${f}">${f}<b>${c}</b></button>`;
+}).join("");
+$("#chips").addEventListener("click",e=>{
+  const b = e.target.closest("[data-f]"); if(!b) return;
+  curFam = b.dataset.f;
+  document.querySelectorAll(".fchip").forEach(c=>c.classList.toggle("on",c===b));
+  render();
+});
+$("#sort").addEventListener("change",e=>{curSort=e.target.value;render();});
+
+function footCtrl(p,q){
+  return q>0
+    ? `<span class="step-qty"><button data-sub="${p.id}" aria-label="Quitar uno de ${p.nombre}">−</button><b>${q}</b><button data-add="${p.id}" aria-label="Agregar uno más de ${p.nombre}">+</button></span>`
+    : `<button class="add add-txt" data-add="${p.id}">＋ Agregar</button>`;
+}
+function ph(name){
+  const ini = name.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='300' height='340'><rect width='100%' height='100%' fill='#1d1610'/><circle cx='150' cy='140' r='70' fill='none' stroke='#c9a24b' stroke-width='3'/><text x='150' y='162' font-family='Georgia,serif' font-size='54' fill='#e8ca7d' text-anchor='middle'>${ini}</text><text x='150' y='290' font-family='Verdana,sans-serif' font-size='15' letter-spacing='4' fill='#b9ad93' text-anchor='middle'>DAGAH</text></svg>`;
+  return "data:image/svg+xml," + encodeURIComponent(svg);
+}
+function card(p,i){
+  const out = p.stock===0;
+  const q = sel.get(p.id)||0;
+  const pill = out ? `<span class="pill pill-out">Agotado</span>`
+    : p.stock<=2 ? `<span class="pill pill-low">¡Últimas ${p.stock}!</span>`
+    : `<span class="pill pill-ok">Stock · ${p.stock}</span>`;
+  const tag = p.tag ? `<span class="tag">${p.tag}</span>` : "";
+  const act = out
+    ? `<a class="btn-wa btn-wa--ghost" target="_blank" rel="noopener" href="${wa(`${SALUDO} Vi que *${p.nombre}* está agotado. ¿Me avisas cuando vuelva a llegar? 👀`)}"><svg><use href="#i-wa"/></svg>Avísame cuando vuelva</a>`
+    : `<a class="btn-wa" target="_blank" rel="noopener" href="${wa(`${SALUDO} Quiero pedir *${p.nombre}* (${p.ml} ml — ${fmt(p.precio)}).\n\n✦ Mi ciudad y dirección:\n${payLine()}\n¿Es posible? ✦`)}"><svg><use href="#i-wa"/></svg>Pedir por WhatsApp</a>`;
+      const base = p.img || p.nombre;
+  const seal = ph(p.nombre);
+  const imgSrc = `imagenes/${base}.jpeg`;
+  const imgErr = ` onerror="this.onerror=null;this.src='imagenes/${base}.jpg';this.onerror=function(){this.onerror=null;this.src='${seal}';};"`;
+  return `<article class="card${out?" is-out":""}" data-card="${p.id}" style="animation-delay:${i*40}ms">
+    <div class="card-img"><img src="${imgSrc}"${imgErr} width="300" height="340" alt="Perfume ${p.nombre}" loading="lazy">${tag}${pill}</div>
+    <div class="card-body">
+      <div class="card-top"><span>${p.familia}</span><span class="ml">${p.ml} ml</span></div>
+      <h3 class="card-name">${p.nombre}</h3>
+      <p class="price">${fmt(p.precio)}</p>
+      <p class="spec">🌸 <b>Aroma:</b> ${p.nota}</p>
+      <p class="spec">⏳ <b>Duración:</b> ${p.dur}</p>
+      <p class="spec">✨ <b>Estela:</b> ${p.estela}</p>
+      <div class="card-foot">${out?"":footCtrl(p,q)}</div>
+      ${act}
+    </div>
+  </article>`;
+}
+function render(){
+  let list = PROD.filter(p=>curFam==="Todos"||p.familia===curFam);
+  if(curSort==="asc")  list=[...list].sort((a,b)=>a.precio-b.precio);
+  if(curSort==="desc") list=[...list].sort((a,b)=>b.precio-a.precio);
+  if(curSort==="few")  list=[...list].sort((a,b)=>a.stock-b.stock);
+  $("#count").textContent = `Mostrando ${list.length} de ${PROD.length} referencias en vitrina`;
+  $("#grid").innerHTML = list.length
+    ? list.map(card).join("")
+    : `<p class="empty">Nada por aquí… escríbenos y lo buscamos para ti ✦</p>`;
+}
+render();
+
+document.addEventListener("click",e=>{
+  if(e.target.closest(".b-head")){ bOpen = !bOpen; basket(); return; }
+  const t = e.target.closest("[data-add],[data-sub]"); if(!t) return;
+  const id = +(t.dataset.add || t.dataset.sub);
+  const p = PROD.find(x=>x.id===id);
+  const q = sel.get(id)||0;
+  let nq = t.dataset.add ? q+1 : q-1;
+  if(nq > p.stock) nq = p.stock;
+  nq<=0 ? sel.delete(id) : sel.set(id,nq);
+  const foot = document.querySelector(`[data-card="${id}"] .card-foot`);
+  if(foot) foot.innerHTML = footCtrl(p, sel.get(id)||0);
+  basket(); bar();
+});
+function basket(){
+  const items = PROD.filter(p=>sel.get(p.id));
+  const b = $("#basket");
+  if(!items.length){ b.hidden = true; b.innerHTML = ""; return; }
+  const units = items.reduce((a,p)=>a+sel.get(p.id),0);
+  const total = items.reduce((a,p)=>a+p.precio*sel.get(p.id),0);
+  b.hidden = false;
+  b.innerHTML = `<button class="b-head" type="button">${bOpen?"▾":"▸"}  Su lista: <b>${units} ${units===1?"perfume":"perfumes"}</b> · ${fmt(total)}<span class="b-toggle">${bOpen?"Ocultar":"Ver detalle"}</span></button>` +
+    (bOpen ? `<div class="b-body">` + items.map(p=>`<div class="b-row"><span class="b-name">${p.nombre}</span><span class="step-qty"><button data-sub="${p.id}" aria-label="Quitar uno de ${p.nombre}">−</button><b>${sel.get(p.id)}</b><button data-add="${p.id}" aria-label="Agregar uno más de ${p.nombre}">+</button></span><span class="b-sub">${fmt(p.precio*sel.get(p.id))}</span></div>`).join("") +
+    `<p class="b-note">Cuando guste, toque <b>Enviar pedido</b> en la barra verde de abajo. 👇</p></div>` : "");
+}
+function bar(){
+  const items = PROD.filter(p=>sel.get(p.id));
+  const ob = $("#orderbar");
+  if(!items.length){ob.classList.remove("show");document.body.classList.remove("has-bar");return;}
+  const units = items.reduce((a,p)=>a+sel.get(p.id),0);
+  const total = items.reduce((a,p)=>a+p.precio*sel.get(p.id),0);
+  $("#obCount").textContent = units===1 ? "1 perfume en su lista" : units+" perfumes en su lista";
+  $("#obTotal").textContent = "Total: " + fmt(total) + " · toque Enviar pedido y se abre WhatsApp";
+  const msg = `${SALUDO} Quiero hacer este pedido:\n\n` +
+    items.map(p=>`• ${sel.get(p.id)} × *${p.nombre}* (${p.ml} ml) — ${fmt(p.precio*sel.get(p.id))}`).join("\n") +
+    `\n\nTotal aprox.: *${fmt(total)}*\n\n✦ Mi ciudad y dirección:\n${payLine()}\n¿Es posible? ✦`;
+  $("#obSend").href = wa(msg);
+  ob.classList.add("show"); document.body.classList.add("has-bar");
+}
+$("#obClear").onclick = ()=>{sel.clear();bar();basket();render();};
+
+/* ── asesoría de aroma ── */
+const quiz = {para:null,oca:null,fam:null};
+const LBL = {para:{ella:"ella",el:"él",regalo:"un regalo",sorpresa:"sorprender"},
+             oca:{diario:"el diario y el trabajo",gimnasio:"el deporte y el gimnasio",especial:"una ocasión especial",noche:"la noche y la fiesta"}};
+document.querySelectorAll(".q-opts").forEach(g=>{
+  g.addEventListener("click",e=>{
+    const b = e.target.closest("button"); if(!b) return;
+    g.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));
+    quiz[g.dataset.q] = b.dataset.v;
+    advise();
+  });
+});
+function advise(){
+  if(!quiz.para || !quiz.oca || !quiz.fam) return;
+  const scored = PROD.filter(p=>p.stock>0).map(p=>{
+    let s = 0; const t = TAGS[p.id];
+    if(p.familia===quiz.fam) s+=3;
+    if(t.oca.includes(quiz.oca)) s+=2;
+    if(quiz.para==="regalo"){ if(t.oca.includes("especial")) s+=2; }
+    else if(quiz.para!=="sorpresa"){ if(t.para.includes(quiz.para)) s+=2; else if(t.para.length>1) s+=1; }
+    return {p,s};
+  }).sort((a,b)=> b.s-a.s || b.p.stock-a.p.stock);
+  const top = scored[0], alt = scored[1];
+  if(!top) return;
+  const why = top.s>0
+    ? `Porque busca un aroma ${top.p.familia.toLowerCase()} para ${LBL.oca[quiz.oca]}${quiz.para==="regalo"?", y viene envuelto para regalo.":", pensado para "+LBL.para[quiz.para]+"."}`
+    : `Una joya de la vitrina que creemos le va a encantar.`;
+  const r = $("#qres");
+  r.hidden = false;
+  r.innerHTML = `
+    <p class="q-res-t">✦ Su perfume ideal</p>
+    <div class="q-card">
+      <div>
+        <h3>${top.p.nombre}</h3>
+        <p class="card-notes">${top.p.nota} · ${top.p.ml} ml</p>
+        <p class="q-why">${why}</p>
+      </div>
+      <div class="q-side">
+        <span class="price">${fmt(top.p.precio)}</span>
+        <a class="btn-wa" target="_blank" rel="noopener" href="${wa(`${SALUDO} Hice la asesoría de aroma y me recomendó *${top.p.nombre}* (${top.p.ml} ml — ${fmt(top.p.precio)}). ¡Lo quiero! ✦\n\n✦ Mi ciudad y dirección:\n${payLine()}\n¿Es posible? ✦`)}"><svg><use href="#i-wa"/></svg>Pedir por WhatsApp</a>
+      </div>
+    </div>
+    ${alt?`<p class="q-alt">Otra opción que le va a encantar: <b>${alt.p.nombre}</b> (${fmt(alt.p.precio)}) — lo encuentra en la vitrina de arriba.</p>`:""}
+    <button class="q-reset" id="qreset">↺ Empezar de nuevo</button>`;
+  $("#qreset").onclick = ()=>{
+    quiz.para=quiz.oca=quiz.fam=null;
+    document.querySelectorAll(".q-opts button").forEach(x=>x.classList.remove("on"));
+    r.hidden = true; r.innerHTML = "";
+  };
+  if(!RM) r.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+
+addEventListener("scroll",()=>$("#hd").classList.toggle("scrolled",scrollY>12),{passive:true});
+const io = new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target);}}),{threshold:.12});
+document.querySelectorAll(".rv").forEach(e=>RM?e.classList.add("in"):io.observe(e));
+
+const sc = document.querySelector("[data-scramble]");
+if(sc && !RM){
+  const fin = sc.dataset.scramble, gl = "✦·×AEIOUDGH";
+  let i = 0; const iv = setInterval(()=>{
+    sc.textContent = fin.split("").map((c,x)=>x<i?c:gl[Math.random()*gl.length|0]).join("");
+    if(++i>fin.length){clearInterval(iv);sc.textContent=fin;}
+  },38);
+}
+
+document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
+  const it = q.parentElement, open = it.classList.contains("open");
+  document.querySelectorAll(".faq-item.open").forEach(o=>{o.classList.remove("open");o.querySelector(".faq-q").setAttribute("aria-expanded","false");});
+  if(!open){it.classList.add("open");q.setAttribute("aria-expanded","true");}
+}));
+</script>
 </body>
 </html>
