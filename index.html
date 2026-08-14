@@ -46,6 +46,10 @@ header.scrolled{background:rgba(21,16,9,.96);border-color:var(--line)}
 .logo{font-family:var(--serif);font-weight:700;font-size:1.45rem;letter-spacing:.14em;display:flex;align-items:center;gap:.5rem}
 .logo-img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:1px solid rgba(201,162,75,.6)}
 .logo i{font-style:normal;color:var(--gold);font-size:.9em;animation:twinkle 3.2s ease-in-out infinite}
+.logo-col{display:flex;flex-direction:column;line-height:1.15}
+.logo-tag{font-family:var(--serif);font-style:italic;font-size:.82rem;font-size:2.1rem;font-weight:1400;line-height:1.05;letter-spacing:.02em;color:var(--gold-hi)}
+.logo-col{display:flex;flex-direction:column;line-height:1.15}
+
 @keyframes twinkle{50%{opacity:.35;transform:scale(.8)}}
 .hd nav{display:none;gap:1.6rem;font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-dim)}
 .hd nav a:hover{color:var(--gold-hi)}
@@ -150,7 +154,7 @@ header.scrolled{background:rgba(21,16,9,.96);border-color:var(--line)}
 .b-sub{font-weight:800;color:#a07d2e;min-width:9ch;text-align:right}
 .b-note{margin-top:.7rem;font-size:.85rem;color:#5c4d2e}
 .grid-count{font-size:.78rem;color:#8a7a56;margin-bottom:1.1rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:1.1rem}
 .card{background:var(--card);border:1px solid var(--card-line);border-radius:14px;display:flex;gap:.95rem;padding:.95rem;position:relative;transition:transform .3s,box-shadow .3s;animation:pop .5s cubic-bezier(.2,.75,.25,1) both}
 @keyframes pop{from{opacity:0;transform:translateY(14px) scale(.98)}}
 .card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(56,42,15,.14)}
@@ -250,7 +254,7 @@ header.scrolled{background:rgba(21,16,9,.96);border-color:var(--line)}
 .final{position:relative;padding:6rem 0;text-align:center;overflow:hidden;
   background:radial-gradient(55% 60% at 50% 110%,rgba(201,162,75,.22),transparent 65%),var(--ink)}
 .final .ghost{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--serif);font-size:clamp(7rem,26vw,20rem);color:transparent;-webkit-text-stroke:1px rgba(230,214,180,.06);pointer-events:none;white-space:nowrap}
-.final h2{position:relative;font-family:var(--serif);font-weight:500;font-size:clamp(2.3rem,6.5vw,4.2rem);line-height:1.05}
+.final h2{position:relative;font-family:var(--serif);font-weight:500;font-size:clamp(2.3rem,6.5vw,4.2rem);line-height:1.05}@media(max-width:640px){.logo-tag{font-size:1.2rem}}
 .final h2 em{font-style:italic;color:var(--gold-hi)}
 .final p{position:relative;color:var(--cream-dim);margin:1.1rem auto 2rem;max-width:42ch}
 .final .btn{position:relative;font-size:1.05rem;padding:1.1rem 2.2rem}
@@ -266,7 +270,7 @@ footer{border-top:1px solid var(--line);padding:3rem 0 2.4rem;background:var(--i
 .ft ul{list-style:none;display:grid;gap:.5rem}
 .ft-bot{margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:.8rem;justify-content:space-between;font-size:.75rem;color:#7d715a}
 
-#orderbar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:#221a0e;border-top:1px solid var(--gold);transform:translateY(110%);transition:transform .45s cubic-bezier(.2,.75,.25,1);box-shadow:0 -14px 40px rgba(0,0,0,.5)}
+#orderbar{position:fixed;left:0;right:0;bottom:0;padding-bottom:env(safe-area-inset-bottom);z-index:70;background:#221a0e;border-top:1px solid var(--gold);transform:translateY(110%);transition:transform .45s cubic-bezier(.2,.75,.25,1);box-shadow:0 -14px 40px rgba(0,0,0,.5)}
 #orderbar.show{transform:none}
 #orderbar.show #obSend{animation:bnc .5s ease}
 @keyframes bnc{40%{transform:scale(1.07)}}
@@ -307,7 +311,7 @@ body.has-bar .fab{bottom:92px}
 
 <header id="hd">
   <div class="wrap hd">
-    <a class="logo" href="#top"><img src="logo-dagah.png" alt="DAGAH" class="logo-img">DAGAH<i>✦</i></a>
+        <a class="logo" href="#top" style="flex-wrap:wrap"><img src="logo-dagah.png" alt="DAGAH" class="logo-img"><span class="logo-col">DAGAH<i>✦</i><small class="logo-tag">No solo uses un perfume…<br>deja una huella que nadie pueda olvidar.</small></span></a>
     <nav>
       <a href="#inventario">Inventario</a><a href="#asesoria">Asesoría</a><a href="#escuela">Tips</a><a href="#preguntas">Preguntas</a>
     </nav>
@@ -521,7 +525,8 @@ body.has-bar .fab{bottom:92px}
   <div class="wrap ft">
     <div>
       <p class="logo"><img src="logo-dagah.png" alt="DAGAH" class="logo-img">DAGAH<i>✦</i></p>
-      <p>Casa de perfumes con inventario real. Curamos pocas referencias, las fotografiamos una por una y las enviamos protegidas.</p>
+      <p>Casa de perfumes con inventario real.
+         <span style="display:block;margin-top:.55rem;font-family:var(--serif);font-style:italic;font-size:3.0rem;font-weight:600;color:var(--gold-hi)">"Tu presencia merece un aroma inolvidable"</span></p>
     </div>
     <div>
       <h4>La casa</h4>
