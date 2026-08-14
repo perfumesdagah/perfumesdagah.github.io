@@ -298,7 +298,42 @@ body.has-bar .fab{bottom:92px}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .rv,.lm span{opacity:1;transform:none}
 }
+.catalog{background:#221a10;color:var(--cream)}
+.cat-head h2{color:var(--cream)}.cat-head h2 em{color:var(--gold-hi)}
+.eyebrow.dark{color:var(--gold)}.eyebrow.dark::before{background:var(--gold)}
+.cat-live{color:var(--cream-dim)}
+.howto{background:rgba(201,162,75,.07);border-color:var(--gold)}
+.howto-t{color:var(--cream)}.howto-t em{color:var(--gold-hi)}
+.howto-a,.howto-b{background:rgba(21,16,9,.55);border-color:var(--line-strong)}
+.howto-a b,.howto-b b{color:var(--gold)}
+.howto-a p,.howto-b p{color:var(--cream-dim)}
+.hl{background:rgba(201,162,75,.4);color:#221a0e}
+.paybar{background:rgba(21,16,9,.55);border-color:var(--line-strong)}
+.paybar-t{color:var(--cream)}.paybar-note{color:var(--cream-dim)}
+.paychip{border-color:var(--line-strong);color:var(--cream)}
+.paychip.on{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+.fchip{border-color:var(--line-strong);color:var(--cream-dim)}
+.fchip:hover{border-color:var(--gold);color:var(--gold-hi)}
+.fchip.on{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+.sortsel{border-color:var(--line-strong);color:var(--cream);background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3e%3cpath d='m1 1l4 4 4-4' stroke='%23e8ca7d' fill='none' stroke-width='1.5'/%3e%3c/svg%3e")}
+.grid-count{color:var(--cream-dim)}
+.basket{background:rgba(201,162,75,.08);border-color:var(--gold)}
+.b-head{color:var(--cream)}.b-head b{color:var(--gold-hi)}.b-toggle{color:var(--gold)}
+.b-row{border-color:var(--line)}.b-name{color:var(--cream)}.b-sub{color:var(--gold)}
+.b-note{color:var(--cream-dim)}
+.basket .step-qty{border-color:var(--gold)}.basket .step-qty button{color:var(--gold-hi)}.basket .step-qty b{color:var(--cream)}
+.empty{color:var(--cream-dim)}
+.card{background:#2b2115;border-color:var(--line-strong)}
+.card-name{color:var(--cream)}
+.card-top{color:var(--gold)}
+.price{color:var(--gold-hi)}
+.spec{color:var(--cream-dim)}
+.spec b{color:var(--gold)}
+.add{border-color:var(--gold);color:var(--gold-hi)}
+.add:hover{background:var(--gold);color:var(--gold-ink)}
+.step-qty{border-color:var(--gold)}.step-qty button{color:var(--gold-hi)}.step-qty b{color:var(--cream)}
 </style>
+
 </head>
 <body>
 
@@ -331,7 +366,7 @@ body.has-bar .fab{bottom:92px}
         <a class="btn btn-gold" href="#inventario">Ver inventario <span class="ar">↓</span></a>
         <a class="btn btn-ghost" id="hero-wa" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Escríbenos</a>
       </div>
-      <a class="hero-ases rv" style="--d:.15s" href="#asesoria">¿No sabe cuál elegir? Haga la asesoría de 3 toques ↓</a>
+      <div class="status.*</div>
       <div class="hero-stats rv" style="--d:.2s">
         <div><b id="stat-stock">—</b><span>En stock hoy</span></div>
         <div><b>24/7</b><span>Atención</span></div>
@@ -512,11 +547,16 @@ body.has-bar .fab{bottom:92px}
 <section class="final" id="contacto">
   <div class="ghost" aria-hidden="true">DAGAH</div>
   <div class="wrap">
-    <h2 class="rv">¿A qué quieres <em>oler hoy?</em></h2>
-    <p class="rv" style="--d:.08s">Haga la asesoría de aroma o escríbanos: le ayudamos a encontrar su firma olfativa entre lo que hay en vitrina.</p>
-    <a class="btn btn-wabg rv" style="--d:.16s" id="final-wa" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Hablar con DAGAH</a>
-    <a class="btn btn-ghost rv" style="--d:.2s" id="share-wa" target="_blank" rel="noopener">📲 Recomendar la página</a>
-    <div class="status rv" style="--d:.24s"><span class="dot"></span><span data-status>—</span></div>
+    <h2 class="rv">Su perfume viaja protegido, <em>usted paga a su manera.</em></h2>
+    <p class="rv" style="--d:.08s">🚚 Envíos a todo el país, empacados con cuidado hasta su puerta. 💳 Nequi o Bancolombia: elija su forma de pago y confírmela en el chat.</p>
+    <div class="rv" style="--d:.16s;display:flex;flex-wrap:wrap;gap:1rem;justify-content:center">
+      <div style="border:1px solid var(--line-strong);border-radius:14px;padding:1rem 1.4rem;background:rgba(21,16,9,.5);min-width:200px;cursor:pointer" onclick="window.open('https://wa.me/573106410582?text=hola%20dagah%20%e2%9c%a6%20quiero%20pagar%20con%20nequi.%20%c2%bfme%20confirma%20los%20datos%3f','_blank')">💳 <b style="color:var(--gold-hi);font-family:var(--serif);font-size:1.1rem">nequi</b><br><span style="font-size:.85rem;color:var(--cream-dim)">pago inmediato desde su celular</span></div>
+      <div style="border:1px solid var(--line-strong);border-radius:14px;padding:1rem 1.4rem;background:rgba(21,16,9,.5);min-width:200px;cursor:pointer" onclick="window.open('https://wa.me/573106410582?text=hola%20dagah%20%e2%9c%a6%20quiero%20pagar%20con%20bancolombia%20a%20la%20cuenta%2032504379832.%20%c2%bfme%20confirma%20el%20pedido%3f','_blank')">🏦 <b style="color:var(--gold-hi);font-family:var(--serif);font-size:1.1rem">bancolombia</b><br><span style="font-size:.85rem;color:var(--cream-dim)">transferencia o consignación</span></div>
+      <div style="border:1px solid var(--line-strong);border-radius:14px;padding:1rem 1.4rem;background:rgba(21,16,9,.5);min-width:200px;cursor:pointer" onclick="window.open('https://wa.me/573106410582?text=hola%20dagah%20%e2%9c%a6%20quiero%20convenir%20el%20env%c3%ado%20a%20mi%20ciudad.','_blank')">🚚 <b style="color:var(--gold-hi);font-family:var(--serif);font-size:1.1rem">envío</b><br><span style="font-size:.85rem;color:var(--cream-dim)">para convenir</span></div>
+    </div>
+    <div class="status.*</div>
+    <div class="status rv" style="--d:.24s"><div class="status rv" style="--d:.24s"></div></div>
+    <div class="status rv" style="--d:.24s"><div class="status rv" style="--d:.24s"></div></div>
   </div>
 </section>
 </main>
@@ -590,7 +630,9 @@ const PROD = [
  {id:27, nombre:"Kamrah",           familia:"Dulce",     nota:"Gourmand · Flores · Almizcle",         ml:100, precio:110000, stock:3, tag:"Baúl de lujo", dur:"8+ horas", estela:"Alta"},
  {id:28, nombre:"Lattafa Morada",   familia:"Floral",    nota:"Frutas moradas · Flores · Vainilla",   ml:100, precio:110000, stock:3, tag:"Baúl de lujo", dur:"8+ horas", estela:"Alta"},
  {id:29, nombre:"Now Women",        familia:"Floral",    nota:"Pera · Jazmín · Almizcle",             ml:100, precio:110000, stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta"},
- {id:30, nombre:"Postre Mallows",   familia:"Dulce",     nota:"Malvavisco · Caramelo · Vainilla",     ml:100, precio:120000, stock:3, tag:"Gourmand",     dur:"6–8 horas", estela:"Media-alta"}
+ {id:30, nombre:"Postre Mallows",   familia:"Dulce",     nota:"Malvavisco · Caramelo · Vainilla",     ml:100, precio:120000, stock:3, tag:"Gourmand",     dur:"6–8 horas", estela:"Media-alta"},
+ {id:31,nombre:"Hair Mist",marca:"DAGAH",ml:60,fam:"floral",dest:"Para ella",precio:30000,notas:["flores blancas","almizcle ligero","brisa de jardín"],dur:"2 a 4 horas",estela:"Íntima",occ:"Después de peinar, diario",foto:"",destacado:false},
+{id:32,nombre:"Body Splash",marca:"DAGAH",ml:250,fam:"fresco",dest:"Unisex",precio:25000,notas:["frutas frescas","cítricos suaves","agua de coco"],dur:"2 a 3 horas",estela:"Cercana",occ:"Después del baño o del deporte",foto:"",destacado:false},
 ];
 
 const TAGS = {
@@ -638,6 +680,7 @@ document.querySelectorAll("[data-pay]").forEach(b=>b.addEventListener("click",()
   curPay = (curPay === b.dataset.pay) ? "" : b.dataset.pay;
   document.querySelectorAll("[data-pay]").forEach(x=>x.classList.toggle("on", x.dataset.pay === curPay));
   $("#paynote").textContent = curPay ? `Listo: su pedido dirá «Pagaré con ${curPay}».` : "Tóquelo y quedará escrito en su pedido.";
+  render();bar();
 }));
 
 const msgGen = `${SALUDO} Vengo de la página web y quiero información sobre sus perfumes disponibles 🙌`;
