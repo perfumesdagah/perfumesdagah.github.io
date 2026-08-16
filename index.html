@@ -152,7 +152,7 @@ header.scrolled{background:rgba(21,16,9,.96);border-color:var(--line)}
 .b-row:last-of-type{border-bottom:none}
 .b-name{flex:1;font-weight:700;color:#221a0e}
 .b-sub{font-weight:800;color:#a07d2e;min-width:9ch;text-align:right}
-.b-note{margin-top:.7rem;font-size:.85rem;color:#5c4d2e}
+.b-note{margin-top:.7rem;font-size:16rem;color:#5c4d2e}
 .grid-count{font-size:.78rem;color:#8a7a56;margin-bottom:1.1rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:1.1rem}
 .card{background:var(--card);border:1px solid var(--card-line);border-radius:14px;display:flex;gap:.95rem;padding:.95rem;position:relative;transition:transform .3s,box-shadow .3s;animation:pop .5s cubic-bezier(.2,.75,.25,1) both}
@@ -332,7 +332,32 @@ body.has-bar .fab{bottom:92px}
 .add{border-color:var(--gold);color:var(--gold-hi)}
 .add:hover{background:var(--gold);color:var(--gold-ink)}
 .step-qty{border-color:var(--gold)}.step-qty button{color:var(--gold-hi)}.step-qty b{color:var(--cream)}
+.school .eyebrow::before{display:none}
+.school .eyebrow{color:#d4af37;font-size:.8rem}
+.school{border-top:none}
+.quiz{border-bottom:none}
+.school .eyebrow::before{display:none}
+.eyebrow{font-size:.9rem;letter-spacing:.24em}
+footer{border-top:none}
+.eyebrow::before{display:none}
+.eyebrow{font-size:.85rem;letter-spacing:.24em}
+.school{background:#1A120B;color:#F5EFE0}
+.school .eyebrow{color:#D4AF37}
+.school h2{color:#F5EFE0}.school h2 em{color:#D4AF37}
+.school .sub{color:rgba(245,239,224,.72)}
+.fig-card{background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.3)}
+.q-t{color:#F5EFE0}
+.fig-legend li{color:rgba(245,239,224,.85)}.fig-legend b{color:#D4AF37}
+.fig-note{color:rgba(245,239,224,.6)}
+.concept{border-top:1px solid rgba(212,175,55,.25)}
+.concept h3{color:#D4AF37}.concept h3 em{color:rgba(245,239,224,.7)}
+.concept p{color:rgba(245,239,224,.75)}
+.tip{background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.25)}
+.tip b{color:#D4AF37}.tip p{color:rgba(245,239,224,.75)}
+.tips-hook{color:rgba(245,239,224,.85)}
+.concept{background:rgba(212,175,55,.06);border:1px solid rgba(212,175,55,.25)}
 </style>
+
 
 </head>
 <body>
@@ -346,14 +371,13 @@ body.has-bar .fab{bottom:92px}
 
 <header id="hd">
   <div class="wrap hd">
-        <a class="logo" href="#top" style="flex-wrap:wrap"><img src="logo-dagah.png" alt="DAGAH" class="logo-img"><span class="logo-col">DAGAH<i>✦</i><small class="logo-tag">No solo uses un perfume…<br>deja una huella que nadie pueda olvidar.</small></span></a>
+        <a class="logo" href="#top" style="flex-wrap:wrap"><img src="logo-dagah.png" alt="DAGAH" class="logo-img"><span class="logo-col">DAGAH<i>✦</i><small class="logo-tag">Vendemos Elegancia…<br>Que se lleva en la Piel</small></span></a>
     <nav>
-      <a href="#inventario">Inventario</a><a href="#asesoria">Asesoría</a><a href="#escuela">Tips</a><a href="#preguntas">Preguntas</a>
+      <a href="#inventario">Inventario</a><a href="#asesoria">Asesoría</a><a href="#escuela">El Aula del Perfume</a><a href="#preguntas">Preguntas</a>
     </nav>
   </div>
 </header>
 
-<main id="top">
 <section class="hero">
   <div class="hero-ghost" aria-hidden="true">aroma</div>
   <div class="wrap hero-grid">
@@ -473,8 +497,17 @@ body.has-bar .fab{bottom:92px}
 </section>
 
 <section class="school" id="escuela">
+  <section class="school" id="escuela">
   <div class="wrap">
-    <p class="eyebrow rv">El aula del perfume</p>
+  <div class="aula-cine rv" style="margin:0 0 2.2rem">
+    <video class="aula-video" data-src="videos/aula1.mp4" muted loop playsinline preload="none" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;border:1px solid rgba(212,175,55,.35);background:#0d0803"></video>
+    <p style="text-align:center;font-family:var(--serif);font-style:italic;color:#D4AF37;margin-top:.8rem;font-size:.95rem">Lección 1 · La huella que dejas</p>
+  </div>
+  <script>
+  (function(){var v=document.querySelector(".aula-video");if(!v)return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(!v.getAttribute("src")&&v.dataset.src){v.src=v.dataset.src;v.load();}v.play().catch(function(){});io.disconnect();}});},{threshold:.2});io.observe(v);})();
+  </script>
+  <div class="wrap">
+    <p class="eyebrow rv">La escuela del aroma</p>
     <h2 class="rv" style="--d:.05s">La pequeña ciencia <em>de la gran elegancia</em></h2>
     <p class="sub rv" style="--d:.1s">Tres minutos de saber para llevar el perfume como un conocedor — y elegir el próximo con criterio.</p>
     <div class="school-grid">
@@ -528,6 +561,8 @@ body.has-bar .fab{bottom:92px}
       <div class="tip rv"><b>🕰️ Los perfumes también envejecen</b><p>Un frasco cerrado dura años; abierto, entre 1 y 3 si lo guarda lejos del calor y la luz. Si el color o el olor cambian mucho, ya cumplió su ciclo.</p></div>
     </div>
     <p class="tips-hook rv">✦ ¿Quiere saber más? Vuelva. <b>Aquí los esperamos</b> con más Tips ✦</p>
+    <p class="rv" style="text-align:center;margin:2.2rem 0 0"><a class="btn btn-gold" href="#inventario">Ahora que sabes elegir, explora la colección →</a></p>
+    <p class="tips-hook rv">
   </div>
 </section>
 
@@ -554,9 +589,7 @@ body.has-bar .fab{bottom:92px}
       <div style="border:1px solid var(--line-strong);border-radius:14px;padding:1rem 1.4rem;background:rgba(21,16,9,.5);min-width:200px;cursor:pointer" onclick="window.open('https://wa.me/573106410582?text=hola%20dagah%20%e2%9c%a6%20quiero%20pagar%20con%20bancolombia%20a%20la%20cuenta%2032504379832.%20%c2%bfme%20confirma%20el%20pedido%3f','_blank')">🏦 <b style="color:var(--gold-hi);font-family:var(--serif);font-size:1.1rem">bancolombia</b><br><span style="font-size:.85rem;color:var(--cream-dim)">transferencia o consignación</span></div>
       <div style="border:1px solid var(--line-strong);border-radius:14px;padding:1rem 1.4rem;background:rgba(21,16,9,.5);min-width:200px;cursor:pointer" onclick="window.open('https://wa.me/573106410582?text=hola%20dagah%20%e2%9c%a6%20quiero%20convenir%20el%20env%c3%ado%20a%20mi%20ciudad.','_blank')">🚚 <b style="color:var(--gold-hi);font-family:var(--serif);font-size:1.1rem">envío</b><br><span style="font-size:.85rem;color:var(--cream-dim)">para convenir</span></div>
     </div>
-    <div class="status.*</div>
-    <div class="status rv" style="--d:.24s"><div class="status rv" style="--d:.24s"></div></div>
-    <div class="status rv" style="--d:.24s"><div class="status rv" style="--d:.24s"></div></div>
+    <div class="status rv" style="--d:.24s"></div>
   </div>
 </section>
 </main>
