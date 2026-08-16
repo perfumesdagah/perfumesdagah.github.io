@@ -4,9 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+.logo-movil{display:none}
 @media(max-width:700px){
 #hd .hd{display:flex;flex-direction:column;align-items:center;gap:.55rem}
-#hd .logo{margin:0;display:flex;flex-wrap:nowrap;align-items:center;gap:.5rem}
+#hd .logo{display:none}
+#hd .logo-movil{display:flex;flex-direction:column;align-items:center;gap:.35rem;margin:0;text-align:center}
+#hd .logo-movil img{height:56px;border-radius:50%}
+#hd .logo-movil b{font-family:var(--serif);font-size:2rem;letter-spacing:.14em;color:#f5efe0}
+#hd .logo-movil small{font-family:var(--serif);font-style:italic;color:#d4af37;font-size:.85rem}
+.hero h1{display:none}
 #hd .logo-img{height:34px}
 #hd .logo-col{font-size:1.3rem}
 #hd .logo-tag{font-size:.6rem}
@@ -383,16 +389,23 @@ footer{border-top:none}
 </style>
 <header id="hd">
   <div class="wrap hd">
-        <a class="logo" href="#top"><img src="logo-dagah.png" alt="DAGAH" class="logo-img"><span class="logo-col">DAGAH<i>✦</i><small class="logo-tag">Vendemos Elegancia…<br>Que se lleva en la Piel</small></span></a>
+        <a class="logo" href="#top">
+    <p class="logo-movil"><img src="logo-dagah.png" alt="dagah"><b>dagah</b><small>vendemos elegancia… que se lleva en la piel</small></p><img src="logo-dagah.png" alt="DAGAH" class="logo-img"><span class="logo-col">DAGAH<i>✦</i><small class="logo-tag">Vendemos Elegancia…<br>Que se lleva en la Piel</small></span></a>
     <nav>
       <a href="#inventario">Inventario</a><a href="#asesoria">Asesoría</a><a href="#escuela">El Aula del Perfume</a><a href="#preguntas">Preguntas</a>
     </nav>
   </div>
 </header>
 <style>
+.logo-movil{display:none}
 @media(max-width:700px){
 #hd .hd{flex-direction:column;align-items:center;gap:.55rem}
-#hd .logo{margin:0;display:flex;flex-wrap:nowrap;align-items:center;gap:.5rem}
+#hd .logo{display:none}
+#hd .logo-movil{display:flex;flex-direction:column;align-items:center;gap:.35rem;margin:0;text-align:center}
+#hd .logo-movil img{height:56px;border-radius:50%}
+#hd .logo-movil b{font-family:var(--serif);font-size:2rem;letter-spacing:.14em;color:#f5efe0}
+#hd .logo-movil small{font-family:var(--serif);font-style:italic;color:#d4af37;font-size:.85rem}
+.hero h1{display:none}
 #hd .logo-img{height:34px}
 #hd .logo-col{font-size:1.3rem}
 #hd .logo-tag{font-size:.6rem}
