@@ -17,10 +17,6 @@
 #hd .logo-col{font-size:1.3rem}
 #hd .logo-tag{font-size:.6rem}
 #hd nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1.1rem;font-size:.78rem}
-#hd .logo{display:flex!important;flex-direction:column;align-items:center;gap:.5rem;text-align:center}
-#hd .logo-img{height:88px}
-#hd .logo-movil{display:none!important}
-.hero-visual{display:none!important}
 #hd .logo{display:flex!important;flex-wrap:nowrap;align-items:center;gap:.5rem}
 #hd .logo-movil{display:none!important}
 .gigante{display:none}
@@ -402,6 +398,7 @@ footer{border-top:none}
 </style>
 <header id="hd">
   <div class="wrap hd">
+    <div class="medal medal-movil"><img src="logo-dagah.png" alt="logo perfumes dagah"><svg class="ring" viewbox="0 0 200 200" aria-hidden="true"><defs><path id="cir2" d="m100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"/></defs><text><textpath href="#cir2">perfumes dagah ✦ excelente calidad ✦ pedidos al whatsapp ✦ </textpath></text></svg></div>
         <a class="logo" href="#top">
     
       <a href="#inventario">Inventario</a><a href="#asesoria">Asesoría</a><a href="#escuela">El Aula del Perfume</a><a href="#preguntas">Preguntas</a>
@@ -422,10 +419,6 @@ footer{border-top:none}
 #hd .logo-col{font-size:1.3rem}
 #hd .logo-tag{font-size:.6rem}
 #hd nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1.1rem;font-size:.78rem}
-#hd .logo{display:flex!important;flex-direction:column;align-items:center;gap:.5rem;text-align:center}
-#hd .logo-img{height:88px}
-#hd .logo-movil{display:none!important}
-.hero-visual{display:none!important}
 #hd .logo{display:flex!important;flex-wrap:nowrap;align-items:center;gap:.5rem}
 #hd .logo-movil{display:none!important}
 .gigante{display:none}
@@ -451,7 +444,9 @@ footer{border-top:none}
     <p class="logo-movil"><img src="logo-dagah.png" alt="dagah"><b>dagah</b><small>vendemos elegancia… que se lleva en la piel</small></p>
         <a class="btn btn-ghost" id="hero-wa" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>Escríbenos</a>
       </div>
-      <div class="status.*</div>
+      <div class="wrap hd">
+    <div class="medal medal-movil"><img src="logo-dagah.png" alt="logo perfumes dagah"><svg class="ring" viewbox="0 0 200 200" aria-hidden="true"><defs><path id="cir2" d="m100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"/></defs><text><textpath href="#cir2">perfumes dagah ✦ excelente calidad ✦ pedidos al whatsapp ✦ </textpath></text></svg></div>
+        
       <div class="hero-stats rv" style="--d:.2s">
         <div><b id="stat-stock">—</b><span>En stock hoy</span></div>
         <div><b>24/7</b><span>Atención</span></div>
@@ -962,16 +957,14 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
 }));
 </script>
 <style>
+.medal-movil{display:none}
 @media(max-width:700px){
+.medal-movil{display:block!important;width:170px;margin:0 auto}
+.hero-scene{display:none!important}
+#hd .logo{display:none!important}
 #hd .hd{display:flex!important;flex-direction:column!important;align-items:center!important;gap:.6rem!important}
-#hd .logo{display:flex!important;flex-direction:column!important;align-items:center!important;gap:.5rem!important;margin:0!important;text-align:center}
-#hd .logo-img{height:88px!important;width:88px!important;border-radius:50%!important}
-#hd .logo-col{font-size:1.5rem!important}
-#hd .logo-tag{font-size:.8rem!important}
-#hd .logo-movil{display:none!important}
 #hd nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:.4rem 1.1rem!important;font-size:.8rem!important}
 .gigante{display:none!important}
-.hero-visual,.hero-vis,.visual,.hero-seal{display:none!important}
 }
 </style>
 </body>
