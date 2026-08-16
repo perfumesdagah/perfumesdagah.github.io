@@ -961,5 +961,18 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
   if(!open){it.classList.add("open");q.setAttribute("aria-expanded","true");}
 }));
 </script>
+<style>
+@media(max-width:700px){
+#hd .hd{display:flex!important;flex-direction:column!important;align-items:center!important;gap:.6rem!important}
+#hd .logo{display:flex!important;flex-direction:column!important;align-items:center!important;gap:.5rem!important;margin:0!important;text-align:center}
+#hd .logo-img{height:88px!important;width:88px!important;border-radius:50%!important}
+#hd .logo-col{font-size:1.5rem!important}
+#hd .logo-tag{font-size:.8rem!important}
+#hd .logo-movil{display:none!important}
+#hd nav{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:.4rem 1.1rem!important;font-size:.8rem!important}
+.gigante{display:none!important}
+.hero-visual,.hero-vis,.visual,.hero-seal{display:none!important}
+}
+</style>
 </body>
 </html>
