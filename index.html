@@ -778,7 +778,7 @@ const hoy = new Date().toLocaleDateString("es-CO",{weekday:"long",day:"numeric",
 document.querySelectorAll("[data-today]").forEach(e=>e.textContent = hoy);
 document.querySelectorAll("[data-status]").forEach(e=>e.innerHTML = "🟢 Atendemos 24/7 — escríbanos a cualquier hora");
 $("#yr").textContent = new Date().getFullYear();
-$("#stat-stock").textContent = PROD.reduce((a,p)=>a+Math.max(p.stock,0),0);
+$("#stat-stock").textContent = PROD.reduce((a,p)=>a+(parseInt(p.stock,10)||0),0);
 
 const fams = ["Todos",...new Set(PROD.map(p=>p.familia))];
 $("#chips").innerHTML = fams.map(f=>{
@@ -973,5 +973,6 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
 .hero h1{display:none!important}
 }
 </style>
+<style>@media(max-width:700px){.medal-movil{margin-top:20px}}</style>
 </body>
 </html>
