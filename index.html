@@ -397,6 +397,7 @@ footer{border-top:none}
 <header id="hd">
   <div class="wrap hd">
     <div class="medal medal-movil"><img src="logo-dagah.png" alt="Logo Perfumes DAGAH"><svg class="ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="cir2" d="M100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"/></defs><text><textPath href="#cir2">PERFUMES DAGAH ✦ EXCELENTE CALIDAD ✦ PEDIDOS AL WHATSAPP ✦ </textPath></text></svg></div>
+    <p class="slogan-movil">Vendemos Elegancia…<br>Que se lleva en la Piel</p>
     <a class="logo" href="#top"><img src="logo-dagah.png" alt="DAGAH" class="logo-img"><span class="logo-col">DAGAH<i>✦</i><small class="logo-tag">Vendemos Elegancia…<br>Que se lleva en la Piel</small></span></a>
     <nav>
       <a href="#inventario">Inventario</a>
@@ -436,7 +437,7 @@ footer{border-top:none}
     <div class="hero-copy">
       <p class="eyebrow"><span data-scramble="INVENTARIO REAL · HOY">INVENTARIO REAL · HOY</span></p>
       <h1 class="gigante"><span class="lm"><span style="--d:.1s">DAGAH</span></span></h1>
-      <p class="hero-sub lm"><span style="--d:.3s">Perfumes que llegan antes que tu fama.</span></p>
+      <p class="hero-sub lm"><span style="--d:.3s">"Perfumes que saludan primero"</span></p>
       <p class="lead rv">Casa de perfumes con stock verdadero: lo que ves aquí está en la vitrina, listo para enviarse hoy. Sin catálogos eternos, sin crear cuentas y sin iniciar sesión en nada — ves, tocas y pides por WhatsApp.</p>
       <div class="hero-ctas rv" style="--d:.1s">
         <a class="btn btn-gold" href="#inventario">Ver inventario <span class="ar">↓</span></a>
@@ -820,6 +821,8 @@ function card(p,i){
   const act = out
     ? `<a class="btn-wa btn-wa--ghost" target="_blank" rel="noopener" href="${wa(`${SALUDO} Vi que *${p.nombre}* está agotado. ¿Me avisas cuando vuelva a llegar? 👀`)}"><svg><use href="#i-wa"/></svg>Avísame cuando vuelva</a>`
     : `<a class="btn-wa" target="_blank" rel="noopener" href="${wa(`${SALUDO} Quiero pedir *${p.nombre}* (${p.ml} ml — ${fmt(p.precio)}).\n\n✦ Mi ciudad y dirección:\n${payLine()}\n¿Es posible? ✦`)}"><svg><use href="#i-wa"/></svg>Pedir por WhatsApp</a>`;
+  const gen={1:"u",2:"m",3:"m",4:"m",5:"m",6:"h",7:"h",8:"h",9:"h",10:"m",11:"h",12:"u",13:"h",14:"h",15:"u",16:"m",17:"h",18:"h",19:"m",20:"h",21:"m",22:"m",23:"m",24:"h",25:"h",26:"m",27:"m",28:"m",29:"m",30:"m"};
+  p.gen = p.dest || ({"h":"para él","m":"para ella","u":"unisex"})[gen[p.id]] || "unisex";
   const base = p.img || p.nombre;
   const seal = ph(p.nombre);
   const imgSrc = `imagenes/${base}.jpeg`;
@@ -827,7 +830,7 @@ function card(p,i){
   return `<article class="card${out?" is-out":""}" data-card="${p.id}" style="animation-delay:${i*40}ms">
     <div class="card-img"><img src="${imgSrc}"${imgErr} width="300" height="340" alt="Perfume ${p.nombre}" loading="lazy">${tag}${pill}</div>
     <div class="card-body">
-      <div class="card-top"><span>${p.familia}</span><span class="ml">${p.ml} ml</span></div>
+      <div class="card-top"><span>${p.familia||p.fam||""} · ${p.gen}</span><span class="ml">${p.ml} ml</span></div>
       <h3 class="card-name">${p.nombre}</h3>
       <p class="price">${fmt(p.precio)}</p>
       <p class="spec">🌸 <b>Aroma:</b> ${p.nota}</p>
@@ -983,6 +986,15 @@ document.querySelectorAll(".faq-q").forEach(q=>q.addEventListener("click",()=>{
 <style>@media(max-width:700px){.medal-movil{margin-top:20px}}</style>
 <style>@media(max-width:700px){#hd nav{display:block!important;text-align:center!important}#hd nav a{display:inline-block;margin:0 .55rem;line-height:1.9;white-space:nowrap}}</style>
 
+<style>
+.slogan-movil{display:none}
+@media(max-width:700px){
+.marquee,.cinta{display:none!important}
+#hd nav{order:-1;display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:.1rem .9rem!important;background:linear-gradient(90deg,#8a6a1f,#d4af37,#8a6a1f)!important;border-radius:10px!important;padding:.45rem .6rem!important;width:100%!important}
+#hd nav a{color:#241505!important;font-size:.7rem!important;font-weight:700!important;line-height:1.7!important;margin:0!important}
+.slogan-movil{display:block!important;text-align:center;font-family:var(--serif);font-style:italic;color:#e8ca7d;margin:.7rem 0 0!important;font-size:1rem}
+}
+</style>
 </body>
 
 </html>
