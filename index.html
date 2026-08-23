@@ -562,7 +562,7 @@ footer{border-top:none}
     <p style="text-align:center;font-family:var(--serif);font-style:italic;color:#D4AF37;margin-top:.8rem;font-size:.95rem">Lección 1 · La huella que dejas</p>
   </div>
   <div class="aula-cine rv" style="margin:0 0 2.2rem">
-    <video class="aula-video" src="videos/aula2.mp4" muted loop playsinline preload="none" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;border:1px solid rgba(212,175,55,.35);background:#0d0803"></video>
+    <video class="aula-video" src="videos/aula2.mp4" muted loop playsinline preload="metadata" autoplay controls style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;border:1px solid rgba(212,175,55,.35);background:#0d0803"></video>
     <p style="text-align:center;font-family:var(--serif);font-style:italic;color:#D4AF37;margin-top:.8rem;font-size:.95rem">Lección 2 · Las tres notas del perfume</p>
   </div>
   <script>
@@ -696,43 +696,42 @@ const WA_NUM = "573106410582";
 const SALUDO = "¡Hola DAGAH! ✦";
 
 const PROD = [
- {id:1,  nombre:"Mandarina",        familia:"Fresco",    nota:"Mandarina chispeante · Azahar",        ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media: alegre"},
- {id:2,  nombre:"Bubble Gum",       familia:"Dulce",     nota:"Chicle dulce · Frutas rosadas",        ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media: divertida"},
- {id:3,  nombre:"Yara Rosa",        familia:"Dulce",     nota:"Orquídea · Vainilla · Almizcle",       ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta: firma"},
- {id:4,  nombre:"Yara Candy",       familia:"Dulce",     nota:"Caramelo de fresa · Grosella · Vainilla", ml:100, precio:100000, stock:3, tag:"Inspiración", img:"Yara Candy", dur:"8+ horas", estela:"Exclusiva"},
- {id:5,  nombre:"Yara Tous",        familia:"Floral",    nota:"Frutos rojos · Flores · Almizcle",     ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"Yara Tous",  dur:"6–8 horas", estela:"Media-alta"},
- {id:6,  nombre:"Asad",             familia:"Oriental",  nota:"Especias · Ámbar · Vainilla de bourbon", ml:100, precio:100000, stock:3, tag:"Inspiración", img:"Asad Bourbon", dur:"8+ horas", estela:"Alta: presencia de caballero"},
- {id:7,  nombre:"Asad Elixir",      familia:"Oriental",  nota:"Especias oscuras · Cuero · Ámbar",     ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"8+ horas", estela:"Alta"},
- {id:8,  nombre:"Asad Café",        familia:"Dulce",     nota:"Café · Especias · Ámbar",              ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"8+ horas", estela:"Alta"},
- {id:9,  nombre:"Club de Nuit",     familia:"Amaderado", nota:"Piña · Abedul · Almizcle",             ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Alta"},
- {id:10, nombre:"Vida Bella",       familia:"Dulce",     nota:"Grosella · Iris · Praliné",            ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta"},
- {id:11, nombre:"Toy Boy",          familia:"Amaderado", nota:"Pimienta · Madera · Ámbar",            ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"Toy Boy",    dur:"6–8 horas", estela:"Media-alta"},
- {id:12, nombre:"Eau Fraîche",      familia:"Fresco",    nota:"Limón · Cardamomo · Madera clara",     ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
- {id:13, nombre:"Eros",             familia:"Fresco",    nota:"Menta · Manzana · Vainilla",           ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"Versace Eros", dur:"6–8 horas", estela:"Alta: conquista"},
- {id:14, nombre:"One Million",      familia:"Dulce",     nota:"Ámbar · Canela · Cuero dulce",         ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"One Million", dur:"6–8 horas", estela:"Alta: de fiesta"},
- {id:15, nombre:"Mandarina Mango",  familia:"Fresco",    nota:"Mango · Mandarina · Coco",             ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
- {id:16, nombre:"Good Girl Blush",  familia:"Floral",    nota:"Peonía · Cereza · Vainilla",           ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta"},
- {id:17, nombre:"Nitro Red",        familia:"Fresco",    nota:"Cítricos · Lavanda · Ámbar",           ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
- {id:18, nombre:"Tommy Men",        familia:"Fresco",    nota:"Manzana · Menta · Algodón",            ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
- {id:19, nombre:"París Fem",        familia:"Floral",    nota:"Rosa · Violeta · Madera suave",        ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"5–7 horas", estela:"Media"},
- {id:20, nombre:"Boss Unlimited",   familia:"Amaderado", nota:"Manzana · Pino · Sándalo",             ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"5–7 horas", estela:"Media"},
- {id:21, nombre:"Thanks Next",      familia:"Floral",    nota:"Frutas · Flores · Almizcle",           ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"Thank U Next", dur:"5–7 horas", estela:"Media: juvenil"},
- {id:22, nombre:"Thanks Next 2.0",  familia:"Dulce",     nota:"Frutas dulces · Flores · Almizcle",    ml:100, precio:100000,  stock:3, tag:"Inspiración", img:"Thanks Next 2", dur:"5–7 horas", estela:"Media"},
- {id:23, nombre:"Valentino",        familia:"Floral",    nota:"Rosa · Café · Vainilla",               ml:100, precio:100000,  stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Alta"},
- {id:24, nombre:"Le Male Elixir",   familia:"Oriental",  nota:"Menta · Lavanda · Vainilla intensa",   ml:100, precio:110000, stock:3, tag:"Elixir",       dur:"8+ horas", estela:"Alta"},
- {id:25, nombre:"9 PM Elixir",      familia:"Dulce",     nota:"Canela · Ámbar · Vainilla",            ml:100, precio:110000, stock:3, tag:"Elixir",       dur:"8+ horas", estela:"Alta"},
- {id:26, nombre:"Lattafa Roja",     familia:"Oriental",  nota:"Frutas rojas · Rosa · Ámbar",          ml:100, precio:110000, stock:3, tag:"Baúl de lujo", dur:"8+ horas", estela:"Alta"},
- {id:27, nombre:"Kamrah",           familia:"Dulce",     nota:"Gourmand · Flores · Almizcle",         ml:100, precio:110000, stock:3, tag:"Baúl de lujo", dur:"8+ horas", estela:"Alta"},
- {id:28, nombre:"Lattafa Morada",   familia:"Floral",    nota:"Frutas moradas · Flores · Vainilla",   ml:100, precio:110000, stock:3, tag:"Baúl de lujo", dur:"8+ horas", estela:"Alta"},
- {id:29, nombre:"Now Women",        familia:"Floral",    nota:"Pera · Jazmín · Almizcle",             ml:100, precio:110000, stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta"},
- {id:30, nombre:"Postre Mallows",   familia:"Dulce",     nota:"Malvavisco · Caramelo · Vainilla",     ml:100, precio:120000, stock:3, tag:"Gourmand",     dur:"6–8 horas", estela:"Media-alta"},
- {id:31,nombre:"Hair Mist",marca:"DAGAH",ml:60,fam:"floral",dest:"Para ella",precio:30000,notas:["flores blancas","almizcle ligero","brisa de jardín"],dur:"2 a 4 horas",estela:"Íntima",occ:"Después de peinar, diario",foto:"",destacado:false},
-{id:32,nombre:"Loción Capilar",marca:"DAGAH",ml:250,fam:"fresco",dest:"Unisex",precio:25000,notas:["frutas frescas","cítricos suaves","agua de coco"],dur:"2 a 3 horas",estela:"Cercana",occ:"Después del baño o del deporte",foto:"",destacado:false},
-{id:33,nombre:"París Hilton",marca:"DAGAH",ml:100,fam:"fresco",dest:"Unisex",precio:100000,notas:["frutas frescas","cítricos suaves","agua de coco"],dur:"2 a 3 horas",estela:"Cercana",occ:"Después del baño o del deporte",foto:"",destacado:false},
-{id:34,nombre:"Toy 2 Bubble Gum",marca:"DAGAH",ml:100,fam:"fresco",dest:"Unisex",precio:100000,notas:["frutas frescas","cítricos suaves","agua de coco"],dur:"2 a 3 horas",estela:"Cercana",occ:"Después del baño o del deporte",foto:"",destacado:false},
-
-];
-
+ {id:25, nombre:"9 PM Elixir",      familia:"Dulce",     nota:"Canela · Vainilla · Ámbar",            ml:100, precio:110000, stock:3, tag:"Elixir",       dur:"8–10 horas", estela:"Alta: de fiesta"},
+ {id:6,  nombre:"Asad",             familia:"Oriental",  nota:"Pimienta · Tabaco · Vainilla de bourbon", ml:100, precio:100000, stock:3, tag:"Inspiración", img:"Asad Bourbon", dur:"8–10 horas", estela:"Alta: presencia de caballero"},
+  {id:25, nombre:"9 PM Elixir",      familia:"Dulce",     nota:"Canela · Vainilla · Ámbar",            ml:100, precio:150000, stock:3, tag:"Elixir",       dur:"8+ horas", estela:"Alta: de fiesta"},
+ {id:6,  nombre:"Asad",             familia:"Oriental",  nota:"Pimienta · Tabaco · Vainilla de bourbon", ml:100, precio:120000, stock:3, tag:"Inspiración", img:"Asad Bourbon", dur:"8+ horas", estela:"Alta: presencia de caballero"},
+ {id:8,  nombre:"Asad Café",        familia:"Dulce",     nota:"Café tostado · Cacao · Ámbar",         ml:100, precio:120000, stock:3, tag:"Inspiración",  dur:"8+ horas", estela:"Alta"},
+ {id:7,  nombre:"Asad Elixir",      familia:"Oriental",  nota:"Especias oscuras · Cuero · Ámbar",     ml:100, precio:150000, stock:3, tag:"Inspiración",  dur:"8+ horas", estela:"Alta"},
+ {id:20, nombre:"Boss Unlimited",   familia:"Fresco",    nota:"Manzana · Menta · Cedro",              ml:100, precio:120000, stock:3, tag:"Inspiración",  dur:"5–7 horas", estela:"Media"},
+ {id:2,  nombre:"Bubble Gum",       familia:"Dulce",     nota:"Chicle dulce · Frutas rosadas",        ml:100, precio:120000, stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media: divertida"},
+ {id:9,  nombre:"Club de Nuit",     familia:"Amaderado", nota:"Piña · Abedul ahumado · Almizcle",     ml:100, precio:120000, stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Alta"},
+ {id:12, nombre:"Eau Fraîche",      familia:"Fresco",    nota:"Limón · Cardamomo · Madera clara",     ml:100, precio:120000, stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
+ {id:13, nombre:"Eros",             familia:"Fresco",    nota:"Menta · Manzana verde · Haba tonka",   ml:100, precio:120000, stock:3, tag:"Inspiración", img:"Versace Eros", dur:"6–8 horas", estela:"Alta: conquista"},
+ {id:15, nombre:"Go Mango",         familia:"Fresco",    nota:"Mango · Mandarina · Coco",             ml:100, precio:120000, stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
+ {id:16, nombre:"Good Girl Blush",  familia:"Floral",    nota:"Peonía · Ylang · Vainilla",            ml:100, precio:120000, stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta"},
+ {id:31,nombre:"Hair Mist",         marca:"DAGAH",ml:60,fam:"floral",dest:"Para ella",precio:30000,notas:["flores blancas","almizcle ligero","brisa de jardín"],dur:"2 a 4 horas",estela:"Íntima",occ:"Después de peinar, diario",foto:"",destacado:false},
+ {id:27, nombre:"Khamrah",          familia:"Dulce",     nota:"Dátiles · Praliné · Canela · Vainilla", ml:100, precio:150000, stock:3, tag:"Baúl de lujo", dur:"8+ horas", estela:"Altísima: firma"},
+ {id:28, nombre:"Lattafa Morada",   familia:"Floral",    nota:"Frutas moradas · Jazmín · Vainilla",   ml:100, precio:150000, stock:3, tag:"Baúl de lujo", dur:"8+ horas", estela:"Alta"},
+ {id:26, nombre:"Lattafa Roja",     familia:"Oriental",  nota:"Frutas rojas · Rosa · Ámbar",          ml:100, precio:150000, stock:3, tag:"Baúl de lujo", dur:"8+ horas", estela:"Alta"},
+ {id:24, nombre:"Le Male Elixir",   familia:"Oriental",  nota:"Vainilla intensa · Lavanda · Miel",    ml:100, precio:150000, stock:3, tag:"Elixir",       dur:"8+ horas", estela:"Alta"},
+ {id:32,nombre:"Loción Capilar",    marca:"DAGAH",ml:250,fam:"fresco",dest:"Unisex",precio:25000,notas:["frutas frescas","cítricos suaves","agua de coco"],dur:"2 a 3 horas",estela:"Cercana",occ:"Después del baño o del deporte",foto:"",destacado:false},
+ {id:1,  nombre:"Mandarina",        familia:"Fresco",    nota:"Mandarina chispeante · Azahar",        ml:100, precio:120000, stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media: alegre"},
+ {id:17, nombre:"Nitro Red",        familia:"Fresco",    nota:"Cítricos · Lavanda · Ámbar",           ml:100, precio:120000, stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
+ {id:29, nombre:"Now Women",        familia:"Floral",    nota:"Pera · Jazmín · Almizcle",             ml:100, precio:120000, stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta"},
+ {id:14, nombre:"One Million",      familia:"Dulce",     nota:"Ámbar · Canela · Cuero dulce",         ml:100, precio:120000, stock:3, tag:"Inspiración", img:"One Million", dur:"6–8 horas", estela:"Alta: de fiesta"},
+ {id:19, nombre:"París Fem",        familia:"Floral",    nota:"Rosa · Violeta · Mimosa",              ml:100, precio:120000, stock:3, tag:"Inspiración",  dur:"5–7 horas", estela:"Media"},
+ {id:33,nombre:"París Hilton",      marca:"DAGAH",ml:100,fam:"floral frutal",dest:"Unisex",precio:100000,notas:["manzana","melocotón","flores blancas"],dur:"4 a 6 horas",estela:"Media",occ:"Día · clima cálido",foto:"",destacado:false},
+ {id:30, nombre:"Postre Mallows",   familia:"Dulce",     nota:"Malvavisco tostado · Caramelo · Vainilla", ml:100, precio:140000, stock:3, tag:"Gourmand",   dur:"6–8 horas", estela:"Media-alta"},
+ {id:21, nombre:"Thanks Next",      familia:"Floral",    nota:"Pera · Frambuesa · Coco",              ml:100, precio:120000, stock:3, tag:"Inspiración", img:"Thank U Next", dur:"5–7 horas", estela:"Media: juvenil"},
+ {id:22, nombre:"Thanks Next 2.0",  familia:"Dulce",     nota:"Coco · Lichi · Praliné",               ml:100, precio:120000, stock:3, tag:"Inspiración", img:"Thanks Next 2", dur:"5–7 horas", estela:"Media"},
+ {id:18, nombre:"Tommy Men",        familia:"Fresco",    nota:"Manzana · Menta · Algodón",            ml:100, precio:120000, stock:3, tag:"Inspiración",  dur:"4–6 horas", estela:"Media"},
+ {id:34,nombre:"Toy 2 Bubble Gum",  marca:"DAGAH",ml:100,fam:"dulce",dest:"Unisex",precio:100000,notas:["chicle de fresa","naranja dulce","almizcle"],dur:"4 a 6 horas",estela:"Media: divertida",occ:"Día · detalle juvenil",foto:"",destacado:false},
+ {id:11, nombre:"Toy Boy",          familia:"Amaderado", nota:"Pimienta rosa · Rosa · Cashmerán",     ml:100, precio:120000, stock:3, tag:"Inspiración", img:"Toy Boy",    dur:"6–8 horas", estela:"Media-alta"},
+ {id:23, nombre:"Valentino",        familia:"Floral",    nota:"Rosa · Café · Vainilla",               ml:100, precio:180000, stock:3, tag:"Diseñador",    dur:"6–8 horas", estela:"Alta"},
+ {id:10, nombre:"Vida Bella",       familia:"Dulce",     nota:"Grosella · Iris · Praliné",            ml:100, precio:120000, stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta"},
+ {id:4,  nombre:"Yara Candy",       familia:"Dulce",     nota:"Caramelo de fresa · Grosella · Vainilla", ml:100, precio:120000, stock:3, tag:"Inspiración", img:"Yara Candy", dur:"8+ horas", estela:"Exclusiva"},
+ {id:3,  nombre:"Yara Rosa",        familia:"Dulce",     nota:"Orquídea · Vainilla · Almizcle",       ml:100, precio:120000, stock:3, tag:"Inspiración",  dur:"6–8 horas", estela:"Media-alta: firma"},
+ {id:5,  nombre:"Yara Tous",        familia:"Floral",    nota:"Frutos rojos · Mango · Almizcle",      ml:100, precio:120000, stock:3, tag:"Inspiración", img:"Yara Tous",  dur:"6–8 horas", estela:"Media-alta"},]
 const TAGS = {
  1:{para:["ella","el"],oca:["diario","gimnasio"]},
  2:{para:["ella"],oca:["diario","gimnasio"]},
