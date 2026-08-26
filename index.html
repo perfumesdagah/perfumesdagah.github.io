@@ -906,7 +906,7 @@ document.querySelectorAll(".q-opts").forEach(g=>{
 function advise(){
   if(!quiz.para || !quiz.oca || !quiz.fam) return;
   const scored = PROD.filter(p=>p.stock>0).map(p=>{
-    let s = 0; const t = TAGS[p.id];
+    let s = 0; const t = TAGS[p.id] || {oca:[],para:[]};
     if(p.familia===quiz.fam) s+=3;
     if(t.oca.includes(quiz.oca)) s+=2;
     if(quiz.para==="regalo"){ if(t.oca.includes("especial")) s+=2; }
