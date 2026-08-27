@@ -565,6 +565,10 @@ footer{border-top:none}
     <video class="aula-video" src="videos/aula2.mp4" muted loop playsinline preload="metadata" autoplay controls style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;border:1px solid rgba(212,175,55,.35);background:#0d0803"></video>
     <p style="text-align:center;font-family:var(--serif);font-style:italic;color:#D4AF37;margin-top:.8rem;font-size:.95rem">Lección 2 · Las tres notas del perfume</p>
   </div>
+    <div class="aula-cine rv" style="margin:0 0 2.2rem">
+    <video class="aula-video" src="videos/aula3.mp4" muted loop playsinline preload="metadata" autoplay controls style="display:block;margin:0 auto;width:100%;max-width:320px;aspect-ratio:9/16;object-fit:contain;border-radius:16px;border:1px solid rgba(212,175,55,.35);background:#0d0803"></video>
+    <p style="text-align:center;font-family:var(--serif);font-style:italic;color:#D4AF37;margin-top:.8rem;font-size:.95rem">Lección 3 · Después del baño — el aula que huele bonito</p>
+  </div>
   <script>
   (function(){var v=document.querySelector(".aula-video");if(!v)return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(!v.getAttribute("src")&&v.dataset.src){v.src=v.dataset.src;v.load();}v.play().catch(function(){});io.disconnect();}});},{threshold:.2});io.observe(v);})();
   </script>
