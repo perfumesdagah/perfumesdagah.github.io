@@ -557,22 +557,149 @@ footer{border-top:none}
 <section class="school" id="escuela">
   
   <div class="wrap">
-  <div class="aula-cine rv" style="margin:0 0 2.2rem">
-    <video class="aula-video" data-src="videos/aula1.mp4" muted loop playsinline preload="none" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;border:1px solid rgba(212,175,55,.35);background:#0d0803"></video>
-    <p style="text-align:center;font-family:var(--serif);font-style:italic;color:#D4AF37;margin-top:.8rem;font-size:.95rem">Lección 1 · La huella que dejas</p>
+  <style>
+/* ✦ DAGAH · aula interactiva: lecciones y puntos al toque */
+.aula-int{border:1px solid rgba(201,162,75,.4);border-radius:18px;padding:1.6rem 1.2rem;background:linear-gradient(180deg,rgba(201,162,75,.07),transparent);margin:0 0 2.6rem}
+.ai-head{text-align:center;margin-bottom:1.1rem}
+.ai-eyebrow{font-size:.66rem;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.ai-t{font-family:var(--serif);font-size:clamp(1.5rem,4vw,2.1rem);font-weight:600;color:var(--gold-hi);margin:.4rem 0 .3rem}
+.ai-sub{font-size:.86rem;color:var(--cream-dim)}
+.li-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.55rem;margin:0 0 1.4rem}
+.li-chips button{border:1px solid var(--line-strong);border-radius:999px;padding:.55rem 1.05rem;font-size:.78rem;font-weight:800;color:var(--cream);transition:.25s;cursor:pointer}
+.li-chips button:hover{border-color:var(--gold);color:var(--gold-hi)}
+.li-chips button.on{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.li-panel{display:none;animation:pop .45s both}
+.li-panel.on{display:block}
+.li-grid{display:grid;gap:1.4rem}
+@media(min-width:820px){.li-grid.dos{grid-template-columns:auto 1fr;align-items:center}}
+.li-txt h4{font-family:var(--serif);font-size:1.35rem;color:var(--gold-hi);margin-bottom:.5rem}
+.li-txt p{font-size:.92rem;color:var(--cream-dim);margin-bottom:.5rem}
+.li-regla{border-left:2px solid var(--gold);padding-left:.8rem;font-family:var(--serif);font-style:italic;color:var(--gold-hi);font-size:.95rem}
+.li-badge{width:74px;height:74px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;font-size:2rem;background:rgba(201,162,75,.08);margin:0 auto}
+.pt-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.45rem;margin-top:.9rem}
+.pt-chips button{border:1px solid var(--line-strong);border-radius:999px;padding:.42rem .8rem;font-size:.72rem;font-weight:700;color:var(--cream);cursor:pointer;transition:.25s}
+.pt-chips button.on{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.pt-det{text-align:center;margin-top:.8rem;font-size:.86rem;color:var(--cream-dim);min-height:2.4em}
+.pt-det strong{color:var(--gold-hi);letter-spacing:.08em}
+.gp{cursor:pointer}
+.gp .hit{fill:transparent}
+.gp .dot{fill:#0c1526;stroke:var(--gold);stroke-width:2;transition:.25s}
+.gp.on .dot{fill:var(--gold);stroke:var(--gold-hi);filter:drop-shadow(0 0 9px rgba(232,202,125,.85))}
+.gp .num{fill:var(--gold-hi);font-size:12px;font-weight:800;font-family:var(--sans)}
+@media(min-width:920px){.school-grid{grid-template-columns:1fr}}
+@media(min-width:760px){.concepts{grid-template-columns:repeat(3,1fr)}}
+</style>
+
+<div class="aula-int rv" id="aula-interactiva">
+  <div class="ai-head">
+    <p class="ai-eyebrow">El aula del perfume · interactiva</p>
+    <h3 class="ai-t">Toque una lección y ábrala con el dedo</h3>
+    <p class="ai-sub">Cuatro lecciones breves, sin videos: usted marca el ritmo.</p>
   </div>
-  <div class="aula-cine rv" style="margin:0 0 2.2rem">
-    <video class="aula-video" src="videos/aula2.mp4" muted loop playsinline preload="metadata" autoplay controls style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;border:1px solid rgba(212,175,55,.35);background:#0d0803"></video>
-    <p style="text-align:center;font-family:var(--serif);font-style:italic;color:#D4AF37;margin-top:.8rem;font-size:.95rem">Lección 2 · No lo frote</p>
+  <div class="li-chips" role="tablist">
+    <button type="button" class="on" data-li="1">1 · Dónde aplicarlo</button>
+    <button type="button" data-li="2">2 · No lo frote</button>
+    <button type="button" data-li="3">3 · Después del baño</button>
+    <button type="button" data-li="4">4 · A 10–15 cm</button>
   </div>
-      <div class="aula-cine rv" style="margin:0 0 2.2rem">
-    <video class="aula-video" src="videos/aula3.mp4" muted loop playsinline preload="metadata" autoplay controls style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;border:1px solid rgba(212,175,55,.35);background:#0d0803"></video>
-    <p style="text-align:center;font-family:var(--serif);font-style:italic;color:#D4AF37;margin-top:.8rem;font-size:.95rem">Lección 3 · Después del baño — el aula que huele bonito</p>
+
+  <div class="li-panel on" data-li="1">
+    <div class="li-grid dos">
+      <svg class="figura" viewBox="0 0 220 430" aria-label="Zonas de aplicación del perfume" style="width:min(210px,70%);margin:0 auto">
+        <ellipse cx="110" cy="215" rx="80" ry="160" fill="none" stroke="rgba(232,202,125,.22)" stroke-dasharray="2 7"/>
+        <ellipse cx="110" cy="200" rx="62" ry="95" fill="rgba(232,202,125,.05)"/>
+        <g fill="none" stroke="#e8ca7d" stroke-width="2.6" stroke-linecap="round" opacity=".95">
+          <ellipse cx="110" cy="38" rx="19" ry="25"/>
+          <path id="mitadAULA" d="M102 62 C100 74 92 80 82 86 C68 94 62 112 62 132 C62 152 58 176 56 198 C55 212 58 220 63 221 C67 222 69 216 69 206 C70 186 73 164 76 146 C78 132 80 122 84 114 C81 134 79 154 81 174 C83 192 88 202 90 216 C92 242 90 270 92 298 C93 326 94 354 96 382 C97 398 95 406 95 412 L106 412 C106 398 107 382 107 354 C107 326 108 298 108 270 C108 252 109 242 110 234"/>
+          <use href="#mitadAULA" transform="matrix(-1,0,0,1,220,0)"/>
+        </g>
+        <g>
+          <g class="gp" data-z="1"><circle class="hit" cx="132" cy="50" r="16"/><circle class="dot" cx="132" cy="50" r="6"/><text class="num" x="146" y="55">1</text></g>
+          <g class="gp" data-z="2"><circle class="hit" cx="110" cy="76" r="16"/><circle class="dot" cx="110" cy="76" r="6"/><text class="num" x="124" y="81">2</text></g>
+          <g class="gp" data-z="3"><circle class="hit" cx="62" cy="188" r="16"/><circle class="dot" cx="62" cy="188" r="6"/><text class="num" x="40" y="193">3</text></g>
+          <g class="gp" data-z="3"><circle class="hit" cx="158" cy="188" r="16"/><circle class="dot" cx="158" cy="188" r="6"/><text class="num" x="172" y="193">3</text></g>
+          <g class="gp" data-z="4"><circle class="hit" cx="80" cy="132" r="16"/><circle class="dot" cx="80" cy="132" r="6"/><text class="num" x="56" y="137">4</text></g>
+          <g class="gp" data-z="5"><circle class="hit" cx="100" cy="252" r="16"/><circle class="dot" cx="100" cy="252" r="6"/><text class="num" x="114" y="257">5</text></g>
+        </g>
+      </svg>
+      <div class="li-txt">
+        <h4>Los cinco puntos del pulso</h4>
+        <p>El perfume vive donde la piel late: el calor activa el aroma y lo libera despacio. Toque un punto de la silueta o su botoncito.</p>
+        <div class="pt-chips">
+          <button type="button" data-z="1">1 · Oreja</button>
+          <button type="button" data-z="2">2 · Cuello y pecho</button>
+          <button type="button" class="on" data-z="3">3 · Muñecas</button>
+          <button type="button" data-z="4">4 · Codos</button>
+          <button type="button" data-z="5">5 · Rodillas</button>
+        </div>
+        <p class="pt-det" id="ptDet"><strong>MUÑECAS</strong> — Punto clave de aplicación. ¡Recuerda no frotar!</p>
+      </div>
+    </div>
   </div>
-      <div class="aula-cine rv" style="margin:0 0 2.2rem">
-    <video class="aula-video" src="videos/aula4.mp4" muted loop playsinline preload="metadata" autoplay controls style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;border:1px solid rgba(212,175,55,.35);background:#0d0803"></video>
-    <p style="text-align:center;font-family:var(--serif);font-style:italic;color:#D4AF37;margin-top:.8rem;font-size:.95rem">Lección 4 · A 10–15 cm — la distancia justa del aroma</p>
+
+  <div class="li-panel" data-li="2">
+    <div class="li-grid dos">
+      <div class="li-badge">🚫</div>
+      <div class="li-txt">
+        <h4>No lo frote</h4>
+        <p>Frotar rompe las moléculas del aroma y lo cambia: la salida se aplasta y el corazón se apaga antes de tiempo.</p>
+        <p class="li-regla">Rocíe y deje secar al natural: el perfume se abre solo, como una flor.</p>
+      </div>
+    </div>
   </div>
+
+  <div class="li-panel" data-li="3">
+    <div class="li-grid dos">
+      <div class="li-badge">🚿</div>
+      <div class="li-txt">
+        <h4>Después del baño</h4>
+        <p>La piel tibia e hidratada retiene el perfume mucho más que la piel seca: los poros abiertos lo abrazan.</p>
+        <p class="li-regla">Baño, crema y luego perfume: ese es el orden de la larga estela.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="li-panel" data-li="4">
+    <div class="li-grid dos">
+      <div class="li-badge">📏</div>
+      <div class="li-txt">
+        <h4>A 10–15 cm</h4>
+        <p>Rocíe a esa distancia para que la nube se reparta parejo, sin empapar la piel ni manchar la ropa.</p>
+        <p class="li-regla">Ni tan cerca que gotee, ni tan lejos que se pierda: 10–15 cm es la medida del oficio.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ✦ DAGAH · el aula interactiva responde al toque */
+(function(){
+  var m=document.getElementById("aula-interactiva"); if(!m) return;
+  m.querySelector(".li-chips").addEventListener("click",function(e){
+    var b=e.target.closest("button"); if(!b) return;
+    m.querySelectorAll(".li-chips button").forEach(function(x){x.classList.toggle("on",x===b);});
+    m.querySelectorAll(".li-panel").forEach(function(p){p.classList.toggle("on",p.getAttribute("data-li")===b.getAttribute("data-li"));});
+  });
+  var Z={
+    "1":["DETRÁS DE LA OREJA","Punto cálido y discreto: el aroma se libera con cada giro de la cabeza."],
+    "2":["CUELLO Y PECHO","El calor del pecho eleva el aroma: su estela lo acompaña al hablar."],
+    "3":["MUÑECAS","Punto clave de aplicación. ¡Recuerda no frotar!"],
+    "4":["INTERIOR DE LOS CODOS","Piel fina y pulso constante: el aroma dura más en clima cálido."],
+    "5":["DETRÁS DE LAS RODILLAS","El calor sube desde abajo: la estela lo acompaña todo el día."]
+  };
+  function fijar(n){
+    m.querySelectorAll(".gp").forEach(function(p){p.classList.toggle("on",p.getAttribute("data-z")===n);});
+    m.querySelectorAll(".pt-chips button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-z")===n);});
+    var d=Z[n];
+    m.querySelector("#ptDet").innerHTML="<strong>"+d[0]+"</strong> — "+d[1];
+  }
+  m.addEventListener("click",function(e){
+    var t=e.target.closest("[data-z]"); if(!t) return;
+    fijar(t.getAttribute("data-z"));
+  });
+  fijar("3");
+})();
+</script>
   
   <script>
   (function(){var v=document.querySelector(".aula-video");if(!v)return;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){if(!v.getAttribute("src")&&v.dataset.src){v.src=v.dataset.src;v.load();}v.play().catch(function(){});io.disconnect();}});},{threshold:.2});io.observe(v);})();
@@ -584,24 +711,22 @@ footer{border-top:none}
     <div class="school-grid">
       <div class="fig-card rv">
         <svg class="figura" viewBox="0 0 220 430" aria-label="Zonas de aplicación del perfume">
-          <g fill="none" stroke="#e8ca7d" stroke-width="3" stroke-linecap="round" opacity=".9">
-            <circle cx="110" cy="42" r="24"/>
-            <path d="M110 66 v14"/>
-            <path d="M78 92 q32 -16 64 0 l6 66 q1 12 -11 12 h-54 q-12 0 -11 -12 z"/>
-            <path d="M76 96 q-18 44 -14 92"/>
-            <path d="M144 96 q18 44 14 92"/>
-            <path d="M96 170 q-4 60 -2 118 t-2 96"/>
-            <path d="M124 170 q4 60 2 118 t2 96"/>
-          </g>
-          <g>
-            <circle class="pt" cx="132" cy="50" r="6"/><text x="146" y="55">1</text>
-            <circle class="pt" cx="110" cy="76" r="6"/><text x="124" y="81">2</text>
-            <circle class="pt" cx="62" cy="188" r="6"/><text x="40" y="193">3</text>
-            <circle class="pt" cx="158" cy="188" r="6"/><text x="170" y="193">3</text>
-            <circle class="pt" cx="80" cy="132" r="6"/><text x="56" y="137">4</text>
-            <circle class="pt" cx="100" cy="252" r="6"/><text x="112" y="257">5</text>
-          </g>
-        </svg>
+  <ellipse cx="110" cy="215" rx="80" ry="160" fill="none" stroke="rgba(232,202,125,.22)" stroke-dasharray="2 7"/>
+  <ellipse cx="110" cy="200" rx="62" ry="95" fill="rgba(232,202,125,.05)"/>
+  <g fill="none" stroke="#e8ca7d" stroke-width="2.6" stroke-linecap="round" opacity=".95">
+    <ellipse cx="110" cy="38" rx="19" ry="25"/>
+    <path id="mitadDAGAH" d="M102 62 C100 74 92 80 82 86 C68 94 62 112 62 132 C62 152 58 176 56 198 C55 212 58 220 63 221 C67 222 69 216 69 206 C70 186 73 164 76 146 C78 132 80 122 84 114 C81 134 79 154 81 174 C83 192 88 202 90 216 C92 242 90 270 92 298 C93 326 94 354 96 382 C97 398 95 406 95 412 L106 412 C106 398 107 382 107 354 C107 326 108 298 108 270 C108 252 109 242 110 234"/>
+    <use href="#mitadDAGAH" transform="matrix(-1,0,0,1,220,0)"/>
+  </g>
+  <g>
+    <circle cx="132" cy="50" r="10" fill="rgba(232,202,125,.22)"/><circle class="pt" cx="132" cy="50" r="6"/><text x="146" y="55">1</text>
+    <circle cx="110" cy="76" r="10" fill="rgba(232,202,125,.22)"/><circle class="pt" cx="110" cy="76" r="6"/><text x="124" y="81">2</text>
+    <circle cx="62" cy="188" r="10" fill="rgba(232,202,125,.22)"/><circle class="pt" cx="62" cy="188" r="6"/><text x="40" y="193">3</text>
+    <circle cx="158" cy="188" r="10" fill="rgba(232,202,125,.22)"/><circle class="pt" cx="158" cy="188" r="6"/><text x="170" y="193">3</text>
+    <circle cx="80" cy="132" r="10" fill="rgba(232,202,125,.22)"/><circle class="pt" cx="80" cy="132" r="6"/><text x="56" y="137">4</text>
+    <circle cx="100" cy="252" r="10" fill="rgba(232,202,125,.22)"/><circle class="pt" cx="100" cy="252" r="6"/><text x="112" y="257">5</text>
+  </g>
+</svg>
         <div>
           <p class="q-t">Dónde aplicarlo</p>
           <ul class="fig-legend">
@@ -1020,6 +1145,106 @@ href="https://statcounter.com/" target="_blank"><img class="statcounter"
 src="https://c.statcounter.com/13351953/0/8e467c82/0/" alt="Web Analytics"
 referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 <!-- End of Statcounter Code -->
+ <style>
+<style>
+<style>
+/* ✦ DAGAH · azul medianoche (tono bueno) · traje completo sin variables */
+body{background:#0c1526}
+header,#hd{background:rgba(12,21,38,.92)!important}
+header.scrolled,#hd.scrolled{background:rgba(12,21,38,.98)!important}
+.hero{background:radial-gradient(60% 55% at 82% 8%,rgba(201,162,75,.16),transparent 65%),radial-gradient(45% 40% at 8% 92%,rgba(201,162,75,.08),transparent 60%),#0c1526}
+.quiz,#asesoria{background:#111d33!important}
+.quiz-box{background:linear-gradient(180deg,rgba(201,162,75,.06),transparent)}
+.school,#escuela{background:#0c1526!important}
+.catalog,#catálogo{background:#111d33!important}
+.card{background:#1b2a47}
+.chip{background:rgba(12,21,38,.88)}
+.tag,.pill-low,#orderbar{background:#152340}
+.howto-a,.howto-b,.paybar{background:rgba(12,21,38,.55)}
+.final,#contacto{background:radial-gradient(55% 60% at 50% 110%,rgba(201,162,75,.22),transparent 65%),#0c1526!important}
+footer{background:#0c1526!important}
+</style>
+<style>
+/* ✦ DAGAH · tonalidad pareja de portada a pie */
+.quiz,#asesoria{background:#0c1526!important}
+.catalog,#catálogo{background:#0c1526!important}
+.school,#escuela{background:#0c1526!important}
+.aula-video{background:#0c1526!important}
+</style>
+</style>
+<div class="sello-mayor" aria-hidden="true"><img src="logo-dagah.png" alt=""></div>
+</style>
+<style>
+/* ✦ DAGAH · opción C en toda la página: paredes azules, oro como adorno */
+.belt{background:#0c1526;color:var(--gold-hi);border-block:1px solid var(--line-strong)}
+.belt em{color:var(--gold)}
+.faq{background:#0c1526;color:var(--cream)}
+.faq h2{color:var(--cream)}
+.faq h2 em{color:var(--gold-hi)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{color:var(--cream)}
+.faq-q .pl{border-color:var(--cream);color:var(--cream)}
+.faq-item.open .pl{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.faq-a p{color:var(--cream-dim)}
+</style>
+<style>
+/* ✦ DAGAH · el sello mayor: marca de agua majestuosa */
+.sello-mayor{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;z-index:40;opacity:.08}
+.sello-mayor img{width:min(86vmin,840px);height:auto;filter:drop-shadow(0 0 60px rgba(201,162,75,.35));animation:selloRespira 12s ease-in-out infinite}
+@keyframes selloRespira{50%{transform:scale(1.035)}}
+@media(prefers-reduced-motion:reduce){.sello-mayor img{animation:none}}
+</style>
+<style>
+/* ✦ DAGAH · aula en dos campos: solo dos despiertos a la vez */
+.aula-campos{display:block!important}
+.campo-aula{display:grid;gap:2.4rem;margin:0 0 4rem}
+@media(min-width:860px){.campo-aula{grid-template-columns:1fr 1fr}}
+</style>
+<script>
+/* ✦ DAGAH · solo el campo que está al frente permanece despierto */
+(function(){
+  document.querySelectorAll(".sello-play").forEach(function(s){s.remove();});
+  var cams=document.querySelectorAll(".aula-cine");
+  if(!cams.length) return;
+  var parent=cams[0].parentNode;
+  parent.classList.add("aula-campos");
+  if(!parent.querySelector(".campo-aula")){
+    for(var i=0;i<cams.length;i+=2){
+      var campo=document.createElement("div");
+      campo.className="campo-aula";
+      parent.insertBefore(campo,cams[i]);
+      campo.appendChild(cams[i]);
+      if(cams[i+1]) campo.appendChild(cams[i+1]);
+    }
+  }
+  document.querySelectorAll("video.aula-video").forEach(function(v){
+    var s=v.getAttribute("src")||v.getAttribute("data-src");
+    if(s){v.setAttribute("data-aula",s);}
+    v.removeAttribute("src");v.removeAttribute("data-src");
+    v.removeAttribute("autoplay");
+    v.setAttribute("preload","none");
+    v.setAttribute("controls","");
+    v.pause();
+  });
+  var campos=document.querySelectorAll(".campo-aula");
+  function dormir(c){c.querySelectorAll("video.aula-video").forEach(function(v){v.pause();});}
+  function despertar(c){c.querySelectorAll("video.aula-video").forEach(function(v){
+    if(!v.getAttribute("src")&&v.getAttribute("data-aula")){v.src=v.getAttribute("data-aula");v.load();}
+    v.play().catch(function(){});
+  });}
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting&&e.intersectionRatio>=.5){
+        despertar(e.target);
+        campos.forEach(function(o){if(o!==e.target)dormir(o);});
+      }else{
+        dormir(e.target);
+      }
+    });
+  },{threshold:[0,.5,1]});
+  campos.forEach(function(c){io.observe(c);});
+})();
+</script>
 </body>
 
 </htm>
