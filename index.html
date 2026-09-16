@@ -781,7 +781,7 @@ footer{border-top:none}
     <h2 class="rv">PAGOS <em>Y ENVÍOS</em></h2>
     <p class="rv" style="--d:.08s">🚚 Envíos a todo el país, empacados con cuidado hasta su puerta. 💳 Nequi o Bancolombia: elija su forma de pago y confírmela en el chat.</p>
     <div class="rv" style="--d:.16s;display:flex;flex-wrap:wrap;gap:1rem;justify-content:center">
-      <div style="border:1px solid var(--line-strong);border-radius:14px;padding:1rem 1.4rem;background:rgba(21,16,9,.5);min-width:200px;cursor:pointer" onclick="window.open('https://wa.me/573106410582?text=hola%20dagah%20%e2%9c%a6%20quiero%20pagar%20con%20nequi.%20%c2%bfme%20confirma%20los%20datos%3f','_blank')">💳 <b style="color:var(--gold-hi);font-family:var(--serif);font-size:1.1rem">nequi</b><br><span style="font-size:.85rem;color:var(--cream-dim)">pago inmediato desde su celular</span></div>
+      <div style="border:1px solid var(--line-strong);border-radius:14px;padding:1rem 1.4rem;background:rgba(21,16,9,.5);min-width:200px;cursor:pointer" onclick="window.open('https://wa.me/   font-size:.82rem?text=hola%20dagah%20%e2%9c%a6%20quiero%20pagar%20con%20nequi.%20%c2%bfme%20confirma%20los%20datos%3f','_blank')">💳 <b style="color:var(--gold-hi);font-family:var(--serif);font-size:1.1rem">nequi</b><br><span style="font-size:.85rem;color:var(--cream-dim)">pago inmediato desde su celular</span></div>
       <div style="border:1px solid var(--line-strong);border-radius:14px;padding:1rem 1.4rem;background:rgba(21,16,9,.5);min-width:200px;cursor:pointer" onclick="window.open('https://wa.me/573106410582?text=hola%20dagah%20%e2%9c%a6%20quiero%20pagar%20con%20bancolombia%20a%20la%20cuenta%2032504379832.%20%c2%bfme%20confirma%20el%20pedido%3f','_blank')">🏦 <b style="color:var(--gold-hi);font-family:var(--serif);font-size:1.1rem">bancolombia</b><br><span style="font-size:.85rem;color:var(--cream-dim)">transferencia o consignación</span></div>
       <div style="border:1px solid var(--line-strong);border-radius:14px;padding:1rem 1.4rem;background:rgba(21,16,9,.5);min-width:200px;cursor:pointer" onclick="window.open('https://wa.me/573106410582?text=hola%20dagah%20%e2%9c%a6%20quiero%20convenir%20el%20env%c3%ado%20a%20mi%20ciudad.','_blank')">🚚 <b style="color:var(--gold-hi);font-family:var(--serif);font-size:1.1rem">envío</b><br><span style="font-size:.85rem;color:var(--cream-dim)">para convenir</span></div>
     </div>
@@ -800,7 +800,8 @@ footer{border-top:none}
     <div>
       <h4>La casa</h4>
       <ul>
-        <li><p>WhatsApp: 310 641 0582</p></li>
+        <li><p>        <li><p>🛒 Pedidos y despacho: 313 506 4321</p></li>
+        <li><p>🏬 Mayoristas y ficha técnica: 310 641 0582</p></li></p></li>
         <li><p>Pagos: Nequi · Bancolombia</p></li>
         <li><p>San Luis, Antioquia · Colombia</p></li>
       </ul>
@@ -826,7 +827,7 @@ footer{border-top:none}
 <a class="fab" id="fab" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg><use href="#i-wa"/></svg></a>
 
 <script>
-const WA_NUM = "573106410582";
+const WA_NUM = "573135064321";
 const SALUDO = "¡Hola DAGAH! ✦";
 
 const PROD = [
@@ -1284,6 +1285,38 @@ footer{background:#122544!important}
 .tag,.pill-low,#orderbar{background:#162b50}
 .howto-a,.howto-b,.paybar{background:rgba(18,37,68,.6)}
 .aula-video{background:#122544!important}
+</style>
+<style>
+/* ✦ DAGAH · inteligencia de color: cada color, un solo trabajo */
+:root{
+  --trust:#122544;     /* azul real: la confianza del salón */
+  --trust-hi:#1b3459;  /* azul vitrina: donde flota el producto */
+  --reward:#c9a24b;    /* oro: el premio y la marca */
+  --reward-hi:#e8ca7d; /* oro vivo: los momentos de decisión */
+  --action:#22c15e;    /* verde: el ÚNICO color que dice "compra" */
+  --urgent:#e0855a;    /* coral: el ÚNICO color que dice "apúrate" */
+  --calm:#f0e6d2;      /* crema: la palabra que se lee */
+}
+/* 1 · La urgencia estrena color propio (el oro no se desgasta) */
+.pill-low{background:#2a1410;color:#ffb08a;border-color:var(--urgent);animation:pulseUrg 2.4s infinite}
+@keyframes pulseUrg{50%{box-shadow:0 0 0 6px rgba(224,133,90,.20)}}
+/* 2 · La tarjeta se calienta al tocarla (frío→calor = interés) */
+.card:hover{border-color:rgba(201,162,75,.55);box-shadow:0 14px 34px rgba(0,0,0,.35),0 0 0 1px rgba(201,162,75,.35),0 0 26px rgba(201,162,75,.12)}
+/* 3 · Todo botón se enciende en oro al pasar el dedo */
+.fchip:hover,.paychip:hover,.guia-chips button:hover,.pt-chips button:hover,.li-chips button:hover{border-color:var(--reward-hi);color:var(--reward-hi)}
+/* 4 · El precio, en oro vivo: el instante del premio */
+.price{color:var(--reward-hi)}
+</style>
+<style>
+/* ✦ DAGAH · la notica de la canasta, a su tamaño real */
+.b-note{font-size:.82rem!important;line-height:1.5!important;margin-top:.7rem!important}
+</style>
+<style>
+/* ✦ DAGAH · el celular también luce la cinta dorada del PC */
+@media(max-width:860px){
+  .topline{display:block!important}      /* la cinta de mensajes del PC, visible en celular */
+  .topline-movil{display:none!important} /* la barrita dorada de botones sigue jubilada (ya están los ⋮) */
+}
 </style>
 </body>
 
