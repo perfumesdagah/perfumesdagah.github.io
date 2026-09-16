@@ -1412,6 +1412,52 @@ footer{background:#122544!important}
   var t; window.addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(build,200); });
 })();
 </script>
+<style>
+/* ✦ DAGAH · ⋮ bajados 1.5 cm; panel fijo que nada tapa */
+#menuBtn{display:none;position:absolute;right:.8rem;top:calc(.45rem + 1.5cm);z-index:95;width:42px;height:42px;border:1px solid var(--line-strong);border-radius:10px;background:rgba(14,31,58,.75);color:var(--gold-hi);font-size:1.5rem;line-height:1;cursor:pointer;place-items:center}
+#menuDrop{display:none;position:fixed;right:.8rem;z-index:999;min-width:230px;background:#0e1f3a;border:1px solid var(--line-strong);border-radius:14px;box-shadow:0 18px 40px rgba(0,0,0,.55);padding:.5rem;flex-direction:column}
+#menuDrop.open{display:flex}
+#menuDrop a{padding:.8rem 1rem;border-radius:10px;color:var(--cream);font-weight:700;font-size:.9rem;letter-spacing:.06em}
+#menuDrop a:hover,#menuDrop a:active{background:rgba(201,162,75,.16);color:var(--gold-hi)}
+@media(min-width:861px){#menuBtn,#menuDrop{display:none!important}}
+</style>
+<script>
+/* ✦ DAGAH · menú móvil: botón en su sitio y panel que siempre abre */
+(function(){
+  var LABELS=['Catálogo','Asesoría','Aula del Perfume','Preguntas'];
+  var FALLBACK=['#catalogo','#asesoria','#escuela','#preguntas'];
+  function header(){ return document.querySelector('header .hd')||document.querySelector('#hd .hd')||document.querySelector('#hd')||document.querySelector('header'); }
+  function anchors(){
+    var nav=document.querySelector('header nav')||document.querySelector('#hd nav')||document.querySelector('nav');
+    var h=[]; if(nav){ nav.querySelectorAll('a').forEach(function(a){ h.push(a.getAttribute('href')); }); }
+    return h.length?h:FALLBACK;
+  }
+  function kill(){ document.querySelectorAll('#menuBtn,#menuDrop').forEach(function(n){ n.remove(); }); }
+  function build(){
+    var hd=header(); if(!hd) return;
+    hd.style.position='relative';
+    kill();
+    if(window.innerWidth>860) return;
+    var btn=document.createElement('button');
+    btn.id='menuBtn'; btn.type='button'; btn.setAttribute('aria-label','Abrir menú'); btn.textContent='⋮'; btn.style.display='grid';
+    var drop=document.createElement('nav'); drop.id='menuDrop';
+    anchors().forEach(function(h,i){ var a=document.createElement('a'); a.href=h; a.textContent=LABELS[i]||LABELS[3]; drop.appendChild(a); });
+    hd.appendChild(btn);
+    document.body.appendChild(drop);   /* el panel vive en el cuerpo: nada lo tapa */
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      var r=btn.getBoundingClientRect();
+      drop.style.top=(r.bottom+8)+'px';   /* se abre justo bajo los ⋮ */
+      drop.classList.toggle('open');
+    });
+    drop.addEventListener('click',function(){ drop.classList.remove('open'); });
+    document.addEventListener('click',function(e){ if(!drop.contains(e.target)&&e.target!==btn) drop.classList.remove('open'); });
+    window.addEventListener('scroll',function(){ drop.classList.remove('open'); },{passive:true});
+  }
+  build();
+  var t; window.addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(build,200); });
+})();
+</script>
 </body>
 
 </htm>
