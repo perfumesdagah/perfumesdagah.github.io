@@ -1318,6 +1318,42 @@ footer{background:#122544!important}
   .topline-movil{display:none!important} /* la barrita dorada de botones sigue jubilada (ya están los ⋮) */
 }
 </style>
+<style>
+/* ✦ DAGAH · los tres punticos y su desplegable */
+#menuBtn{display:none;place-items:center;width:42px;height:42px;margin-left:auto;border:1px solid var(--line-strong);border-radius:10px;background:transparent;color:var(--gold-hi);font-size:1.5rem;line-height:1;cursor:pointer}
+#menuDrop{display:none;position:absolute;right:.9rem;top:calc(100% + .4rem);z-index:90;min-width:230px;background:#0e1f3a;border:1px solid var(--line-strong);border-radius:14px;box-shadow:0 18px 40px rgba(0,0,0,.5);padding:.5rem;flex-direction:column}
+#menuDrop.open{display:flex}
+#menuDrop a{padding:.75rem .95rem;border-radius:10px;color:var(--cream);font-weight:700;font-size:.85rem;letter-spacing:.06em}
+#menuDrop a:hover,#menuDrop a:active{background:rgba(201,162,75,.16);color:var(--gold-hi)}
+@media(max-width:860px){ #menuBtn{display:grid} }
+</style>
+<script>
+/* ✦ DAGAH · menú de los ⋮ en el celular */
+(function(){
+  document.querySelectorAll('#menuBtn,#menuDrop').forEach(function(n){ n.remove(); });
+  var hd=document.querySelector('header .hd')||document.querySelector('#hd .hd')||document.querySelector('#hd')||document.querySelector('header');
+  if(!hd) return;
+  hd.style.position='relative';
+  var nav=document.querySelector('header nav')||document.querySelector('#hd nav')||document.querySelector('nav');
+  var labels=['Inventario','Asesoría','Aula del perfume','Preguntas'];
+  var hrefs=[];
+  if(nav){ nav.querySelectorAll('a').forEach(function(a){ hrefs.push(a.getAttribute('href')); }); }
+  if(!hrefs.length){ hrefs=['#catalogo','#asesoria','#escuela','#preguntas']; }
+  var btn=document.createElement('button');
+  btn.id='menuBtn'; btn.type='button'; btn.setAttribute('aria-label','Abrir menú'); btn.textContent='⋮';
+  var drop=document.createElement('nav'); drop.id='menuDrop';
+  hrefs.forEach(function(h,i){
+    var a=document.createElement('a'); a.href=h;
+    a.textContent = labels[i] || h;
+    drop.appendChild(a);
+  });
+  hd.appendChild(btn); hd.appendChild(drop);
+  btn.addEventListener('click',function(e){ e.stopPropagation(); drop.classList.toggle('open'); });
+  drop.addEventListener('click',function(){ drop.classList.remove('open'); });
+  document.addEventListener('click',function(e){ if(!drop.contains(e.target)&&e.target!==btn) drop.classList.remove('open'); });
+  window.addEventListener('scroll',function(){ drop.classList.remove('open'); },{passive:true});
+})();
+</script>
 </body>
 
 </htm>
