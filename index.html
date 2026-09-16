@@ -1354,6 +1354,24 @@ footer{background:#122544!important}
   window.addEventListener('scroll',function(){ drop.classList.remove('open'); },{passive:true});
 })();
 </script>
+<style>
+/* ✦ DAGAH · PC sin panel (sobra); celular con ⋮ arriba a la derecha */
+@media(min-width:861px){
+  #menuBtn,#menuDrop{display:none!important}   /* en el PC no existen ni los punticos ni el panel */
+}
+@media(max-width:860px){
+  #menuBtn{display:grid!important;position:absolute;right:.8rem;top:50%;transform:translateY(-50%);margin-left:0}
+  #menuDrop{display:none;position:absolute;right:.8rem;top:calc(100% + .3rem)}
+  #menuDrop.open{display:flex}
+}
+</style>
+<script>
+(function(){
+  var t=['Catálogo','Asesoría','Aula del Perfume','Preguntas'];
+  document.querySelectorAll('#menuDrop a').forEach(function(a,i){ if(t[i]) a.textContent=t[i]; });
+  var d=document.getElementById('menuDrop'); if(d) d.classList.remove('open');
+})();
+</script>
 </body>
 
 </htm>
