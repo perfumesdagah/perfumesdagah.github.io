@@ -555,6 +555,82 @@ footer{border-top:none}
 </section>
 
 <section class="school" id="escuela">
+  <style>
+/* ✦ DAGAH · abrebocas de notas: tres actos por fila, activables y parables */
+.abr-notas{background:#0b1526;border-top:1px solid rgba(201,162,75,.25);border-bottom:1px solid rgba(201,162,75,.25);padding:4rem 1rem}
+.abr-head{text-align:center;max-width:640px;margin:0 auto 2.2rem}
+.abr-eyebrow{font-size:.66rem;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:#c9a24b}
+.abr-t{font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.7rem,4vw,2.5rem);font-weight:600;color:#e8ca7d;margin:.5rem 0 .4rem}
+.abr-sub{font-size:.9rem;color:#cfc4a6}
+.notas-fila{display:grid;gap:1.4rem;max-width:1080px;margin:0 auto}
+@media(min-width:860px){.notas-fila{grid-template-columns:repeat(3,1fr)}}
+.nota{position:relative;overflow:hidden;border:1px solid rgba(201,162,75,.35);border-radius:18px;padding:1.8rem 1.3rem 1.5rem;background:linear-gradient(180deg,rgba(201,162,75,.07),rgba(11,21,38,.4));text-align:center}
+.nota .fase{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#8fa0c4;font-weight:800}
+.nota .glifo{font-size:2.2rem;margin:.6rem 0 .2rem;filter:drop-shadow(0 0 12px rgba(232,202,125,.35))}
+.nota h3{font-family:Georgia,serif;font-size:1.5rem;color:#e8ca7d;margin:.2rem 0 .1rem}
+.nota .alma{font-style:italic;color:#c9a24b;font-size:.95rem;margin-bottom:.6rem}
+.nota .desc{font-size:.86rem;color:#cfc4a6;line-height:1.6;max-height:0;opacity:0;overflow:hidden;transition:max-height .6s ease,opacity .6s ease}
+.nota.on .desc{max-height:220px;opacity:1}
+.nota .humo{position:absolute;inset:0;pointer-events:none}
+.nota .humo span{position:absolute;bottom:-8px;width:6px;height:6px;border-radius:50%;background:#e8ca7d;opacity:0;animation:subir 7s linear infinite;animation-play-state:paused}
+.nota.on .humo span{animation-play-state:running}
+.nota .humo span:nth-child(1){left:18%;animation-delay:0s}
+.nota .humo span:nth-child(2){left:38%;animation-delay:1.4s}
+.nota .humo span:nth-child(3){left:58%;animation-delay:2.8s}
+.nota .humo span:nth-child(4){left:78%;animation-delay:4.2s}
+@keyframes subir{0%{transform:translateY(0) scale(.6);opacity:0}12%{opacity:.65}100%{transform:translateY(-320px) scale(1.15);opacity:0}}
+.nota .btn-nota{margin-top:1rem;border:1px solid #c9a24b;border-radius:999px;background:transparent;color:#e8ca7d;font-weight:800;font-size:.78rem;letter-spacing:.08em;padding:.55rem 1.2rem;cursor:pointer;transition:.25s}
+.nota.on .btn-nota{background:#c9a24b;color:#0b1526}
+.nota.on{border-color:rgba(232,202,125,.7);box-shadow:0 0 26px rgba(201,162,75,.15)}
+</style>
+
+<section class="abr-notas" id="abrebocas">
+  <div class="abr-head">
+    <p class="abr-eyebrow">La anatomía de un perfume</p>
+    <h2 class="abr-t">Tres actos, una estela</h2>
+    <p class="abr-sub">Active cada acto para verlo respirar; párelo cuando guste. Así se lee un perfume de verdad.</p>
+  </div>
+  <div class="notas-fila">
+    <article class="nota">
+      <div class="humo"><span></span><span></span><span></span><span></span></div>
+      <p class="fase">0 – 15 minutos</p>
+      <p class="glifo">✨</p>
+      <h3>Salida</h3>
+      <p class="alma">El saludo</p>
+      <p class="desc">La primera impresión: chispas cítricas y aromáticas que anuncian su llegada y despiertan los sentidos. Dura unos quince minutos y decide si el mundo se voltea a mirarlo.</p>
+      <button type="button" class="btn-nota">▶ Activar</button>
+    </article>
+    <article class="nota">
+      <div class="humo"><span></span><span></span><span></span><span></span></div>
+      <p class="fase">15 min – 4 horas</p>
+      <p class="glifo">🌸</p>
+      <h3>Corazón</h3>
+      <p class="alma">El alma</p>
+      <p class="desc">El carácter del perfume: flores y especias que emergen cuando el saludo se retira. Es la personalidad que sostiene la conversación toda la tarde.</p>
+      <button type="button" class="btn-nota">▶ Activar</button>
+    </article>
+    <article class="nota">
+      <div class="humo"><span></span><span></span><span></span><span></span></div>
+      <p class="fase">4 – 12 horas</p>
+      <p class="glifo">🪵</p>
+      <h3>Fondo</h3>
+      <p class="alma">La estela</p>
+      <p class="desc">Lo que permanece cuando usted ya se fue: maderas, ámbar y almizcle fijados a la piel. Es la firma profunda que la gente recuerda al día siguiente.</p>
+      <button type="button" class="btn-nota">▶ Activar</button>
+    </article>
+  </div>
+</section>
+
+<script>
+/* ✦ DAGAH · cada nota respira o se detiene a voluntad del cliente */
+document.querySelectorAll('.nota').forEach(function(n){
+  var b=n.querySelector('.btn-nota');
+  b.addEventListener('click',function(){
+    var on=n.classList.toggle('on');
+    b.textContent = on ? '⏸ Parar' : '▶ Activar';
+  });
+});
+</script>
   
   <div class="wrap">
   <style>
@@ -1457,7 +1533,7 @@ footer{background:#122544!important}
   build();
   var t; window.addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(build,200); });
 })();
-</script>
+</script><section class="school" id="escuela"></section>
 </body>
 
 </htm>
